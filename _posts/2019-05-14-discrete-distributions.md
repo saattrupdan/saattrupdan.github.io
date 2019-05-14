@@ -1,4 +1,4 @@
----
+--
 layout: post
 mathjax: true
 title: The Three Discretes
@@ -14,6 +14,7 @@ The easiest way to grasp what the Bernoulli distribution is doing is via the not
 
 Now, a random variable $X$ following a Bernoulli distribution with success rate $p$, written $X\sim\text{Bern}(p)$, means that $X$ is the outcome of a single Bernoulli trial. The density of this distribution is $f\colon\{0,1\}\to\mathbb R$, given by $f(k)=(p-1)(k-1)+k$, which is really just a convoluted way of saying that $f(0)=P(X\leq 0)=1-p$ and $f(1)=P(X\leq 1)=1$. Here's a plot:
 
+{: style="text-align:center"}
 ![Bernoulli distribution](/img/bernoulli.png)
 
 ```python
