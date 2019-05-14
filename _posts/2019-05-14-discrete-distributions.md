@@ -16,6 +16,7 @@ Now, a random variable $X$ following a Bernoulli distribution with success rate 
 
 **insert image**
 
+```python
   import numpy
   from scipy.stats import bernoulli
   from random import uniform
@@ -23,6 +24,7 @@ Now, a random variable $X$ following a Bernoulli distribution with success rate 
   p = uniform(0, 1)
   X = bernoulli(p)
   plt.vlines(X, 0, X.cmf(np.arange(1)), lw=2)
+```
 
 ## Binomial
 
