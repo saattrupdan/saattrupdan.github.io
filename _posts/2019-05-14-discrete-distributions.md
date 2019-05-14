@@ -22,12 +22,13 @@ from scipy.stats import bernoulli
 from matplotlib import pyplot as plt
 from random import uniform
 
-p = uniform(0, 1)
+p = uniform(0, 1) # success rate
+
 X = bernoulli(p)
 xs = range(2)
 
 plt.bar(xs, height=X.pmf(xs))
-plt.xticks([0,1])
+plt.xticks(xs)
 plt.show()
 ```
 
@@ -37,15 +38,54 @@ A binomial distribution is a simple generalisation of the Bernoulli distribution
 
 So a random variable $X$ following a binomial distribution with parameters $n$ and $p$, written $X\sim\text{Bin}(n,p)$, simply means that $X$ counts the number of successful trials out of $n$ attempts, each having success rate $p$. The binomial density is then $f\colon\{0,\dots,n\}\to\mathbb R$, given as
 
-$$ f(k)=\sum\_{m=0}^k {n\choose m}p^m(1-p)^{n-m} $$.
+`$$ f(k)=\sum_{m=0}^k {n\choose m}p^m(1-p)^{n-m} $$`
 
 Let's illustrate that in a plot:
 
-**insert image**
+{: style="text-align:center"}
+![Binomial distribution](/img/binom.png)
+
+```python
+from scipy.stats import binom
+from matplotlib import pyplot as plt
+from random import uniform
+
+n = 20 # number of trials
+p = uniform(0, 1) # success rate for every trial
+
+X = binom(n, p)
+xs = range(n+1)
+
+plt.bar(xs, height=X.pmf(xs))
+plt.xticks(xs)
+plt.show()
+```
+
 
 ## Hypergeometric
 
 asd
+
+{: style="text-align:center"}
+![Hypergeometric distribution](/img/hypergeom.png)
+
+```python
+from scipy.stats import hypergeom
+from matplotlib import pyplot as plt
+from random import randint
+
+M = 100 # number of balls in total
+n = randint(0,M) # number of white balls
+N = 20 # number of draws
+
+X = hypergeom(M, n, N)
+xs = range(N+1)
+
+plt.bar(xs, height=X.pmf(xs))
+plt.xticks(xs)
+plt.title("Sample hypergeometric distribution")
+plt.show()
+```
 
 ## Poisson
 
