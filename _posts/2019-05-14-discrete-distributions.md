@@ -14,23 +14,27 @@ The easiest way to grasp what the Bernoulli distribution is doing is via the not
 
 Now, a random variable $X$ following a Bernoulli distribution with success rate $p$, written $X\sim\text{Bern}(p)$, means that $X$ is the outcome of a single Bernoulli trial. The density of this distribution is $f\colon\{0,1\}\to\mathbb R$, given by $f(k)=(p-1)(k-1)+k$, which is really just a convoluted way of saying that $f(0)=P(X\leq 0)=1-p$ and $f(1)=P(X\leq 1)=1$. Here's a plot:
 
-**insert image**
+![Bernoulli distribution](/img/bernoulli.png)
 
 ```python
-  import numpy
-  from scipy.stats import bernoulli
-  from random import uniform
+from scipy.stats import bernoulli
+from matplotlib import pyplot as plt
+from random import uniform
 
-  p = uniform(0, 1)
-  X = bernoulli(p)
-  plt.vlines(X, 0, X.cmf(np.arange(1)), lw=2)
+p = uniform(0, 1)
+X = bernoulli(p)
+xs = range(2)
+
+plt.bar(xs, height=X.pmf(xs))
+plt.xticks([0,1])
+plt.show()
 ```
 
 ## Binomial
 
 A binomial distribution is a simple generalisation of the Bernoulli distribution. Instead of doing a single Bernoulli trial, we do many!
 
-So a random variable $X$ following a binomial distribution with parameters $n$ and $p$, written $X\sim\text{Bin}(n,p)$, simply means that $X$ counts the number of successful trials out of $n$ attempts, each having success rate $p$. The binomial density is then $f\colon\{0,\hdots,n\}\to\mathbb R$, given as
+So a random variable $X$ following a binomial distribution with parameters $n$ and $p$, written $X\sim\text{Bin}(n,p)$, simply means that $X$ counts the number of successful trials out of $n$ attempts, each having success rate $p$. The binomial density is then $f\colon\{0,\dots,n\}\to\mathbb R$, given as
 
 $$ f(k)=\sum\_{m=0}^k {n\choose m}p^m(1-p)^{n-m} $$.
 
