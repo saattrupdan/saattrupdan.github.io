@@ -1,4 +1,4 @@
---
+---
 layout: post
 mathjax: true
 title: The Three Discretes
