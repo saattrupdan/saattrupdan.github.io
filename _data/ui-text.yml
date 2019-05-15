@@ -489,6 +489,19 @@ pa: &DEFAULT_PA
 pa-IN:
   <<: *DEFAULT_PA  
 
-# Another locale
-# --------------
-#
+# Danish
+# -----------------
+da: &DEFAULT_DA
+  comments_label             : "Skriv en kommentar"
+  comments_title             : "Kommentarer"
+  comment_form_info          : "Din emailadresse vil ikke blive vist. Obligatoriske felter er markeret."
+  comment_form_comment_label : "Kommentér"
+  comment_form_md_info       : "Markdown are understøttet."
+  comment_form_name_label    : "Navn"
+  comment_form_email_label   : "Emailadresse"
+  comment_form_website_label : "Hjemmeside (valgfrit)"
+  comment_btn_submit         : "Tilføj kommentar"
+  comment_btn_submitted      : "Tilføjet"
+  comment_success_msg        : "Tak for din kommentar! Den bliver vist lige så snart den er accepteret."
+  comment_error_msg          : "Der skete en fejl. Sørg for at alle obligatoriske felter er udfyldte og prøv igen."
+da-DK:
