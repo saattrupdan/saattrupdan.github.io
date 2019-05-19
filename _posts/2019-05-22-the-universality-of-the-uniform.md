@@ -1,0 +1,51 @@
+---
+layout: post
+mathjax: true
+title: The universality of the uniform
+---
+
+Today I'd like to talk about the uniform distribution. It might seem a bit weird to dedicate an entire post to such a thing as it's arguably one of the simplest distributions there are. But where the *definition* isn't that interesting, it has a very fundamental property in that it *generates* all other continuous distributions, in a certain sense. 
+
+Let's start with a definition. The uniform has both a discrete and continuous version, so let's include both of those here. Both of them models the simple idea of everything having an equally likely chance of happening.
+
+> **Definition** (Discrete uniform distribution). A random variable $X$ has the *discrete uniform distribution* with parameter a finite nonempty set $C\subset\mathbb R$ if it has density $f\colon C\to\mathbb R$ given as $f(x)=\sfrac{1}{|C|}$. We write $X\sim\text{DUnif}(C)$.
+
+> **Definition** (Uniform distribution). A random variable $X$ has the *uniform distribution* with parameters $a < b$ if it has density $f\colon(a,b)\to\mathbb R$ given as
+>
+> ** f(x) = \frac{1}{b-a}. **
+>
+> We write $X\sim\text{Unif}(0,1)$.
+
+Examples of uniformly random variables all involve *pure chance* in some sense, in that no outside information can have an influence of the given event. In the discrete case we have plenty of natural examples:
+  * the number you throw with a regular fair die is $\text{DUnif}(6)$
+  * the outcome of a fair coin toss (say heads is $1$ and tails is $0$) is $\text{DUnif}(2)$
+  * the suit of a chosen card in a standard 52 deck is $\text{DUnif}(13)$
+
+When it comes to the continuous version, we have to add on a continuity assumption. We could for instance assume that time is continuous, and then let $X$ count the arrival time of the next bus at a bus stop where buses come every hour, measured in hours --- then $X\sim\text{Unif}(0,1)$.
+
+A uniform distribution is what most people would think of when they talk about randomness, and in some sense this is the basic building block for all continuous distributions, in the following sense.
+
+> **Theorem** (Universality of the Uniform). For any continuous distribution $\mathcal D$ there exist functions $F,G$ such that
+>   1. $F(X)\sim\text{Unif}(0,1)$ for any random variable $X\sim\mathcal D$.
+>   2. $G(U)\sim\mathcal D$ for any random variable $U\sim\text{Unif}(0,1)$;
+
+Let's show a special case of this result, where we will assume that $\mathcal D$'s cumulative density function (CDF) $F$ is invertible, in which case $F$ will end up witnessing (1) and $F^{-1}$ will witness (2). 
+
+This might seem a bit weird at first, as (1) is then saying that we're *inserting $X$ into its own CDF*. And indeed, that *is* what we're doing: the CDF $F$ is, aside from having the special status of being a CDF, is also just a function $F\colon\mathbb R\to[0,1]$. This means that we can use $F$ to transform $X\sim\mathcal D$ into the random variable $F(X)$, modeled as the composed function $F\circ X\colon\Omega\to(0,1)$.
+
+{: style="text-align:center"}
+![Universality of the uniform](/img/uniform.png)
+
+We then get that $F(X)\sim\text{Unif}(0,1)$ as we for $y\in(0,1)$ have that
+
+$$ P(F(X)\leq y) = P(X\leq F^{-1}(y)) = F(F^{-1}(y)) = y, $$
+
+which is precisely the CDF for $\text{Unif}(0,1)$.
+
+As for the second part, if $U\sim\text{Unif}(0,1)$ then
+
+$$ P(F^{-1}(U)\leq x) = P(U\leq F(x)) = F(x), $$
+
+where the last equality was using that $P(U\leq y) = y$ for any $y\in(0,1)$, the key property of the uniform distribution. This shows that $F^{-1}(U)\sim\mathcal D$, having CDF $F$. **QED**
+
+This result might then come in handy in situations where we're dealing with a wild distribution, where we may derive properties of the uniform distribution and transfer these over to the new distribution, rather than dealing with the wild one directly.
