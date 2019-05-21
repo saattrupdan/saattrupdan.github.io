@@ -29,7 +29,7 @@ A uniform distribution is what most people would think of when they talk about r
 >   1. $F(X)\sim\text{Unif}(0,1)$ for any random variable $X\sim\mathcal D$.
 >   2. $G(U)\sim\mathcal D$ for any random variable $U\sim\text{Unif}(0,1)$;
 
-Let's show a special case of this result, where we will assume that $\mathcal D$'s cumulative density function (CDF) $F$ is invertible, in which case $F$ will end up witnessing (1) and $F^{-1}$ will witness (2). 
+Let's show a special case of this result, where we will assume that $\mathcal D$'s cumulative density function (CDF) $F$ is invertible, in which case $F$ will end up witnessing (1) and $F^{-1}$ will witness (2). In general we would have that $G(u):=\inf\\\{x\mid F(x)\geq u\\\}$.
 
 This might seem a bit weird at first, as (1) is then saying that we're *inserting $X$ into its own CDF*. And indeed, that *is* what we're doing: the CDF $F$ is, aside from having the special status of being a CDF, is also just a function $F\colon\mathbb R\to[0,1]$. This means that we can use $F$ to transform $X\sim\mathcal D$ into the random variable $F(X)$, modeled as the composed function $F\circ X\colon\Omega\to(0,1)$.
 
