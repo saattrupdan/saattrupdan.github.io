@@ -8,7 +8,7 @@ Today I'd like to talk about the uniform distribution. It might seem a bit weird
 
 Let's start with a definition. The uniform has both a discrete and continuous version, so let's include both of those here. Both of them models the simple idea of everything having an equally likely chance of happening.
 
-> **Definition** (Discrete uniform distribution). A random variable $X$ has the *discrete uniform distribution* with parameter a finite nonempty set $C\subset\mathbb R$ if it has density $f\colon C\to\mathbb R$ given as $f(x)=\sfrac{1}{|C|}$. We write $X\sim\text{DUnif}(C)$.
+> **Definition** (Discrete uniform distribution). A random variable $X$ has the *discrete uniform distribution* with parameter a finite nonempty set $C\subset\mathbb R$ if it has density $f\colon C\to\mathbb R$ given as $f(x)=\sfrac{1}{\vert C\vert}$. We write $X\sim\text{DUnif}(C)$.
 
 > **Definition** (Uniform distribution). A random variable $X$ has the *uniform distribution* with parameters $a < b$ if it has density $f\colon(a,b)\to\mathbb R$ given as
 >
