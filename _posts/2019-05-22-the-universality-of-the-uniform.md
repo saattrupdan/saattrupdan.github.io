@@ -16,6 +16,32 @@ Let's start with a definition. The uniform has both a discrete and continuous ve
 >
 > We write $X\sim\text{Unif}(0,1)$.
 
+Here are some uniformly distributed variables, together with the associated Python code:
+
+{: style="text-align:center"}
+![Uniform random variables](/img/uniform_rvs.png)
+
+```python
+from scipy.stats import uniform
+from matplotlib import pyplot as plt
+import seaborn as sns
+
+fig, ax = plt.subplots(1,4, figsize=(16,3))
+sizes = [100, 1000, 10000, 1000000]
+
+for i, size in enumerate(sizes):
+    
+    # generate uniformly distributed random variables
+    rvs = uniform.rvs(size=size, loc=-10, scale=20)
+    
+    # plot the values of the random variables
+    sns.distplot(rvs, bins=100, color='limegreen', kde=False, ax=ax[i])
+    ax[i].title.set_text(f"{size} random variables")
+
+fig.suptitle("Uniformly distributed random variables", y=1.1, fontsize=18)
+plt.show()
+```
+
 Examples of uniformly random variables all involve *pure chance* in some sense, in that no outside information can have an influence of the given event. In the discrete case we have plenty of natural examples:
   * the number you throw with a regular fair die is $\text{DUnif}(6)$
   * the outcome of a fair coin toss (say heads is $1$ and tails is $0$) is $\text{DUnif}(2)$
