@@ -14,7 +14,7 @@ Let's start with a definition. The uniform has both a discrete and continuous ve
 >
 > $$ f(x) = \frac{1}{b-a}. $$
 >
-> We write $X\sim\text{Unif}(0,1)$.
+> We write $X\sim\text{Unif}(a,b)$.
 
 Here are some uniformly distributed variables, together with the associated Python code:
 

@@ -60,7 +60,7 @@ We actually get an even stronger result, in that the $A_i$'s don't even have to 
 
 We won't show either of those two results here, but merely the special case when all the $p_i$'s are equal to some $p$, which will take us to the *binomial* distribution. Recall that a random variable $X$ follows the binomial distribution with parameters $n$ and $p$ if $X$ counts the number of successes out of $n$ Bernoulli trials with success rate $p$, so in this case we have that $X\sim\text{Bin}(n,p)$.
 
-> **Theorem** (Special case of the law of small numbers). If $X_n\sim\text{Bin}(n,\tfrac{\lambda}{n})$ for some $\lambda$ and $Y\sim\text{Pois}(\lambda)$ then $X_n\to Y$ in distribution.
+> **Theorem** (Special case of the law of small numbers). If $X_n\sim\text{Bin}(n,\tfrac{\lambda}{n})$ for some $\lambda$ then $X_n\to\text{Pois}(\lambda)$ in distribution.
 
 To see that this special case holds, first recall that the density function of $\text{Bin}(n,p)$ is $f\colon\\\{0,\dots,n\\\}\to\mathbb R$ given as
 
