@@ -45,7 +45,7 @@ plt.show()
 Examples of uniformly random variables all involve *pure chance* in some sense, in that no outside information can have an influence of the given event. In the discrete case we have plenty of natural examples:
   * the number you throw with a regular fair die is $\text{DUnif}(6)$
   * the outcome of a fair coin toss (say heads is $1$ and tails is $0$) is $\text{DUnif}(2)$
-  * the suit of a chosen card in a standard 52 deck is $\text{DUnif}(13)$
+  * the suit of a chosen card in a standard 52 deck is $\text{DUnif}(4)$
 
 When it comes to the continuous version, we have to add on a continuity assumption. We could for instance assume that time is continuous, and then let $X$ count the arrival time of the next bus at a bus stop where buses come every hour, measured in hours --- then $X\sim\text{Unif}(0,1)$.
 
