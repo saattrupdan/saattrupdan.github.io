@@ -89,7 +89,7 @@ This is a [separable differential equation](https://www.khanacademy.org/math/ap-
 
 $$ \log(y) = \int \frac{1}{y}dy = \int cdt = ct + C $$
 
-for some constant $C$, and setting $K:=e^C$ this means that $y = e^{ct+C} = Ke^{ct}$. As $G(0) = P(X>0) = 1$ we get that $K = \tfrac{G(0)}{e^{c\cdot 0}} = 1$.
+for some constant $C$, and setting $K:=e^C$ this means that $y = e^{ct+K} = Ke^{ct}$. As $G(0) = P(X>0) = 1$ we get that $K = \tfrac{G(0)}{e^{c\cdot 0}} = 1$.
 
 This means that $y = e^{ct}$, so if we choose $\lambda := -c$ we get what we want: $G(t) = e^{-\lambda t}$. Note that this makes sense, i.e. that $\lambda > 0$, because $G$ is decreasing, so that $c = G'(0) < 0$. **QED**
 
