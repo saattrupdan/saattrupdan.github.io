@@ -11,7 +11,6 @@ This week we'll deal with memory. More specifically, we'll tackle the question o
 > **Definition** (Exponential distribution). A random variable $X$ has the **exponential distribution** with parameter $\lambda$ if it counts how long the waiting time is until it reaches a successful Bernoulli trial, where trials are continuously performed with $\lambda$ successes every time unit. We write $X\sim\text{Expo}(\lambda)$, which has density $f\colon(0,\infty)\to\mathbb R$ given as $f(x):=\lambda e^{-\lambda x}$.
 
 I'll mostly focus on the exponential distribution in this blog post, mostly to avoid redundancy. Here's a few plots of this distribution, with the associated python code.
-To get a rough idea of how these distributions
 
 {: style="text-align:center"}
 ![Exponentially distributed random variables](/img/expon.png)
@@ -22,7 +21,7 @@ from matplotlib import pyplot as plt
 import seaborn as sns
 import numpy as np
 
-fig, ax = plt.subplots(1,4, figsize=(16,3))
+fig, ax = plt.subplots(1, 4, figsize = (16,3))
 lambdas = [.3, .6, 1.0, 1.3]
 t = np.arange(0, 10, 0.2)
 
@@ -32,13 +31,21 @@ for (i, lamb) in enumerate(lambdas):
     rvs = expon.rvs(size = 500, scale = 1/lamb)
     
     # plot the values of the random variables
-    sns.distplot(rvs, bins=100, color='limegreen', kde=False, ax=ax[i], norm_hist=True)
+    sns.distplot(
+      rvs,
+      bins = 100,
+      color = 'limegreen',
+      kde = False, # don't include a kernel density estimator
+      ax = ax[i],
+      norm_hist = True # normalise the values
+      )
     ax[i].axes.set_xlim(0, 10)
     ax[i].axes.set_ylim(0, 1)
-    ax[i].axes.plot(t, expon.pdf(t, scale = 1/lamb), 'b--')
+    ax[i].axes.plot(t, expon.pdf(t, scale = 1/lamb), 'b--') # plot pdf
     ax[i].title.set_text(f"lambda = {lamb}")
 
-fig.suptitle("Exponentially distributed random variables", y=1.1, fontsize=18)
+title = "Exponentially distributed random variables"
+fig.suptitle(title, y = 1.1, fontsize = 18)
 plt.show()
 ```
 
@@ -59,7 +66,6 @@ so that if $\mathcal D$ is memoryless then the lefthand side is $P(X\geq t)$, yi
 The two examples mentioned above show that the exponential and geometric distributions are both memoryless. To show that they're the *unique* discrete and continuous distribution with this property we thus need to show that any given memoryless distribution must be one of the two. In showing this we encounter a healthy mix of calculus and differential equations, so buckle up and I'll try my best to go through it step by step.
 
 
-<--------------------------------------------------------->
 
 > **Theorem.** The exponential distribution is the unique memoryless continuous distribution on $(0,\infty)$, and the geometric distribution is the unique memoryless discrete distribution on $\\\{0,1,2,\dots\\\}$.
 
@@ -73,15 +79,14 @@ We established above that $G(s+t)=G(s)G(t)$, so if we differentiate with respect
 
 $$ y' = G'(t) = G'(0+t) = G'(0)G(t) = cG(t) = cy.  $$
 
-This is a [separable differential equation](https://www.khanacademy.org/math/ap-calculus-ab/ab-differential-equations-new/ab-7-6/a/applying-procedures-for-separable-differential-equations) with $\sfrac{dy}{dt} = cy$, so we do the separation and integrate:
+This is a [separable differential equation](https://www.khanacademy.org/math/ap-calculus-ab/ab-differential-equations-new/ab-7-6/a/applying-procedures-for-separable-differential-equations) with $\tfrac{dy}{dt} = cy$, so we do the separation and integrate:
 
 $$ \log(y) = \int \frac{1}{y}dy = \int cdt = ct + C $$
 
 for some constant $C$, and setting $K:=e^C$ this means that $y = e^{ct+K} = Ke^{ct}$. As $G(0) = P(X>0) = 1$ we get that $K = Ke^{c\cdot 0} = 1$.
 
-This means that $y = e^{ct}$, so if we choose $\lambda := -c$ we get what we want: $G(t) = e^{-\lambda t}$. Note that this makes sense, i.e. that $\lamdba > 0$, because $G$ is decreasing, so that $c = G'(0) < 0$. **QED**
+This means that $y = e^{ct}$, so if we choose $\lambda := -c$ we get what we want: $G(t) = e^{-\lambda t}$. Note that this makes sense, i.e. that $\lambda > 0$, because $G$ is decreasing, so that $c = G'(0) < 0$. **QED**
 
-<--------------------------------------------------------->
 
 
 So whenever we have data which seems to be memoryless, then there's a *unique* choice for the distribution: exponential if we're looking for a continuous one, and geometric if we want to be discrete. Hoorah!
