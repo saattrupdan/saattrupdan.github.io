@@ -63,9 +63,11 @@ $$ P(X\geq s+t \mid X\geq s) = \frac{P(X\geq s+t)P(X\geq s \mid X\geq s+t)}{P(X\
 
 so that if $\mathcal D$ is memoryless then the lefthand side is $P(X\geq t)$, yielding
 
-$$ P(X\geq s+t) = P(X\geq s)P(X\geq t), $$$
+$$ P(X\geq s+t) = P(X\geq s)P(X\geq t), $$
 
-and if this equation holds then Bayes' rule applied to the above implies that $P(X\geq s+t \mid X\geq s) = P(X\geq t)$.
+and if this equation holds then Bayes' rule applied to the above implies that
+
+$$ P(X\geq s+t \mid X\geq s) = P(X\geq t). $$
 
 The two examples mentioned above show that the exponential and geometric distributions are both memoryless. To show that they're the *unique* discrete and continuous distribution with this property we thus need to show that any given memoryless distribution must be one of the two. In showing this we encounter a healthy mix of calculus and differential equations, so buckle up and I'll try my best to go through it step by step.
 
