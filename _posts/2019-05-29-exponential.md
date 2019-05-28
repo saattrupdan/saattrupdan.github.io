@@ -10,7 +10,7 @@ This week we'll deal with memory. More specifically, we'll tackle the question o
 
 > **Definition** (Exponential distribution). A random variable $X$ has the **exponential distribution** with parameter $\lambda$ if it counts how long the waiting time is until it reaches a successful Bernoulli trial, where trials are continuously performed with $\lambda$ successes every time unit. We write $X\sim\text{Expo}(\lambda)$, which has density $f\colon(0,\infty)\to\mathbb R$ given as $f(x):=\lambda e^{-\lambda x}$.
 
-I'll mostly focus on the exponential distribution in this blog post, mostly to avoid redundancy. Here's a few plots of this distribution, with the associated python code.
+I'll get to a couple of examples of both of these distributions in a bit. Also, a disclaimer: I'll mostly be focusing on the exponential distribution in this blog post, primarily to avoid redundancy. Here's a few plots of this distribution, with the associated python code.
 
 {: style="text-align:center"}
 ![Exponentially distributed random variables](/img/expon.png)
@@ -53,7 +53,7 @@ As I mentioned, we'll be dealing with the concept of a distribution having *memo
 
 > **Defintion** (Memoryless distribution). A distribution $\mathcal D$ is **memoryless** if $X\sim\mathcal D$ implies $P(X\geq s+t\mid X\geq s)=P(X\geq t)$ for all $s,t>0$.
 
-To understand why this could justfied as being *memoryless*, take the example of $X$ counting the waiting time for the train. In this case the equation is stating that the probability of waiting at least $t$ minutes is independent of what time it is: we "forget" that we might have waited some time already. Note that $X\sim\text{Expo}(\lambda)$, with $\lambda$ the number of arrivals per minute.
+To understand why this could justified as being *memoryless*, take the example of $X$ counting the waiting time for the train. In this case the equation is stating that the probability of waiting at least $t$ minutes is independent of what time it is: we "forget" that we might have waited some time already. Note that $X\sim\text{Expo}(\lambda)$, with $\lambda$ the number of arrivals per minute.
 
 On a more discrete note, we could consider buying scratch cards. Even if we have bought ten scratch cards and won nothing, that does *not* increase the odds of winning if we buy another one! Note that this is following a geometric distribution, as we are counting the number of failed trials until the first success.
 
@@ -67,7 +67,7 @@ $$ P(X\geq s+t) = P(X\geq s)P(X\geq t), $$
 
 and if this equation holds then Bayes' rule applied to the above implies that
 
-$$ P(X\geq s+t \mid X\geq s) = P(X\geq t). $$
+$$ P(X\geq s+t \mid X\geq s) = P(X\geq t) $$
 
 The two examples mentioned above show that the exponential and geometric distributions are both memoryless. To show that they're the *unique* discrete and continuous distribution with this property we thus need to show that any given memoryless distribution must be one of the two. In showing this we encounter a healthy mix of calculus and differential equations, so buckle up and I'll try my best to go through it step by step.
 
