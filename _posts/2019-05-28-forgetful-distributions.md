@@ -53,7 +53,7 @@ As I mentioned, we'll be dealing with the concept of a distribution having *memo
 
 > **Defintion** (Memoryless distribution). A distribution $\mathcal D$ is **memoryless** if $X\sim\mathcal D$ implies $P(X\geq s+t\mid X\geq s)=P(X\geq t)$ for all $s,t>0$.
 
-To understand why this could justified as being *memoryless*, take the example of $X$ counting the waiting time for the train. In this case the equation is stating that the probability of waiting at least $t$ minutes is independent of what time it is: we "forget" that we might have waited some time already. Note that $X\sim\text{Expo}(\lambda)$, with $\lambda$ the number of arrivals per minute.
+To understand why this could justified as being *memoryless*, take the example of $X$ counting the lifespan of a given radioactive particle. In this case the equation is stating that the probability of decaying is independent of how much decay it has previously emitted: we "forget" that we might have decayed some already. Note that $X\sim\text{Expo}(\lambda)$, with $\lambda$ the rate of decay per time unit.
 
 On a more discrete note, we could consider buying scratch cards. Even if we have bought ten scratch cards and won nothing, that does *not* increase the odds of winning if we buy another one! Note that this is following a geometric distribution, as we are counting the number of failed trials until the first success.
 
