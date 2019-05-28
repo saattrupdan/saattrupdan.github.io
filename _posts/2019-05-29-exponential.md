@@ -6,7 +6,7 @@ title: Forgetful distributions
 
 This week we'll deal with memory. More specifically, we'll tackle the question of when a distribution do *not* have any memory whatsoever, meaning that it doesn't depend on past experience in any way. It turns out that there is a *unique* continuous distribution with this property, the *exponential distribution*, and a unique discrete distribution with this property, the *geometric distribution*. Let's dig in.
 
-> **Definition** (Geometric distribution). A random variable $X$ has the **geometric distribution** with parameter $p\in(0,1)$ if it's counting the number of failed iid Bernoulli trials with parameter $p$ until it reaches a successful trial. We write $X\sim\text{Geom}(p)$, which has density $f\colon\\\{0,1,2,\dots\\\}\to\mathbb R$ given as $f(k):=(1-p)^kp.
+> **Definition** (Geometric distribution). A random variable $X$ has the **geometric distribution** with parameter $p\in(0,1)$ if it's counting the number of failed [iid](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) [Bernoulli trials](https://en.wikipedia.org/wiki/Bernoulli_trial) with parameter $p$ until it reaches a successful trial. We write $X\sim\text{Geom}(p)$, which has density $f\colon\\\{0,1,2,\dots\\\}\to\mathbb R$ given as $f(k):=(1-p)^kp$.
 
 > **Definition** (Exponential distribution). A random variable $X$ has the **exponential distribution** with parameter $\lambda$ if it counts how long the waiting time is until it reaches a successful Bernoulli trial, where trials are continuously performed with $\lambda$ successes every time unit. We write $X\sim\text{Expo}(\lambda)$, which has density $f\colon(0,\infty)\to\mathbb R$ given as $f(x):=\lambda e^{-\lambda x}$.
 
@@ -61,7 +61,11 @@ An equivalent formulation of this property is that $P(X\geq s+t) = P(X\geq s)P(X
 
 $$ P(X\geq s+t \mid X\geq s) = \frac{P(X\geq s+t)P(X\geq s \mid X\geq s+t)}{P(X\geq s)} = \frac{P(X \geq s+t)}{P(X\geq s)}, $$
 
-so that if $\mathcal D$ is memoryless then the lefthand side is $P(X\geq t)$, yielding $P(X\geq s+t) = P(X\geq s)P(X\geq t)$, and if this equation holds then Bayes' rule applied to the above implies that $P(X\geq s+t \mid X\geq s) = P(X\geq t)$.
+so that if $\mathcal D$ is memoryless then the lefthand side is $P(X\geq t)$, yielding
+
+$$ P(X\geq s+t) = P(X\geq s)P(X\geq t), $$$
+
+and if this equation holds then Bayes' rule applied to the above implies that $P(X\geq s+t \mid X\geq s) = P(X\geq t)$.
 
 The two examples mentioned above show that the exponential and geometric distributions are both memoryless. To show that they're the *unique* discrete and continuous distribution with this property we thus need to show that any given memoryless distribution must be one of the two. In showing this we encounter a healthy mix of calculus and differential equations, so buckle up and I'll try my best to go through it step by step.
 
@@ -83,7 +87,7 @@ This is a [separable differential equation](https://www.khanacademy.org/math/ap-
 
 $$ \log(y) = \int \frac{1}{y}dy = \int cdt = ct + C $$
 
-for some constant $C$, and setting $K:=e^C$ this means that $y = e^{ct+K} = Ke^{ct}$. As $G(0) = P(X>0) = 1$ we get that $K = Ke^{c\cdot 0} = 1$.
+for some constant $C$, and setting $K:=e^C$ this means that $y = e^{ct+K} = Ke^{ct}$. As $G(0) = P(X>0) = 1$ we get that $K = \tfrac{G(0)}{e^{c\cdot 0}} = 1$.
 
 This means that $y = e^{ct}$, so if we choose $\lambda := -c$ we get what we want: $G(t) = e^{-\lambda t}$. Note that this makes sense, i.e. that $\lambda > 0$, because $G$ is decreasing, so that $c = G'(0) < 0$. **QED**
 
