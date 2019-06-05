@@ -47,7 +47,7 @@ for (i, j) in np.ndindex(3, 3):
     ax[(i, j)].axes.set_title(f"mu = {mus[i]} & sigma = {sigmas[j]}", loc='right')
 ```
 
-Now, moving on to how this is related to a data scientist's work, if we have given an infinite sequence $X_1, X_2, \dots$ of random variables then we define the **n'th sample mean**
+Now, moving on to how this is related to a data scientist's work, if we have given an infinite sequence $X_1, X_2, \dots$ of [iid](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) random variables then we define the **n'th sample mean**
 
 $$ \overline X_n := \frac{X_1 + X_2 + \dots + X_n}{n}, $$
 
@@ -57,9 +57,11 @@ Firstly, corresponding to our intuition, the sample means have the true mean as 
 
 $$ E\overline X_n = \frac{E(X_1+\dots +X_n)}{n} = \frac{EX_1+\dots +EX_n}{n} = \mu. $$
 
-Here we used that [expectation is linear](https://brilliant.org/wiki/linearity-of-expectation/). A stronger result is true in fact, as the following famous theorem shows that the sample means *converge* to the true mean:
+Note that here we used that all our random variables have the same mean, as we're assuming that they're all following the same distribution. We also used that [expectation is linear](https://brilliant.org/wiki/linearity-of-expectation/).
 
-> **Theorem** ([Law of Large Numbers](https://terrytao.wordpress.com/2008/06/18/the-strong-law-of-large-numbers/)). Let $X_1, X_2, \dots$ be [iid](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) random variables with mean $\mu$. Then $\overline X_n \to \mu$ [almost surely](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Almost_sure_convergence).
+A stronger result is true in fact, as the following famous theorem shows that the sample means *converge* to the true mean:
+
+> **Theorem** ([Law of Large Numbers](https://terrytao.wordpress.com/2008/06/18/the-strong-law-of-large-numbers/)). Let $X_1, X_2, \dots$ be iid random variables with mean $\mu$. Then $\overline X_n \to \mu$ [almost surely](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Almost_sure_convergence).
 
 Moving from the mean to the variance, we can again easily compute the variance of the sample means:
 
@@ -73,9 +75,9 @@ Now, recall that we say that we **standardise** a random variable when we subtra
 >
 > $$ \sqrt{n}\left(\frac{\overline X_n-\mu}{\sigma}\right)\to\mathcal N(0,1)\text{ in distribution}. $$
 
-In slightly more layman's terms:
+But note that the this object, $\sqrt{n}\sfrac{\overline X_n-\mu}{\sigma}$, is *precisely* the same thing as subtracting the mean ($\mu = E\overline X_n$) and dividing by the standard deviation ($\sigma = \sqrt{\text{Var}(\overline X_n)}=\sqrt{\sfrac{\sigma^2}{n}}=\sfrac{\sigma}{\sqrt{n}}$). In other words, it's *precisely* the result of applying `StandardScaler` to our data! So, said more simply:
 
 {: style="text-align:center"}
-*When we standardise our data then we approximate a standard normal distribution*
+*When we apply `StandardScaler` to our data then we approximate a standard normal distribution*
 
-The more samples we have, the closer the distribution will look like a standard bell curve. Hoorah!
+The more samples we have, the closer the distribution will look like a standard bell curve, which will make training machine learning models more efficient. Hoorah!
