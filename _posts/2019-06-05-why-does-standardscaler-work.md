@@ -6,11 +6,11 @@ title: Why does StandardScaler work?
 
 The normal distribution. Gaussian distribution. Bell curve. [The ideal has many names](https://www.goodreads.com/quotes/7745235-the-ideal-has-many-names-and-beauty-is-but-one). But what *is* so special about this distribution? Answering this question turns out to also give justification for Scikit-Learn's `StandardScaler`! Let's get crackin'.
 
-Let's introduce our main character. A random variable $X$ has the **standard normal distribution** if its density function $\varphi\colon\mathbb R\to\mathbb R$ is given as
+Let's start by introducing our main character. A random variable $X$ has the **standard normal distribution** if its density function $\varphi\colon\mathbb R\to\mathbb R$ is given as
 
 $$ \varphi(z) = \frac{1}{\sqrt{2\pi}}e^{-z^2/2}, $$
 
-where the $\tfrac{1}{\sqrt{2\pi}}$ is there solely to ensure that it integrates to 1. We write $X\sim\mathcal N(0,1)$, because one can show that $EX = 0$ and $\text{Var}(X)=1$ in this case. To generate new random variables $Y$ with mean $\mu$ and variance $\sigma^2$ we can simply take $X\sim\mathcal N(0,1)$ and set
+where the $\tfrac{1}{\sqrt{2\pi}}$ is there solely to ensure that it integrates to 1. We write $X\sim\mathcal N(0,1)$, because one can show that $EX = 0$ and $\text{Var}(X)=1$ in this case. To generate new normally distributed random variables $Y$ with mean $\mu$ and variance $\sigma^2$ we can simply take $X\sim\mathcal N(0,1)$ and set
 
 $$ Y := \mu + \sigma X, $$
 
@@ -47,7 +47,7 @@ for (i, j) in np.ndindex(3, 3):
     ax[(i, j)].axes.set_title(f"mu = {mus[i]} & sigma = {sigmas[j]}", loc='right')
 ```
 
-Now, moving on to how this is related to a data scientist's work, if we have given an infinite sequence $X_1, X_2, \dots$ of random variables then we define the **n'th sample mean** to be
+Now, moving on to how this is related to a data scientist's work, if we have given an infinite sequence $X_1, X_2, \dots$ of random variables then we define the **n'th sample mean**
 
 $$ \overline X_n := \frac{X_1 + X_2 + \dots + X_n}{n}, $$
 
@@ -76,6 +76,6 @@ Now, recall that we say that we **standardise** a random variable when we subtra
 In slightly more layman's terms:
 
 {: style="text-align:center"}
-*When we standardise our observations then we approximate a standard normal distribution*
+*When we standardise our data then we approximate a standard normal distribution*
 
 The more samples we have, the closer the distribution will look like a standard bell curve. Hoorah!
