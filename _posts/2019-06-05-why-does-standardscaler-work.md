@@ -78,6 +78,6 @@ Now, recall that we say that we **standardise** a random variable when we subtra
 But note that the this object, $\sqrt{n}\sfrac{\overline X_n-\mu}{\sigma}$, is *precisely* the same thing as subtracting the mean ($\mu = E\overline X_n$) and dividing by the standard deviation ($\sigma = \sqrt{\text{Var}(\overline X_n)}=\sqrt{\sfrac{\sigma^2}{n}}=\sfrac{\sigma}{\sqrt{n}}$). In other words, it's *precisely* the result of applying `StandardScaler` to our data! So, said more simply:
 
 {: style="text-align:center"}
-*When we apply `StandardScaler` to our data then we approximate a standard normal distribution*
+*When we apply `StandardScaler` to our data, i.e. standardise our data, then we approximate a standard normal distribution*
 
 The more samples we have, the closer the distribution will look like a standard bell curve, which will make training machine learning models more efficient. Hoorah!
