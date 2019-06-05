@@ -59,7 +59,7 @@ $$ E\overline X_n = \frac{E(X_1+\dots +X_n)}{n} = \frac{EX_1+\dots +EX_n}{n} = \
 
 Here we used that [expectation is linear](https://brilliant.org/wiki/linearity-of-expectation/). A stronger result is true in fact, as the following famous theorem shows that the sample means *converge* to the true mean:
 
-> **Theorem** ([Law of Large Numbers](https://terrytao.wordpress.com/2008/06/18/the-strong-law-of-large-numbers/)). Let $X_1, X_2, \dots$ be iid random variables with mean $\mu$. Then $\overline X_n \to \mu$ [almost surely](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Almost_sure_convergence).
+> **Theorem** ([Law of Large Numbers](https://terrytao.wordpress.com/2008/06/18/the-strong-law-of-large-numbers/)). Let $X_1, X_2, \dots$ be [iid](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) random variables with mean $\mu$. Then $\overline X_n \to \mu$ [almost surely](https://en.wikipedia.org/wiki/Convergence_of_random_variables#Almost_sure_convergence).
 
 Moving from the mean to the variance, we can again easily compute the variance of the sample means:
 
