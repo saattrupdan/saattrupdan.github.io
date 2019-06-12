@@ -25,7 +25,7 @@ It's **diagonal** if it only stretches/shrinks in the axis directions:
 
 To apply the aforementioned idea of breaking into smaller pieces, a way of simplifying a matrix could then be to somehow split it up into these three factors.
 
-The first decomposition that we'll look at, the **eigendecomposition**, does this by isolating a collection of special vectors which are *not rotated* and *stretched/shrunk the same amount in all directions*: our transformation only potentially flips and "uniformly" stretches/shrinks these special ones. Of course this comes with its own cryptic terminology: these special vectors are called **eigenvectors**.
+The first decomposition that we'll look at, the **eigendecomposition**, does this by isolating a collection of special vectors which are *not rotated* and *stretched/shrunk the same amount in all directions*: our transformation only potentially flips and "uniformly" stretches/shrinks these special ones. Of course this comes with its own cryptic terminology: these special vectors are called **eigenvectors**, and the amount that they are uniformly stretched/shrunk are the **eigenvalues**.
 
 The decomposition then first rotates and potentially flips a given vector, then uniformly stretches/shrinks it and potentially flips it, and rotates and potentially flips it back again:
 
@@ -50,7 +50,7 @@ In three dimensions (and higher) we can get positive semi-definite transformatio
 
 Here's the precise statement of the eigendecomposition:
 
-> **Theorem** (Eigendecomposition). Let $M$ be a square matrix which is both symmetric and positive semi-definite. Then there exists an invertible matrix $Q$ and a diagonal matrix $\Lambda$ such that $M=Q\Lambda Q^{-1}$.
+> **Theorem** (Eigendecomposition). Let $M$ be a square matrix which is both symmetric and positive semi-definite. Then there exists an orthogonal matrix $Q$ and a diagonal matrix $\Lambda$ such that $M=Q\Lambda Q^{-1}$.
 
 The generalisation of the eigendecomposition to *all* matrices is then the **singular value decomposition**. Instead of performing the *same* rotation and potential flip before and after the uniform scaling, we allow them to be different.
 
@@ -63,7 +63,7 @@ The decomposition is then saying that any transformation can be split up into a 
 
 You can find a cool interactive animation of the decomposition [here](https://www.geogebra.org/m/mrey8VJX). Here's the precise statement of the decomposition.
 
-> **Theorem** (Singular Value Decomposition). Any real-valued $m\times n$ matrix $M$ can be written as $M=U\Sigma V^T$, where $U$ and $V$ are orthogonal matrices of dimensions $m\times m$ and $n\times n$ matrix$, respectively, and $\Sigma$ is a diagonal $m\times n$ matrix. Further, if we let $\sigma_i$ be the $i$'th diagonal entry of $\Sigma$ then
+> **Theorem** (Singular Value Decomposition). Any real-valued $m\times n$ matrix $M$ can be written as $M=U\Sigma V^T$, where $U$ and $V$ are orthogonal matrices of dimensions $m\times m$ and $n\times n$ matrix, respectively, and $\Sigma$ is a diagonal $m\times n$ matrix. Further, if we let $\sigma_i$ be the $i$'th diagonal entry of $\Sigma$ then
 > 
 > $$ \sigma_1 \geq \sigma_2 \geq \dots \geq \sigma_p $$
 > 
