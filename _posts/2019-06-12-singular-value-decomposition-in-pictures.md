@@ -27,14 +27,14 @@ To apply the aforementioned idea of breaking into smaller pieces, a way of simpl
 
 The first decomposition that we'll look at, the **eigendecomposition**, does this by isolating a collection of special vectors which are *not rotated* and *stretched/shrunk the same amount in all directions*: our transformation only potentially flips and "uniformly" stretches/shrinks these special ones. Of course this comes with its own cryptic terminology: these special vectors are called **eigenvectors**, and the amount that they are uniformly stretched/shrunk are the **eigenvalues**.
 
-The decomposition then first rotates and potentially flips a given vector, then stretches/shrinks it in the axis directions and potentially flips it, and rotates and potentially flips it back again:
+The decomposition then first rotates and potentially flips a given vector, then stretches/shrinks it in the axis directions, and rotates and potentially flips it back again:
 
 {: style="text-align:center"}
 ![eigendecomposition](../img/eigendecomposition.jpg)
 
 There is a problem, however: it doesn't always work. We firstly have to assume that $M$ is a **square matrix**, meaning that $m=n$, because we're doing the same rotation (in reverse) after we stretch/shrink and so we have to stay in the same space.
 
-Being a square matrix is not even enough, as we also require that $M$ is *symmetric* and *positive semi-definite*. More jargon! Let's look at those one at a time.
+Being a square matrix is not even enough, as we also require that $M$ is *symmetric* and *positive semi-definite* (technically, a [weaker condition suffices](https://en.wikipedia.org/wiki/Diagonalizable_matrix), but we'll ignore this here, as SVD will take care of this as well). More jargon! Let's look at those one at a time.
 
 A transformation is **symmetric** if applying it twice cancels out all rotations and flips; i.e. only stretching/shrinking stays after the second transformation:
 
@@ -56,7 +56,7 @@ The generalisation of the eigendecomposition to *all* matrices is then the **sin
 
 We therefore isolate some *special vectors* again, where in this case "special" only means that they are "uniformly" stretched/shrunk, i.e. that the stretching/shrinking are equal in all directions. This is *almost* the same thing as the eigenvectors, except that we allow them to be rotated. We call these special vectors **singular vectors**, and the amount that they're stretched/shrunk are the **singular values**.
 
-The decomposition is then saying that any transformation can be split up into a (1) rotation + potential flip, (2) stretching/shrinking in the axis directions and (3) another (potentially different) rotation + potential flip. Note that (2) doesn't include flips, in contrast to the eigendecomposition.
+The decomposition is then saying that any transformation can be split up into a (1) rotation + potential flip, (2) stretching/shrinking in the axis directions and (3) another (potentially different) rotation + potential flip.
 
 {: style="text-align:center"}
 ![singular value decomposition](../img/svd.jpg)
@@ -69,6 +69,6 @@ You can find a cool interactive animation of the decomposition [here](https://ww
 > 
 > where $p:=\min(m,n)$ and $\sigma_i=0$ for all $i>p$.
 
-That's it! You can check out the proof of this theorem [here](http://www.ee.cuhk.edu.hk/~wkma/engg5781/new_notes/lecture%205-%20SVD-%20note.pdf).
+That's it! You can check out the proof of this theorem [here](http://www.ee.cuhk.edu.hk/~wkma/engg5781/new_notes/lecture%205-%20SVD-%20note.pdf). One neat thing to note is when our transformation is both symmetric and semi-positive definite, then the SVD and eigendecomposition are equivalent!
 
-Tune in next week for some data science applications of this decomposition!
+Tune in next week for some data science applications of this decomposition.
