@@ -27,7 +27,7 @@ To apply the aforementioned idea of breaking into smaller pieces, a way of simpl
 
 The first decomposition that we'll look at, the **eigendecomposition**, does this by isolating a collection of special vectors which are *not rotated* and *stretched/shrunk the same amount in all directions*: our transformation only potentially flips and "uniformly" stretches/shrinks these special ones. Of course this comes with its own cryptic terminology: these special vectors are called **eigenvectors**, and the amount that they are uniformly stretched/shrunk are the **eigenvalues**.
 
-The decomposition then first rotates and potentially flips a given vector, then uniformly stretches/shrinks it and potentially flips it, and rotates and potentially flips it back again:
+The decomposition then first rotates and potentially flips a given vector, then stretches/shrinks it in the axis directions and potentially flips it, and rotates and potentially flips it back again:
 
 {: style="text-align:center"}
 ![eigendecomposition](../img/eigendecomposition.jpg)
@@ -41,22 +41,22 @@ A transformation is **symmetric** if applying it twice cancels out all rotations
 {: style="text-align:center"}
 ![symmetric transformation](../img/symmetric.jpg)
 
-Next, a symmetric transformation is **positive semi-definite** if no vector is flipped. As it's also symmetric this means that any vector which is rotated will have to be rotated back to its starting position after applying the transformation again. In two dimensions this reduces to only allowing scaling. This is still more general than a diagonal transformation however, as we allow scaling in directions different from the axis directions, causing skewness:
+Next, a symmetric transformation is **positive semi-definite** if no vector is flipped. As it's also symmetric this means that any vector which is rotated will have to be rotated back to its starting position after applying the transformation again. In two dimensions this reduces to only allowing stretching/shrinking. This is still more general than a diagonal transformation however, as we allow stretching/shrinking in directions different from the axis directions, causing skewness:
 
 {: style="text-align:center"}
 ![symmetric positive semi-definite transformation](../img/positivesemidefinite.jpg)
 
-In three dimensions (and higher) we can get positive semi-definite transformations that aren't just scalings, see for instance [this video](https://www.youtube.com/watch?v=-PYDcHKPMKk).
+In three dimensions (and higher) we can get positive semi-definite transformations that aren't just stretching/shrinking, see for instance [this video](https://www.youtube.com/watch?v=-PYDcHKPMKk).
 
 Here's the precise statement of the eigendecomposition:
 
 > **Theorem** (Eigendecomposition). Let $M$ be a square matrix which is both symmetric and positive semi-definite. Then there exists an orthogonal matrix $Q$ and a diagonal matrix $\Lambda$ such that $M=Q\Lambda Q^{-1}$.
 
-The generalisation of the eigendecomposition to *all* matrices is then the **singular value decomposition**. Instead of performing the *same* rotation and potential flip before and after the uniform scaling, we allow them to be different.
+The generalisation of the eigendecomposition to *all* matrices is then the **singular value decomposition**. Instead of performing the *same* rotation and potential flip before and after the stretching/shrinking in the axis directions, we allow them to be different.
 
 We therefore isolate some *special vectors* again, where in this case "special" only means that they are "uniformly" stretched/shrunk, i.e. that the stretching/shrinking are equal in all directions. This is *almost* the same thing as the eigenvectors, except that we allow them to be rotated. We call these special vectors **singular vectors**, and the amount that they're stretched/shrunk are the **singular values**.
 
-The decomposition is then saying that any transformation can be split up into a (1) rotation + potential flip, (2) uniform stretching/shrinking and (3) another (potentially different) rotation + potential flip:
+The decomposition is then saying that any transformation can be split up into a (1) rotation + potential flip, (2) stretching/shrinking in the axis directions and (3) another (potentially different) rotation + potential flip. Note that (2) doesn't include flips, in contrast to the eigendecomposition.
 
 {: style="text-align:center"}
 ![singular value decomposition](../img/svd.jpg)
