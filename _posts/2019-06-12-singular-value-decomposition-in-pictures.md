@@ -71,4 +71,4 @@ You can find a cool interactive animation of the decomposition [here](https://ww
 
 That's it! You can check out the proof of this theorem [here](http://www.ee.cuhk.edu.hk/~wkma/engg5781/new_notes/lecture%205-%20SVD-%20note.pdf). One neat thing to note is when our transformation is both symmetric and semi-positive definite, then the SVD and eigendecomposition are equivalent!
 
-Tune in next week for some data science applications of this decomposition.
+Tune in next time for some data science applications of this decomposition!
