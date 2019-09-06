@@ -69,8 +69,8 @@ Here I set the size of the population to 30 and evolve it for 30 generations. Al
 ...   )
 >>> 
 >>> history = nns.evolve(generations = 30)
-Evolving population: 100%|███████████████| 30/30 [2:11:11<00:00, 190.63s/it]
-Computing fitness: 100%|██████████████████████| 7/7 [04:10<00:00, 56.28s/it]
+Evolving population: 100%|██████████████| 30/30 [2:11:11<00:00, 190.63s/it]
+Computing fitness: 100%|█████████████████████| 7/7 [04:10<00:00, 56.28s/it]
 ```
 
 That only took a bit more than two hours on my laptop, which is not too bad and a substantial improvement of the seven hour run of Matt's algorithm, which of course makes sense as we're only training our networks for a single epoch and even in parallel.
