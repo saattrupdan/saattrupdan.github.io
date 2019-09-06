@@ -1,7 +1,7 @@
 ---
 layout: post
 mathjax: true
-title: NaturalSelection - easily evolve neural networks and more
+title: NaturalSelection - easily evolve neural networks
 ---
 
 In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations, it felt way more like guesswork than anything, and I tried to see what other approaches there were to systematise this process. The two main contenders seem to be [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) and [random search](https://en.wikipedia.org/wiki/Random_search), the former searching through a grid of hyperparameters and the latter searching through random combinations of them. My network takes hours to train on my puny GPU-less bog standard [laptop](https://www.lenovo.com/gb/en/laptops/thinkpad/s-series/s440/), so a grid search was quickly ruled out.
