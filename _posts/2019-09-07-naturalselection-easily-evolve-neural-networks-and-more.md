@@ -98,9 +98,9 @@ The architecture might seem a bit strange with all the zeroes, but this correspo
 ```python
 >>> # This also saves the model to cifar10_model.h5
 >>> best_score = nns.train_best(file_name = 'cifar10_model')
-Epoch: 0 - loss: 1.6879, acc: 0.3977, val_loss: 1.5072, val_acc: 0.4605: 100%|██████████| 50000/50000 [00:15<00:00, 958.74it/s]
+Epoch 0: 100%|██████████████████████| 50000/50000 [00:15<00:00, 958.74it/s]
 (...)
-Epoch: 34 - loss: 0.5293, acc: 0.8099, val_loss: 1.5934, val_acc: 0.5641: 100%|██████████| 50000/50000 [00:16<00:00, 82.02it/s]
+Epoch 34: 100%|██████████████████████| 50000/50000 [00:16<00:00, 82.02it/s]
 >>> best_score
 0.5671
 ```
