@@ -69,8 +69,8 @@ Here I set the size of the population to 30 and evolve it for 30 generations. Al
 ...   )
 >>> 
 >>> history = nns.evolve(generations = 30)
-Evolving population: 100%|██████████████████| 30/30 [2:11:11<00:00, 190.63s/it]
-Computing fitness: 100%|█████████████████████████| 7/7 [04:10<00:00, 56.28s/it]
+Evolving population: 100%|███████████████| 30/30 [2:11:11<00:00, 190.63s/it]
+Computing fitness: 100%|██████████████████████| 7/7 [04:10<00:00, 56.28s/it]
 ```
 
 That only took a bit more than two hours on my laptop, which is not too bad and a substantial improvement of the seven hour run of Matt's algorithm, which of course makes sense as we're only training our networks for a single epoch and even in parallel.
@@ -82,7 +82,7 @@ The evolution updates the `nns` population as well as spitting out a `History` o
 {'genome': {'optimizer': 'adamax', 'hidden_activation': 'relu',
 'batch_size': 64, 'initializer': 'lecun_normal', 'input_dropout': 0.0,
 'neurons0': 256, 'dropout0': 0.1, 'neurons1': 0, 'dropout1': 0.0,
-'neurons2': 256, dropout2': 0.1, 'neurons3': 0, 'dropout3': 0.0,
+'neurons2': 256, 'dropout2': 0.1, 'neurons3': 0, 'dropout3': 0.0,
 'neurons4': 256, 'dropout4': 0.1}, 'fitness': 0.4674000144004822}
 >>> 
 >>> history.plot(
