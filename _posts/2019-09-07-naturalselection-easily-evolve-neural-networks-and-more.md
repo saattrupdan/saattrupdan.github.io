@@ -4,7 +4,7 @@ mathjax: true
 title: NaturalSelection - easily evolve neural networks and more
 ---
 
-In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations, it felt way more like guesswork than anything, and I tried to see what other approaches there were to systematise this process. The two main contenders seem to be [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) and [random search](https://en.wikipedia.org/wiki/Random_search), the former searching through a grid of hyperparameters and the latter searching through random combinations of them. My network takes hours to train on my puny GPU-less bog standard [laptop](https://www.lenovo.com/gb/en/laptops/thinkpad/s-series/s440/), so grid search was quickly ruled out.
+In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations, it felt way more like guesswork than anything, and I tried to see what other approaches there were to systematise this process. The two main contenders seem to be [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) and [random search](https://en.wikipedia.org/wiki/Random_search), the former searching through a grid of hyperparameters and the latter searching through random combinations of them. My network takes hours to train on my puny GPU-less bog standard [laptop](https://www.lenovo.com/gb/en/laptops/thinkpad/s-series/s440/), so a grid search was quickly ruled out.
 
 After searching around I stumbled across [this excellent blog post](https://blog.coast.ai/lets-evolve-a-neural-network-with-a-genetic-algorithm-code-included-8809bece164) by Matt Harvey, which is about "evolving" a collection of networks in an intelligent way, inspired by natural selection. It's essentially a "guided random search", which *roughly* works as follows:
 
@@ -49,9 +49,9 @@ I wanted to compare my performance with Matt's algorithm to see if I actually im
 ...   return (X_train, Y_train, X_val, Y_val)
 ```
 
-Next is where `NaturalSelection` enters the picture. All we have to do is define an object of the `NNs` class with the parameters we want, representing a population of neural networks, from which we can call its `evolve` method to run the genetic algorithm.
+Next is where `NaturalSelection` enters the picture. All we have to do is define an object of the `NNs` class with the parameters we want, representing a population of neural networks. From which we can call its `evolve` method to run the genetic algorithm.
 
-Here I set the size of the population to 30 and evolve it for 30 generations. All we want to do is train the networks to the point where we can distinguish the good ones from the bad, and I ended up going for only a single epoch. To avoid some networks that take *ages* to train I also set the maximum training time to two minutes. The other parameters are self-explanatory and completely standard:
+Here I set the size of the population to 30 and evolve it for 30 generations. All we want to do is train the networks to the point where we can distinguish the good ones from the bad, so I ended up only training them for a single epoch. To avoid some networks that take *ages* to train I also set the maximum training time to two minutes. The other parameters are self-explanatory and completely standard:
 
 ```python
 >>> import naturalselection as ns
@@ -89,7 +89,7 @@ The evolution updates the `nns` population as well as spitting out a `History` o
 ...   )
 ```
 
-![Plot of evolution over ten generations, where the average validation accuracy steadily increases from 36% to 42%, with the maximum oscillating between 45% and 48% until it jumps up to 50% on generation 8](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/naturalselection_data/cifar10_plot.png)
+![Plot of evolution over thirty generations, where the average validation accuracy steadily increases from 30% to 45%, with the maximum rising from 43% to 46% with a handful of small oscillations along the way](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/naturalselection_data/cifar10_plot.png)
 
 The architecture might seem a bit strange with all the zeroes, but this corresponds to having neurons [256, 256, 256] with no input dropout and hidden dropouts [10%, 10%, 10%]. Note that we limited ourselves to training for a single epoch, so we can squeeze out some better performance by fully training the fittest network:
 
@@ -103,13 +103,13 @@ Epoch: 34 - loss: 0.5293, acc: 0.8099, val_loss: 1.5934, val_acc: 0.5641: 100%|â
 0.5671
 ```
 
-So we end up with a model yielding 56.71% validation accuracy, which is slightly better than Matt's score, which makes sense as we're tuning more hyperparameters. All in all this took less than 2.5 hours!
+So we end up with a model yielding 56.71% validation accuracy, which is slightly better than Matt's score, which makes sense as we're also tuning more hyperparameters. All in all this took less than 2.5 hours!
 
-This package is still work in progress, but it's coming close to reaching a stable state (at the time of writing it's at version 0.6). If you think you'll find this useful then I'd appreciate if you could give [the repo](https://github.com/saattrupdan/naturalselection) a star, and feel free to open a ticket if you spot a bug. Pull requests with fixes or new features would also be awesome as well!
+This package is still work in progress, but it's coming close to reaching a stable state (at the time of writing it's at version 0.6). If you think you'll find this useful then I'd appreciate if you could give [the repo](https://github.com/saattrupdan/naturalselection) a star, and feel free to open a ticket if you spot a bug. Pull requests with fixes or new features would also be awesome!
 
-Some things I think would be great to include are at least:
+Some things I would be looking into including are at least:
 * Built-in support for CNN- and RNN- layers as well, as it currently only works with densely connected "vanilla" layers
 * Implementing GPU parallel training
 * Searching through network topologies as well, to not limit ourselves to sequential neural networks
 
-I'll also be working on these things and will be commiting updates on the `dev` branch.
+You can check out the `dev` branch to see what work is currently in progress.
