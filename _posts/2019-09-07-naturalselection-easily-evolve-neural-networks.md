@@ -108,7 +108,7 @@ The evolution updates the `nns` population as well as spitting out a `History` o
 
 ![Plot of evolution over thirty generations, where the average validation accuracy steadily increases from 30% to 45%, with the maximum rising from 43% to 46% with a handful of small oscillations along the way](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/naturalselection_data/cifar10_plot.png)
 
-Here the filled area are the accuracies that are one standard deviation away from the mean, which assuming that they're normally distributed would account for ~68% of the population, giving you a rough idea of how homogeneous the population during the evolution.
+Here the filled area are the accuracies that are one standard deviation away from the mean, which, assuming that they're normally distributed, would account for ~68% of the population, giving you a rough idea of how homogeneous the population is during the evolution.
 
 The architecture might seem a bit strange with all the zeroes, but this corresponds to having neurons [256, 256, 256] with no input dropout and hidden dropouts [10%, 10%, 10%]. Note that since I limited myself to training our models for a single epoch, I can squeeze out some more performance by fully training the fittest network:
 
