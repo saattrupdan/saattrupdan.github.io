@@ -4,9 +4,9 @@ mathjax: true
 title: NaturalSelection - a new python package to easily evolve neural networks
 ---
 
-In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations it felt way more like guesswork than anything and I decided to be more systematic, which eventually led to the development of my python package `NaturalEvolution`, which approaches this problem in an intelligent manner with a simple interface.
+In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations it felt way more like guesswork than anything and I decided to be more systematic, which eventually led to the development of my python package `NaturalEvolution`, which approaches this problem in an intelligent manner with a simple interface. [Here's the github repo](https://github.com/saattrupdan/naturalselection).
 
-I started out by trying a few dozen hyperparameter combinations, but it quickly felt more like guesswork than anything and I tried to see what other approaches there were to systematise this process. The two main contenders seem to be [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) and [random search](https://en.wikipedia.org/wiki/Random_search), the former searching through a grid of hyperparameters and the latter searching through random combinations of them. My network takes hours to train on my puny GPU-less bog standard [laptop](https://www.lenovo.com/gb/en/laptops/thinkpad/s-series/s440/), so a grid search was quickly ruled out.
+Before it got to that stage I started out by seeing what other approaches there were to systematise this process. The two main contenders seem to be [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) and [random search](https://en.wikipedia.org/wiki/Random_search), the former searching through a grid of hyperparameters and the latter searching through random combinations of them. My network takes hours to train on my puny GPU-less bog standard [laptop](https://www.lenovo.com/gb/en/laptops/thinkpad/s-series/s440/), so a grid search was quickly ruled out.
 
 After searching around I stumbled across [this excellent blog post](https://blog.coast.ai/lets-evolve-a-neural-network-with-a-genetic-algorithm-code-included-8809bece164) by Matt Harvey, which is about "evolving" a collection of networks in an intelligent way, inspired by natural selection. It's essentially a "guided random search", which *roughly* works as follows:
 
@@ -20,9 +20,9 @@ After searching around I stumbled across [this excellent blog post](https://blog
 
 In [Matt's blog post](https://blog.coast.ai/lets-evolve-a-neural-network-with-a-genetic-algorithm-code-included-8809bece164) he supplied code that tuned the amount of layers in the network, the number of neurons in each layer (with each layer having the same number of neurons), the activation function and choice of optimizer. I really liked the pythonic way he implemented the algorithm, so I decided to try to implement it from scratch myself, adding on several new features along the way.
 
-This resulted in my first python package! I call it `NaturalSelection`: [here's a link to the github repo](https://github.com/saattrupdan/naturalselection), where I also describe the implementation of the algorithm in a bit more detail. Here are a few notable features:
+This was then what resulted in my first python package! I call it `NaturalSelection`: [here's a link to the github repo](https://github.com/saattrupdan/naturalselection), where I also describe the implementation of the algorithm in a bit more detail. Here are a few notable features:
 
-* By default it tunes 15 hyperparameters, but this is highly flexible
+* By default it tunes 15 hyperparameters (see below), but this is highly flexible
 * It never trains the same model twice
 * The training process is parallelised using the `multiprocessing` module
 * The breeders and elites are chosen following a distribution such that the higher scoring a network is, the higher chance it has of being selected
