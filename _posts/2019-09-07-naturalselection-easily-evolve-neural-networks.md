@@ -124,7 +124,7 @@ So I end up with a model yielding 56.71% validation accuracy, which is slightly 
 
 This package is still work in progress, but it's coming close to reaching a stable state (at the time of writing it's at version 0.6). If you think you'll find this useful then I'd appreciate if you could give [the repo](https://github.com/saattrupdan/naturalselection) a star, and feel free to open a ticket if you spot a bug. Pull requests with fixes or new features would also be awesome!
 
-Some things I would be looking into including are at least:
+Some things I will be looking into including are at least:
 * Built-in support for CNN- and RNN- layers as well, as it currently only works with densely connected "vanilla" layers
 * Implementing GPU parallel training
 * Searching through network topologies as well, to not limit ourselves to sequential neural networks
