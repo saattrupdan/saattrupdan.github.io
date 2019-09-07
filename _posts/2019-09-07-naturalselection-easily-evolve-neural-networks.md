@@ -1,20 +1,22 @@
 ---
 layout: post
 mathjax: true
-title: NaturalSelection - easily evolve neural networks
+title: NaturalSelection - a new python package to easily evolve neural networks
 ---
 
-In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations, it felt way more like guesswork than anything, and I tried to see what other approaches there were to systematise this process. The two main contenders seem to be [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) and [random search](https://en.wikipedia.org/wiki/Random_search), the former searching through a grid of hyperparameters and the latter searching through random combinations of them. My network takes hours to train on my puny GPU-less bog standard [laptop](https://www.lenovo.com/gb/en/laptops/thinkpad/s-series/s440/), so a grid search was quickly ruled out.
+In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations it felt way more like guesswork than anything and I decided to be more systematic, which eventually led to the development of my python package `NaturalEvolution`, which approaches this problem in an intelligent manner with a simple interface.
+
+I started out by trying a few dozen hyperparameter combinations, but it quickly felt more like guesswork than anything and I tried to see what other approaches there were to systematise this process. The two main contenders seem to be [grid search](https://en.wikipedia.org/wiki/Hyperparameter_optimization#Grid_search) and [random search](https://en.wikipedia.org/wiki/Random_search), the former searching through a grid of hyperparameters and the latter searching through random combinations of them. My network takes hours to train on my puny GPU-less bog standard [laptop](https://www.lenovo.com/gb/en/laptops/thinkpad/s-series/s440/), so a grid search was quickly ruled out.
 
 After searching around I stumbled across [this excellent blog post](https://blog.coast.ai/lets-evolve-a-neural-network-with-a-genetic-algorithm-code-included-8809bece164) by Matt Harvey, which is about "evolving" a collection of networks in an intelligent way, inspired by natural selection. It's essentially a "guided random search", which *roughly* works as follows:
 
-1. Start with a randomly selected "population" of neural networks
+1. Start with a randomly selected *population* of neural networks
 2. Train all the networks in the population
 3. Set aside a small portion of the better performing networks called *elites*
 4. Select a large portion of *breeders* among the entire population
 5. *Breed* randomly among the breeders by randomly combining hyperparameters of the "parent networks", until the children and elites form a population the same size as the one we started with
 6. *Mutate* a small portion of the children by changing some of their hyperparameters
-7. Go to step 2
+7. This constitutes a *generation* of the evolution. Go to step 2 to proceed with the next one
 
 In [Matt's blog post](https://blog.coast.ai/lets-evolve-a-neural-network-with-a-genetic-algorithm-code-included-8809bece164) he supplied code that tuned the amount of layers in the network, the number of neurons in each layer (with each layer having the same number of neurons), the activation function and choice of optimizer. I really liked the pythonic way he implemented the algorithm, so I decided to try to implement it from scratch myself, adding on several new features along the way.
 
@@ -27,7 +29,7 @@ This resulted in my first python package! I call it `NaturalSelection`: [here's 
 * It's highly customisable and can look for maxima for any given function --- hyperparameter tuning for neural networks is just a special case
 * It prints some pretty plots :)
 
-I wanted to compare my performance with Matt's algorithm to see if I actually improved anything, so let's go through that application together. It's about find a neural network modelling the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) data set, which classifies images into 10 different categories like "airplane" and "automobile". We start out by fetching the data and doing some standard preprocessing:
+I wanted to compare my performance with Matt's algorithm to see if I actually improved anything, so let's go through that application together. It's about finding a neural network modelling the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) data set, which classifies images into 10 different categories like "airplane" and "automobile". We start out by fetching the data and doing some standard preprocessing:
 
 ```python
 >>> def preprocessing(X):
@@ -53,7 +55,20 @@ I wanted to compare my performance with Matt's algorithm to see if I actually im
 
 Next is where `NaturalSelection` enters the picture. All we have to do is define an object of the `NNs` class with the parameters we want, representing a population of neural networks. From which we can call its `evolve` method to run the genetic algorithm.
 
-Here I set the size of the population to 30 and evolve it for 30 generations. All we want to do is train the networks to the point where we can distinguish the good ones from the bad, so I ended up only training them for a single epoch. To avoid some networks that take *ages* to train I also set the maximum training time to two minutes. The other parameters are self-explanatory and completely standard:
+I will be tuning the default set of hyperparameters, which are the following:
+
+* Optimizer, ranging over `adam`, `adamax` and `nadam`
+* Initializer, ranging over `lecun_uniform`, `lecun_normal`, `glorot_uniform`, `glorot_normal`, `he_uniform` and `he_normal`
+* Activation function in the hidden layers, ranging over `relu` and `elu`
+* Batch size, ranging over 16, 32, 64
+* Individual neurons in five hidden layers, ranging over 16, 32, 64, 128, 256, 512 and 1024
+* Input dropout and individual dropouts after each hidden layer, ranging over 0%, 10%, 20%, 30%, 40% and 50%.
+
+Again, these are merely default values and can be changed by setting `input_dropout`, `hidden_dropout`, `neurons`, `optimizer`, `hidden_activation`, `batch_size` and/or `initializer` to range over other values.
+
+Here I set the size of the population to 30 and evolve it for 30 generations, by which I mean that I will be working with 30 neural networks and run the above-mentioned algorithm 30 times. 
+
+All we want to do is train the networks to the point where we can distinguish the good ones from the bad, so I ended up only training them for a single epoch. To avoid some networks that take *ages* to train I also set the maximum training time to two minutes. The other parameters are self-explanatory and [completely standard](https://keras.io/examples/cifar10_cnn/):
 
 ```python
 >>> import naturalselection as ns
@@ -75,7 +90,7 @@ Computing fitness: 100%|██████████████████�
 
 That only took a bit more than two hours on my laptop, which is not too bad and a substantial improvement of the seven hour run of Matt's algorithm, which of course makes sense as we're only training our networks for a single epoch and even in parallel.
 
-The evolution updates the `nns` population as well as spitting out a `History` object which carries information about the evolution process, just like when we `fit` a Keras model. This allows us to output the genome (i.e. hyperparameter combination) and fitness (= validation accuracy) of the best performing network throughout the evolution, as well as plot the progress:
+The evolution updates the `nns` population as well as spitting out a `History` object which carries information about the evolution process, just like when we `fit` a Keras model. This allows us to output the genome (i.e. hyperparameter combination) and fitness (= validation accuracy) of the best performing network throughout the evolution, as well as plot the progress, where the filled area represents the accuracies that are one standard deviation away from the mean:
 
 ```python
 >>> history.fittest
