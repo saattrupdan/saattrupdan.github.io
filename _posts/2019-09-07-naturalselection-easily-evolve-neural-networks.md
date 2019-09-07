@@ -68,7 +68,7 @@ Again, these are merely default values and can be changed by setting `input_drop
 
 Here I set the size of the population to 30 and evolve it for 30 generations, by which I mean that I will be working with 30 neural networks and run the above-mentioned algorithm 30 times. 
 
-All I want to do is train the networks to the point where I can distinguish the good ones from the bad, so I ended up only training them for a single epoch. To avoid some networks that take *ages* to train I also set the maximum training time to two minutes. The other parameters are self-explanatory and [completely standard](https://keras.io/examples/cifar10_cnn/):
+All I want to do is train the networks to the point where I can distinguish the good ones from the bad, so I decided to only train them for a single epoch, but to avoid training some networks for *ages* I also set the maximum training time to two minutes. The other parameters are self-explanatory and [completely standard](https://keras.io/examples/cifar10_cnn/):
 
 ```python
 >>> import naturalselection as ns
