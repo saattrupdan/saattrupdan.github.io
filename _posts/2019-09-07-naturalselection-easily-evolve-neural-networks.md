@@ -90,7 +90,7 @@ Computing fitness: 100%|██████████████████�
 
 That only took a bit more than two hours on my laptop, which is not too bad and a substantial improvement of the seven hour run of Matt's algorithm, which of course makes sense as I'm only training our networks for a single epoch and even in parallel.
 
-The evolution updates the `nns` population as well as spitting out a `History` object which carries information about the evolution process, just like when we `fit` a Keras model. This allows us to output the genome (i.e. hyperparameter combination) and fitness (= validation accuracy) of the best performing network throughout the evolution, as well as plot the progress, where the filled area represents the accuracies that are one standard deviation away from the mean:
+The evolution updates the `nns` population as well as spitting out a `History` object which carries information about the evolution process, just like when we `fit` a Keras model. This allows us to output the genome (i.e. hyperparameter combination) and fitness (= validation accuracy) of the best performing network throughout the evolution, as well as plot the progress:
 
 ```python
 >>> history.fittest
@@ -107,6 +107,8 @@ The evolution updates the `nns` population as well as spitting out a `History` o
 ```
 
 ![Plot of evolution over thirty generations, where the average validation accuracy steadily increases from 30% to 45%, with the maximum rising from 43% to 46% with a handful of small oscillations along the way](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/naturalselection_data/cifar10_plot.png)
+
+Here the filled area are the accuracies that are one standard deviation away from the mean, which assuming that they're normally distributed would account for ~68% of the population, giving you a rough idea of how homogeneous the population during the evolution.
 
 The architecture might seem a bit strange with all the zeroes, but this corresponds to having neurons [256, 256, 256] with no input dropout and hidden dropouts [10%, 10%, 10%]. Note that since I limited myself to training our models for a single epoch, I can squeeze out some more performance by fully training the fittest network:
 
