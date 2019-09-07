@@ -27,7 +27,7 @@ This resulted in my first python package! I call it `NaturalSelection`: [here's 
 * It's highly customisable and can look for maxima for any given function --- hyperparameter tuning for neural networks is just a special case
 * It prints some pretty plots :)
 
-I wanted to compare my performance with Matt's algorithm to see if I actually improved anything, to let's go through that application together. It's about find a neural network modelling the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) data set, which classifies images into 10 different categories like "airplane" and "automobile". We start out by fetching the data and doing some standard preprocessing:
+I wanted to compare my performance with Matt's algorithm to see if I actually improved anything, so let's go through that application together. It's about find a neural network modelling the [CIFAR-10](https://www.cs.toronto.edu/~kriz/cifar.html) data set, which classifies images into 10 different categories like "airplane" and "automobile". We start out by fetching the data and doing some standard preprocessing:
 
 ```python
 >>> def preprocessing(X):
