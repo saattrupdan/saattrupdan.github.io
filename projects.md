@@ -6,7 +6,7 @@ title: Projects
 ## [naturalselection](https://github.com/saattrupdan/naturalselection){:target="_blank"}
 #### An all-purpose pythonic genetic algorithm
 
-A python package which uses genetic algorithms to maximise a given function. A prime example of this is to hyperparameter optimise neural networks. See [the readme](https://github.com/saattrupdan/naturalselection/blob/master/README.md) for several examples and a more in-depth explanation of the algorithm.
+A python package which uses genetic algorithms to maximise a given function. A prime example of this is to hyperparameter optimise neural networks. See [the readme](https://github.com/saattrupdan/naturalselection/blob/master/README.md) for several examples and a more in-depth explanation of the algorithm. [Here is the accompanying blog post](https://saattrupdan.github.io/2019-09-07-naturalselection-easily-evolve-neural-networks/).
 
 ![Image showing an example of the evolution of a population](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/naturalselection_data/numbers_example.png)
 
