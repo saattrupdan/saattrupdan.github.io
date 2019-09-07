@@ -20,7 +20,7 @@ After searching around I stumbled across [this excellent blog post](https://blog
 
 In [Matt's blog post](https://blog.coast.ai/lets-evolve-a-neural-network-with-a-genetic-algorithm-code-included-8809bece164) he supplied code that tuned the amount of layers in the network, the number of neurons in each layer (with each layer having the same number of neurons), the activation function and choice of optimizer. I really liked the pythonic way he implemented the algorithm, so I decided to try to implement it from scratch myself, adding on several new features along the way.
 
-This was then what resulted in my first python package! I call it `NaturalSelection`: [here's a link to the github repo](https://github.com/saattrupdan/naturalselection), where I also describe the implementation of the algorithm in a bit more detail. Here are a few notable features:
+This was then what resulted in my first python package! I call it `NaturalSelection`. Check out the [readme](https://github.com/saattrupdan/naturalselection/blob/master/README.md) if you're interested in my particular implementation of the algorithm and some more examples. Here are a few notable features:
 
 * By default it tunes 15 hyperparameters (see below), but this is highly flexible
 * It never trains the same model twice
