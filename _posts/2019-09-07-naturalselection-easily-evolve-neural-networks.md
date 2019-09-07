@@ -64,11 +64,11 @@ I will be tuning the default set of hyperparameters, which are the following:
 * Individual neurons in five hidden layers, ranging over 16, 32, 64, 128, 256, 512 and 1024
 * Input dropout and individual dropouts after each hidden layer, ranging over 0%, 10%, 20%, 30%, 40% and 50%.
 
-Again, these are merely default values and can be changed by setting `input_dropout`, `hidden_dropout`, `neurons`, `optimizer`, `hidden_activation`, `batch_size` and/or `initializer` to range over other values.
+Again, these are merely default values and can be changed by setting `input_dropout`, `hidden_dropout`, `neurons`, `optimizer`, `hidden_activation`, `batch_size`, `initializer` and/or `max_nm_hidden_layers` to range over other values.
 
 Here I set the size of the population to 30 and evolve it for 30 generations, by which I mean that I will be working with 30 neural networks and run the above-mentioned algorithm 30 times. 
 
-All we want to do is train the networks to the point where we can distinguish the good ones from the bad, so I ended up only training them for a single epoch. To avoid some networks that take *ages* to train I also set the maximum training time to two minutes. The other parameters are self-explanatory and [completely standard](https://keras.io/examples/cifar10_cnn/):
+All I want to do is train the networks to the point where I can distinguish the good ones from the bad, so I ended up only training them for a single epoch. To avoid some networks that take *ages* to train I also set the maximum training time to two minutes. The other parameters are self-explanatory and [completely standard](https://keras.io/examples/cifar10_cnn/):
 
 ```python
 >>> import naturalselection as ns
@@ -88,7 +88,7 @@ Evolving population: 100%|██████████████| 30/30 [2:1
 Computing fitness: 100%|█████████████████████| 7/7 [04:10<00:00, 56.28s/it]
 ```
 
-That only took a bit more than two hours on my laptop, which is not too bad and a substantial improvement of the seven hour run of Matt's algorithm, which of course makes sense as we're only training our networks for a single epoch and even in parallel.
+That only took a bit more than two hours on my laptop, which is not too bad and a substantial improvement of the seven hour run of Matt's algorithm, which of course makes sense as I'm only training our networks for a single epoch and even in parallel.
 
 The evolution updates the `nns` population as well as spitting out a `History` object which carries information about the evolution process, just like when we `fit` a Keras model. This allows us to output the genome (i.e. hyperparameter combination) and fitness (= validation accuracy) of the best performing network throughout the evolution, as well as plot the progress, where the filled area represents the accuracies that are one standard deviation away from the mean:
 
@@ -108,7 +108,7 @@ The evolution updates the `nns` population as well as spitting out a `History` o
 
 ![Plot of evolution over thirty generations, where the average validation accuracy steadily increases from 30% to 45%, with the maximum rising from 43% to 46% with a handful of small oscillations along the way](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/naturalselection_data/cifar10_plot.png)
 
-The architecture might seem a bit strange with all the zeroes, but this corresponds to having neurons [256, 256, 256] with no input dropout and hidden dropouts [10%, 10%, 10%]. Note that since we limited ourselves to training our models for a single epoch, we can squeeze out some more performance by fully training the fittest network:
+The architecture might seem a bit strange with all the zeroes, but this corresponds to having neurons [256, 256, 256] with no input dropout and hidden dropouts [10%, 10%, 10%]. Note that since I limited myself to training our models for a single epoch, I can squeeze out some more performance by fully training the fittest network:
 
 ```python
 >>> # This also saves the model to cifar10_model.h5
@@ -120,7 +120,7 @@ Epoch 34: 100%|█████████████████████�
 0.5671
 ```
 
-So we end up with a model yielding 56.71% validation accuracy, which is slightly better than Matt's score, which makes sense as we're also tuning more hyperparameters. All in all this ended up taking less than 2.5 hours!
+So I end up with a model yielding 56.71% validation accuracy, which is slightly better than Matt's score, which makes sense as I'm also tuning more hyperparameters. All in all this ended up taking less than 2.5 hours!
 
 This package is still work in progress, but it's coming close to reaching a stable state (at the time of writing it's at version 0.6). If you think you'll find this useful then I'd appreciate if you could give [the repo](https://github.com/saattrupdan/naturalselection) a star, and feel free to open a ticket if you spot a bug. Pull requests with fixes or new features would also be awesome!
 
