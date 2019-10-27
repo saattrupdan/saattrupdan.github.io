@@ -13,7 +13,7 @@ Before we dive into why we might be interested in these loss functions, let's en
 
 $$ \frac{1}{n}\sum_{k=1}^n(x_k-y_k)^2, $$
 
-and, assuming now that $x\in{0,1}^n$ and $y\in(0,1]^n$, the **binary cross-entropy** is defined as
+and, assuming now that $x\in\{0,1\}^n$ and $y\in(0,1]^n$, the **binary cross-entropy** is defined as
 
 $$ -\frac{1}{n}\sum_{k=1}^n (x_k\log y_k + (1-x_k\log(1-y_k))). $$
 
@@ -74,11 +74,12 @@ But what if we're dealing with a different distribution? When we're dealing with
 
 $$ p(k) = \left\{\begin{array}{ll}\tfrac{4}{n} & \text{if the $k$'th observation is true}\\ 0 & \text{otherwise}\end{array}\right. $$
 
-Note that $1-X$ then follows the distribution with density function $1-p$. Using these facts, we can now rewrite the cross entropy as
+and $1-X$ then follows the distribution with density function $1-p$. Using these facts, we can now rewrite the cross entropy as
 
 $$
 \begin{align}
--\frac{1}{n}\sum_{k=1}^n (X\log\hat{X}_\theta + (1-X)\log(1-\hat{X}_\theta)) &= -\frac{1}{|\text{supp}(X)|}\sum_{k=1}^n X\log\hat{X}_\theta - \frac{1}{|\text{supp}(1-X)|}\sum_{k=1}^n(1-X)\log(1-\hat{X}_\theta)\\
+&-\frac{1}{n}\sum_{k=1}^n (X\log\hat{X}_\theta + (1-X)\log(1-\hat{X}_\theta))\\
+&= -\frac{1}{|\text{supp}(X)|}\sum_{k=1}^n X\log\hat{X}_\theta - \frac{1}{|\text{supp}(1-X)|}\sum_{k=1}^n(1-X)\log(1-\hat{X}_\theta)\\
 &= -\frac{4}{n}\sum_{k=1}^n X\log\hat{X}_\theta - \frac{4}{3n}\sum_{k=1}^n (1-X)\log(1-\hat{X}_\theta)\\
 &= -E[\log\hat{X}_\theta] - E[\log(1-\hat{X}_\theta)], 
 \end{align}
