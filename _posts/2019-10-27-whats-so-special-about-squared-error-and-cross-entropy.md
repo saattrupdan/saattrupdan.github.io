@@ -72,13 +72,17 @@ Here I was taking $\mu$ to be the discrete probability measure, giving equal pro
 
 But what if we're dealing with a different distribution? When we're dealing with classifications our true variable $X$ follows a probability distribution: If, say, 25% of the values are true and the rest false, then $X$ follows the distribution with density function 
 
+<div>
 $$ p(k) = \left\{\begin{array}{ll}\tfrac{4}{n} & \text{if the $k$'th observation is true}\\ 0 & \text{otherwise}\end{array}\right $$
+</div>
 
 and $\tilde X$, the negation of $X$, follows the distribution with density function $1-p$. Using this, we can now rewrite the cross entropy as
 
+<div>
 $$ -\frac{1}{n}\sum_{k=1}^n (X\log\hat X_\theta + (1-X)\log(1-\hat X_\theta)) &= -\frac{1}{\text{supp}(X)}\sum_{k=1}^n X\log\hat X_\theta - \frac{1}{\text{supp}(1-X)}\sum_{k=1}^n(1-X)\log(1-\hat X_\theta)\\
 &= -\frac{4}{n}\sum_{k=1}^n X\log\hat X_\theta - \frac{4}{3n}\sum_{k=1}^n (1-X)\log(1-\hat X_\theta)\\
 &= -E[\log\hat X_\theta] - E[\log(1-\hat X_\theta], $$
+</div>
 
 which is precisely the two (negative) log-likehood function! This means that, just as before, *minimising* the cross entropy between the true variable $X$ and the predicted variable $\hat X_\theta$ is equivalent to *maximising* the likelihood that the predicted variable follow the distribution of the true variable.
 
