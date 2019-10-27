@@ -28,43 +28,43 @@ To explain why these two losses achieve what we want, we first need to agree on 
 
 We assume here that there is a *true* answer, meaning that there is a distribution which will accurately model the number of Twitter users throughout all time. We only know these true values for historic data and we'd like to be able to predict the future values.
 
-Let us write $X$ for the random variable following the true distribution, meaning that $X(q)$ will be the actual number of Twitter users in a given quarter $q$. Say that we have chosen our favourite model $\hat X_\theta$ with parameters $\theta$, which attempts to model the historic data we have available. 
+Let us write $X$ for the random variable following the true distribution, meaning that $X(q)$ will be the actual number of Twitter users in a given quarter $q$. Say that we have chosen our favourite model $\hat X_{\theta}$ with parameter $\theta$, which attempts to model the historic data we have available. 
 
 
-## Squared error
+## Mean squared error
 
 We will now assume that the errors our model is making is *normally distributed* around the true values. This assumes that our model is a reasonable choice, of course. If our model simply output the value $1$ for all quarters then this would be far from true, so we're simply excluding that possibility.
 
-If we further assume that our observations are independently drawn from this distribution, then this means that we can write the density function of $\hat X_\theta$'s distribution as
+If we further assume that our observations are independently drawn from this distribution, then this means that we can write the density function of $\hat X_{\theta}$'s distribution as
 
-$$ \prod_{q=1}^37\mathcal{N}(X(q),\sigma^2) = \prod_{q=1}^37\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2\sigma^2}(\hat X_theta(q)-X(q))^2\right). $$
+$$ \prod_{q=1}^{37}\mathcal{N}(X(q),\sigma^2) = \prod_{q=1}^{37}\frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{1}{2\sigma^2}(\hat X_{\theta}(q)-X(q))^2\right). $$
 
 By finding the value for our model parameter $\theta$ which maximises this value we're thus effectively maximising the probability of our model being correct, which is what we want! This is called **maximum likelihood estimation**, where the above expression is our likelihood function in this case.
 
 The exponentials are a bit annoying to deal with, so instead of dealing with the above expression we'll apply a logarithmic transform and we wind up with the **log-likelihood function**
 
-$$ \sum_{q=1}^37(\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{1}{2\sigma^2}(\hat X_theta(q)-X(q))^2). $$
+$$ \sum_{q=1}^{37}(\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{1}{2\sigma^2}(\hat X_{\theta}(q)-X(q))^2). $$
 
 As the logarithm is strictly increasing our job is equivalent to maximising this new expression, and as we're maximising with respect to $\theta$ we can ignore the constants. If we also flip the sign then we're left with the job to *minimise*
 
-$$ \sum_{q=1}^37(\hat X_theta(q)-X(q))^2, $$
+$$ \sum_{q=1}^{37}(\hat X_{\theta}(q)-X(q))^2, $$
 
 which is exactly the squared error! This shows that 
 
 <center>
-  Minimising the squared error is equivalent to maximising the likelihood that our predictions are correct, *assuming* that our predictions are normally distributed around the true values.
+  *Minimising mean squared error is equivalent to maximising likelihood, assuming that our errors are normally distributed.*
 </center>
 
 
 ## Cross entropy
 
-The story about cross entropy turns out to be surprisingly similar to the squad error. To see this, recall the notion of **expected value** of a random variable:
+The story about cross entropy turns out to be surprisingly similar to the squared error. To see this, recall the notion of [expected value](https://en.wikipedia.org/wiki/Expected_value) of a random variable:
 
 $$ EX := \int xp(x)d\mu, $$
 
 where $p(x)$ is the density function of $X$'s distribution. If we assume that our probability space is $\{1,2,\dots,n\}$ with $\mu$ being the discrete probability measure, then the expectation is simply the average:
 
-$$ EX = \sum_{k=1}^n\frac{1}{n}X(k) = \frac{1}{n}\sum_{k=1}^nX(k). $$
+$$ EX = \sum_{k=1}^n p(k)X(k) = \frac{1}{n}\sum_{k=1}^nX(k). $$
 
 With this is mind, we can rewrite the mean squared error as $E[(X-\hat X)^2]$, i.e. when we're minimising the squared error then we're reducing the expected value of the squared distance between our predictions and the true values.
 
@@ -72,7 +72,7 @@ Here I was taking $\mu$ to be the discrete probability measure, giving equal pro
 
 But what if we're dealing with a different distribution? When we're dealing with classifications our true variable $X$ follows a probability distribution: If, say, 25% of the values are true and the rest false, then $X$ follows the distribution with density function 
 
-$$ p(k) = \left\{\begin{array}{ll}\sfrac{4}{n} & X(k) \text{True}\\ 0 & X(k) \text{False}\end{array}\right. $$
+$$ p(k) = \left\{\begin{array}{ll}\tfrac{4}{n} & \text{if the $k$'th observation is true}\\ 0 & \text{otherwise}\end{array}\right. $$
 
 Using this, we can now rewrite the cross entropy as
 
