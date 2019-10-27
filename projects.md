@@ -3,6 +3,12 @@ layout: page
 title: Projects
 ---
 
+## [AutoPoet](https://github.com/saattrupdan/autopoet){:target="_blank"}
+#### Build poems from text sources
+
+Automatically build poems from a given text source. At the moment it build Haiku poems from tweets, where a machine learning model counts the number of syllables in English words.
+
+
 ## [NaturalSelection](https://github.com/saattrupdan/naturalselection){:target="_blank"}
 #### An all-purpose pythonic genetic algorithm
 
