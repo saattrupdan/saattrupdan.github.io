@@ -11,11 +11,13 @@ When introduced to machine learning, practically oriented textbooks and online c
 
 Before we dive into why we might be interested in these loss functions, let's ensure that we're on the same page and quickly recall how they are defined. Whenever we have two vectors $x,y\in\mathbb R^n$, the **mean squared error** is given as
 
-$$ \frac{1}{n}\sum_{k=1}^n(x_n-y_n)^2, $$
+$$ \frac{1}{n}\sum_{k=1}^n(x_k-y_k)^2, $$
 
-and, assuming now that $x,y\in(0,1]$, the **cross-entropy** is defined as
+and, assuming now that $x\in[0,1]^n$ and $y\in(0,1]^n$, the **cross-entropy** is defined as
 
-$$ -\sum_{k=1}^n x_k\log y_k. $$
+$$ -\frac{1}{\text{supp}(x)}\sum_{k=1}^n x_k\log y_k, $$
+
+with $\text{supp}(x)$ being the number of non-zero values of $x$.
 
 In [Scikit-learn](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics) we find these as `sklearn.metrics.mean_squared_error` and `sklearn.metrics.log_loss`, in [Keras](https://keras.io/losses/) as `keras.losses.mean_squared_error` and `keras.categorical_crossentropy`, and in [PyTorch](https://pytorch.org/docs/stable/nn.html#loss-functions) as `torch.nn.MSELoss` and `torch.nn.NLLLoss`.
 
@@ -76,7 +78,7 @@ $$ p(k) = \left\{\begin{array}{ll}\tfrac{4}{n} & \text{if the $k$'th observation
 
 Using this, we can now rewrite the cross entropy as
 
-$$ -\sum_{k=1}^n X\log\hat X = -E[\log\hat X], $$
+$$ -\frac{1}{\text{supp}(X)}\sum_{k=1}^n X\log\hat X = -\frac{4}{n}\sum_{k=1}^n X\log\hat X = -E[\log\hat X], $$
 
 which is precisely the (negative) log-likehood function. This means that, just as before, *minimising* the cross entropy between the true variable $X$ and the predicted variable $\hat X$ is equivalent to *maximising* the likelihood that the predicted variable follow the distribution of the true variable.
 
