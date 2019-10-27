@@ -54,7 +54,7 @@ $$ \sum_{q=1}^{37}(\hat X_{\theta}(q)-X(q))^2, $$
 which is exactly the squared error! This shows that 
 
 <center>
-  *Minimising mean squared error is equivalent to maximising likelihood, assuming that our errors are normally distributed.*
+  <i>Minimising mean squared error is equivalent to maximising likelihood, assuming that our errors are normally distributed.</i>
 </center>
 
 
