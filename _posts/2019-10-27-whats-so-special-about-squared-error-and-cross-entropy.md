@@ -79,9 +79,9 @@ and $1-X$ then follows the distribution with density function $1-p$. Using these
 $$
 \begin{align}
 &-\frac{1}{n}\sum_{k=1}^n (X\log\hat{X}_\theta + (1-X)\log(1-\hat{X}_\theta))\\
-&= -\frac{1}{|\text{supp}(X)|}\sum_{k=1}^n X\log\hat{X}_\theta - \frac{1}{|\text{supp}(1-X)|}\sum_{k=1}^n(1-X)\log(1-\hat{X}_\theta)\\
-&= -\frac{4}{n}\sum_{k=1}^n X\log\hat{X}_\theta - \frac{4}{3n}\sum_{k=1}^n (1-X)\log(1-\hat{X}_\theta)\\
-&= -E[\log\hat{X}_\theta] - E[\log(1-\hat{X}_\theta)], 
+=& -\frac{1}{|\text{supp}(X)|}\sum_{k=1}^n X\log\hat{X}_\theta - \frac{1}{|\text{supp}(1-X)|}\sum_{k=1}^n(1-X)\log(1-\hat{X}_\theta)\\
+=& -\frac{4}{n}\sum_{k=1}^n X\log\hat{X}_\theta - \frac{4}{3n}\sum_{k=1}^n (1-X)\log(1-\hat{X}_\theta)\\
+=& -E[\log\hat{X}_\theta] - E[\log(1-\hat{X}_\theta)], 
 \end{align}
 $$
 
