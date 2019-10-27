@@ -15,7 +15,7 @@ $$ \frac{1}{n}\sum_{k=1}^n(x_k-y_k)^2, $$
 
 and, assuming now that $x\in\{0,1\}^n$ and $y\in(0,1]^n$, the **binary cross-entropy** is defined as
 
-$$ -\frac{1}{n}\sum_{k=1}^n (x_k\log y_k + (1-x_k\log(1-y_k))). $$
+$$ -\frac{1}{n}\sum_{k=1}^n (x_k\log y_k + (1-x_k)\log(1-y_k))). $$
 
 In [Scikit-learn](https://scikit-learn.org/stable/modules/model_evaluation.html#classification-metrics) we find these as `sklearn.metrics.mean_squared_error` and `sklearn.metrics.log_loss`, in [Keras](https://keras.io/losses/) as `keras.losses.mean_squared_error` and `keras.binary_crossentropy`, and in [PyTorch](https://pytorch.org/docs/stable/nn.html#loss-functions) as `torch.nn.MSELoss` and `torch.nn.BCELoss`.
 
