@@ -43,7 +43,7 @@ By finding the value for our model parameter $\theta$ which maximises this value
 
 The exponentials are a bit annoying to deal with, so instead of dealing with the above expression we'll apply a logarithmic transform and we wind up with the **log-likelihood function**
 
-$$ \sum_{q=1}^{37}(\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{1}{2\sigma^2}(\hat X_{\theta}(q)-X(q))^2). $$
+$$ \sum_{q=1}^{37}\frac{1}{\sqrt{2\pi\sigma^2}}-\frac{1}{2\sigma^2}(\hat X_{\theta}(q)-X(q))^2. $$
 
 As the logarithm is strictly increasing our job is equivalent to maximising this new expression, and as we're maximising with respect to $\theta$ we can ignore the constants. If we also flip the sign then we're left with the job to *minimise*
 
@@ -66,7 +66,7 @@ where $p(x)$ is the density function of $X$'s distribution. If we assume that ou
 
 $$ EX = \sum_{k=1}^n p(k)X(k) = \frac{1}{n}\sum_{k=1}^nX(k). $$
 
-With this is mind, we can rewrite the mean squared error as $E[(X-\hat X)^2]$, i.e. when we're minimising the squared error then we're reducing the expected value of the squared distance between our predictions and the true values.
+With this is mind, we can rewrite the mean squared error as $E[(X-\hat X_\theta)^2]$, i.e. when we're minimising the squared error then we're reducing the expected value of the squared distance between our predictions and the true values.
 
 Here I was taking $\mu$ to be the discrete probability measure, giving equal probabilities to all the $n$ outcomes. In the mean squared case this translates to giving equal weight to the squared differences throughout all quarters: whether our prediction is wrong in the beginning of 2015 or end of 2018 doesn't really matter to us.
 
@@ -74,18 +74,12 @@ But what if we're dealing with a different distribution? When we're dealing with
 
 $$ p(k) = \left\{\begin{array}{ll}\tfrac{4}{n} & \text{if the $k$'th observation is true}\\ 0 & \text{otherwise}\end{array}\right $$
 
-and $~X$, the negation of $X$, follows the distribution with density function $1-p$. Using this, we can now rewrite the cross entropy as
+and $\tilde X$, the negation of $X$, follows the distribution with density function $1-p$. Using this, we can now rewrite the cross entropy as
 
-$$ 
--\frac{1}{n}\sum_{k=1}^n (X\log\hat X + (1-X)\log(1-\hat X_\theta)) &= 
+$$ -\frac{1}{n}\sum_{k=1}^n (X\log\hat X_\theta + (1-X)\log(1-\hat X_\theta)) &= -\frac{1}{\text{supp}(X)}\sum_{k=1}^n X\log\hat X_\theta - \frac{1}{\text{supp}(1-X)}\sum_{k=1}^n(1-X)\log(1-\hat X_\theta)\\
+&= -\frac{4}{n}\sum_{k=1}^n X\log\hat X_\theta - \frac{4}{3n}\sum_{k=1}^n (1-X)\log(1-\hat X_\theta)\\
+&= -E[\log\hat X_\theta] - E[\log(1-\hat X_\theta], $$
 
--\frac{1}{\text{supp}(X)}\sum_{k=1}^n X\log\hat X_\theta - \frac{1}{\text{supp}(1-X)}\sum_{k=1}^n(1-X)\log(1-\hat X_\theta)\\
-
-&= -\frac{4}{n}\sum_{k=1}^n X\log\hat X - \frac{4}{3n}\sum_{k=1}^n (1-X)\log(1-\hat X_\theta)\\
-
-&= -E[\log\hat X_\theta] - E[\log(1-\hat X_\theta], 
-$$
-
-which is precisely the two (negative) log-likehood function! This means that, just as before, *minimising* the cross entropy between the true variable $X$ and the predicted variable $\hat X$ is equivalent to *maximising* the likelihood that the predicted variable follow the distribution of the true variable.
+which is precisely the two (negative) log-likehood function! This means that, just as before, *minimising* the cross entropy between the true variable $X$ and the predicted variable $\hat X_\theta$ is equivalent to *maximising* the likelihood that the predicted variable follow the distribution of the true variable.
 
 So there you go, it's really all about maximum likelihood estimation!
