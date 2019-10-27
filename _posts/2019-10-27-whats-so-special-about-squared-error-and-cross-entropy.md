@@ -13,7 +13,7 @@ Before we dive into why we might be interested in these loss functions, let's en
 
 $$ \frac{1}{n}\sum_{k=1}^n(x_k-y_k)^2, $$
 
-and, assuming now that $x\in[0,1]^n$ and $y\in(0,1]^n$, the **(binary) cross-entropy** is defined as
+and, assuming now that $x\in{0,1}^n$ and $y\in(0,1]^n$, the **(binary) cross-entropy** is defined as
 
 $$ -\frac{1}{\text{supp}(x)}\sum_{k=1}^n x_k\log y_k, $$
 
