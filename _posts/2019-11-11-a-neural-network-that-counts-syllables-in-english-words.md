@@ -222,9 +222,9 @@ This turned out to have the same performance as the above "anti-smoothing" trick
 After tuning the hyperparameters, the best model achieved a ~96.54% validation accuracy and a ~97.11% training accuracy.
 
 <div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="200">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="200">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/f1s.png" alt="Plot of f1 history" width="200">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="300">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="300">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/f1s.png" alt="Plot of f1 history" width="300">
 </div>
 
 Here are some of the words that the model counted wrongly:
