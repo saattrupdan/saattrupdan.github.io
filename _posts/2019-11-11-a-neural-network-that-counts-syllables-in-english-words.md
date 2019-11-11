@@ -37,8 +37,8 @@ The Gutenberg corpus consists of English words in which the hyphenation points a
 One thing that I found amusing is that the number of syllables in the corpus roughly follows a binomial distribution:
 
 <div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width="370">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width="370">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width="380">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width="380">
 </div>
 
 
@@ -87,8 +87,9 @@ def get_data(file_name, batch_size = 32, split_ratio = 0.99):
       fields = datafields
       )
 
-  # Split dataset into a training set and a validation set in a stratified
-  # fashion, so that both datasets will have the same syllable distribution.
+  # Split dataset into a training set and a validation set in a 
+  # stratified fashion, so that both datasets will have the same 
+  # syllable distribution.
   train, val = dataset.split(
       split_ratio = split_ratio, 
       stratified = True,
@@ -99,9 +100,9 @@ def get_data(file_name, batch_size = 32, split_ratio = 0.99):
   TXT.build_vocab(train)
   SEQ.build_vocab(train)
 
-  # Split the two datasets into batches. This converts the tokenised words 
-  # into integer sequences, and also pads every batch so that, within a 
-  # batch, all sequences are of the same length
+  # Split the two datasets into batches. This converts the tokenised 
+  # words into integer sequences, and also pads every batch so that, 
+  # within a batch, all sequences are of the same length
   train_iter, val_iter = BucketIterator.splits(
       datasets = (train, val),
       batch_sizes = (batch_size, batch_size),
@@ -109,8 +110,8 @@ def get_data(file_name, batch_size = 32, split_ratio = 0.99):
       sort_within_batch = False,
       )
 
-  # Apply custom batch wrapper, which outputs the data in the form that
-  # the network wants it
+  # Apply custom batch wrapper, which outputs the data in the form 
+  # that the network wants it
   train_dl = BatchWrapper(train_iter)
   val_dl = BatchWrapper(val_iter)
 
@@ -123,7 +124,9 @@ The `BatchWrapper` class at the end of the function above is a very simple class
 
 ```python
 class BatchWrapper:
-    ''' A wrapper around a dataloader to pull out data in a custom format. '''
+    ''' A wrapper around a dataloader to pull out data
+        in a custom format. '''
+
     def __init__(self, dl):
         self.dl = dl
         self.batch_size = dl.batch_size
@@ -161,8 +164,10 @@ As for regularisation I went with the following:
 In terms of loss functions I *could* just use binary cross entropy, but the problem with that is that then I won't really be evaluating the *entire* word but only the individual characters locally. As we're ultimately interested in a syllable count we need to ensure that the output numbers depend on each other. After testing a few different ones, I ended up choosing the average of the binary cross entropy and the root mean squared error:
 
 ```python
-def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1, epsilon = 1e-12):
-    ''' A combination of binary crossentropy and root mean squared error.
+def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1, 
+    epsilon = 1e-12):
+    ''' A combination of binary crossentropy and 
+        root mean squared error. '''
 
     INPUT
         pred
@@ -222,8 +227,8 @@ This turned out to have the same performance as the above "anti-smoothing" trick
 After tuning the hyperparameters, the best model achieved a ~96.54% validation accuracy and a ~97.11% training accuracy.
 
 <div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="370">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="370">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="380">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="380">
 </div>
 
 Here are some of the words that the model counted wrongly:
