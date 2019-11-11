@@ -144,7 +144,7 @@ After trying out a bunch of different things, here is the (quite simple!) archit
 
 Concretely, this converts the characters into 64-dimensional vectors, processes them in three bi-directional GRU layers with 2x128 = 256 hidden units, followed by a time-distributed fully connected layer with 256 units, and finally every 256-dimensional vector is projected down to a single dimension, yielding our logits, to which we apply a sigmoid function at every timestep.
 
-This model has 887,751 trainable parameters, which doesn't seem completely out of proportions as we're dealing with ~170k words in our training set, each of which has ~4 characters on average, amounting to ~680k character inputs.
+This model has 810,369 trainable parameters, which doesn't seem completely out of proportions as we're dealing with ~170k words in our training set, each of which has ~4 characters on average, amounting to ~680k character inputs.
 
 As for regularisation I went with the following:
 
