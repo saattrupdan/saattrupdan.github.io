@@ -206,19 +206,7 @@ def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1,
 
 Given an output sequence $\langle x_1, \dots, x_n \rangle\in (0,1)^n$ of the model, how do we convert this into a syllable count?
 
-We could *either* first round the probabities to either 0 or 1, and then simply sum them up. This turned out to not be ideal however, because in the above loss function we're taking the root mean squared error of the *probabilities* and not the rounded values (this wouldn't be differentiable), which means that the model will be doing its best to ensure that the sum of the *probabilities* will equal the syllable count.
-
-But this turns out to not work either! The reason is that our label smoothing forces the extreme values to lie around 0.1 and 0.9, so our sums will become way too large if there are many characters in each syllable, as that would mean that an excessive amount of 0.1's would contribute too much to the sum, causing the syllable count to be too large. To counteract this we could add 0.1 to the probabilities above 0.5 and subtract 0.1 from the probabilities below 0.5, but this seemed overly artificial to me and also seemed to defeat the point of the label smoothing in the first place.
-
-What I ended up going for was instead group the probabilities into four groups:
-
-- Those below 20%, which didn't contribute to the syllable count
-- Those between 20% and 40%, which added 1/4 syllable to the count
-- Those between 40% and 60%, which added 1/2 syllable to the count
-- Those between 60% and 80%, which added 3/4 syllable to the count
-- Those between 80% and 100%, which added a full syllable to the count
-
-This turned out to have the same performance as the above "anti-smoothing" trick, but the fact that this doesn't depend on the smoothing (as long as the smoothing factor is at most 0.2) was more satisfying to me, for whatever that's worth.
+We *could* firstly round the probabities to either 0 or 1 and then simply sum them up. This turned out to not be ideal however, because in the above loss function we're taking the root mean squared error of the *probabilities* and not the rounded values (this wouldn't be differentiable), which means that the model will be doing its best to ensure that the sum of the *probabilities* will equal the syllable count. Instead, we will follow the loss function and sum the probabilities.
 
 
 <a name = 'results'></a>
