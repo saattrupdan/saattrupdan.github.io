@@ -1,7 +1,7 @@
 ---
 layout: post
 mathjax: true
-title: Counting syllables in English words
+title: A neural network that counts syllables in English words
 ---
 
 As part of another project, I came across the problem of correctly counting the number of syllables in English words. After searching around and seeing mostly rule- and dictionary-based methods, I ended up building such a syllable counter from scratch, which ultimately led to the construction of a neural network model that achieved a 96.54% validation accuracy on this task. Here I'll go through the journey that ended up with that final product.
