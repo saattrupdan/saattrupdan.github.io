@@ -166,8 +166,7 @@ In terms of loss functions I *could* just use binary cross entropy, but the prob
 ```python
 def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1, 
     epsilon = 1e-12):
-    ''' A combination of binary crossentropy and 
-        root mean squared error. '''
+    ''' A combination of binary crossentropy and root mean squared error.
 
     INPUT
         pred
