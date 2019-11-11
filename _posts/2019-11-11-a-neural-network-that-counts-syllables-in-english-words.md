@@ -37,8 +37,8 @@ The Gutenberg corpus consists of English words in which the hyphenation points a
 One thing that I found amusing is that the number of syllables in the corpus roughly follows a binomial distribution:
 
 <div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width=500/>
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width=500/>
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width="500">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width="500">
 </div>
 
 
