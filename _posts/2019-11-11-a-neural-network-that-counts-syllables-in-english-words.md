@@ -37,8 +37,8 @@ The Gutenberg corpus consists of English words in which the hyphenation points a
 One thing that I found amusing is that the number of syllables in the corpus roughly follows a binomial distribution:
 
 <div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width="350">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width="350">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width="370">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width="370">
 </div>
 
 
@@ -222,8 +222,8 @@ This turned out to have the same performance as the above "anti-smoothing" trick
 After tuning the hyperparameters, the best model achieved a ~96.54% validation accuracy and a ~97.11% training accuracy.
 
 <div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="350">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="350">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="370">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="370">
 </div>
 
 Here are some of the words that the model counted wrongly:
