@@ -37,8 +37,8 @@ The Gutenberg corpus consists of English words in which the hyphenation points a
 One thing that I found amusing is that the number of syllables in the corpus roughly follows a binomial distribution:
 
 <div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width=500>
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width=500>
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width=500/>
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width=500/>
 </div>
 
 
@@ -55,8 +55,9 @@ The first task was then to convert these strings to a dataset more appropriate f
 
 These points made me change the task from a regression problem to a sequence-to-sequence task, in which we convert a sequence of characters to a sequence of probabilities of the same length, where the probability indicates how likely it is that the given character starts a new syllable. Since the input- and output sequences have the same length we don't have to deal with an [encoder-decoder](https://www.coursera.org/lecture/nlp-sequence-models/basic-models-HyEui) framework and can simply use a recurrent cell as-is. 
 
-![Image of the preprocessing process of target values](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/label_preprocessing.png)
-
+<div style="text-align:center">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/label_preprocessing.png" alt="The preprocessing process of target values" width=100/>
+</div>
 
 <a name = 'words'></a>
 ### Words
@@ -142,7 +143,9 @@ Now, with the preprocessing all done, it's time to build a model! As we're mappi
 
 After trying out a bunch of different things, here is the (quite simple!) architecture that turned out to work the best for me:
 
-![Architecture](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/Architecture.png)
+<div style="text-align:center">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/Architecture.png" alt="Architecture of neural network"/>
+</div>
 
 Concretely, this converts the characters into 64-dimensional vectors, processes them in three bi-directional GRU layers with 2x128 = 256 hidden units, followed by a time-distributed fully connected layer with 256 units, and finally every 256-dimensional vector is projected down to a single dimension, yielding our logits, to which we apply a sigmoid function at every timestep.
 
@@ -218,9 +221,11 @@ This turned out to have the same performance as the above "anti-smoothing" trick
 
 After tuning the hyperparameters, the best model achieved a ~96.54% validation accuracy and a ~97.11% training accuracy.
 
-![Plot of loss history](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png)
-![Plot of accuracy history](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png)
-![Plot of f1 history](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/f1s.png)
+<div style="text-align:center">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history"/>
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history"/>
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/f1s.png" alt="Plot of f1 history"/>
+</div>
 
 Here are some of the words that the model counted wrongly:
 
