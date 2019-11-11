@@ -224,7 +224,6 @@ After tuning the hyperparameters, the best model achieved a ~96.54% validation a
 <div style="text-align:center">
   <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="400">
   <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="400">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/f1s.png" alt="Plot of f1 history" width="400">
 </div>
 
 Here are some of the words that the model counted wrongly:
