@@ -25,21 +25,21 @@ The first question, as always, is getting hold of a dataset. I considered both t
 
 The Gutenberg corpus consists of English words in which the hyphenation points are marked with the Yen symbol (¥) if you decode the file using the latin-1 encoding. Several lines have multiple words, separated by spaces.
 
-<center>
+<div style="text-align:center">
   <span style = 'font-family:Courier; font-size:1em;'>
-    a cap¥pel¥la\n
-    well-rat¥ed\n
-    un¥pur¥chas¥a¥ble\n
+    a cap¥pel¥la\n<br/>
+    well-rat¥ed\n<br/>
+    un¥pur¥chas¥a¥ble\n<br/>
     Twee¥dle¥dum and Twee¥dle¥dee
   </span>
-</center>
+</div>
 
 One thing that I found amusing is that the number of syllables in the corpus roughly follows a binomial distribution:
 
-<center>
+<div style="text-align:center">
   <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/binom_n%3D39_p%3D0.08.png" alt="A binomial distribution" width=500>
   <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/syllable_barplot.png" alt="Distribution of syllables in English words" width=500>
-</center>
+</div>
 
 
 <a name = 'preprocessing'></a>
