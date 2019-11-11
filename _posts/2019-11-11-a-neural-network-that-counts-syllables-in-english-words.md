@@ -64,7 +64,7 @@ These points made me change the task from a regression problem to a sequence-to-
 
 With the preprocessing of the target labels complete, the remaining part of the preprocessing is standard: we need to split the words into sequences of characters, convert the characters to integers and then pad these sequences such that all sequences *in a given batch* have the same length. This can be done quite easily with the [torchtext](https://github.com/pytorch/text) library:
 
-```python3
+```python
 def get_data(file_name, batch_size = 32, split_ratio = 0.99):
   from torchtext.data import Field, TabularDataset, BucketIterator
 
@@ -121,7 +121,7 @@ Notable here is the `BucketIterator` object, which sorts the dataset by the leng
 
 The `BatchWrapper` class at the end of the function above is a very simple class that outputs only the word and the binary syllable sequence. The reason why I even included the `syls` field to start with was because I use it when I'm splitting the dataset into training- and validation sets above, as I'm splitting it in a *stratified* fashion. This will result in a validation set with the same binomial-like syllable distribution as we saw above.
 
-```python3
+```python
 class BatchWrapper:
     ''' A wrapper around a dataloader to pull out data in a custom format. '''
     def __init__(self, dl):
@@ -160,7 +160,7 @@ As for regularisation I went with the following:
 
 In terms of loss functions I *could* just use binary cross entropy, but the problem with that is that then I won't really be evaluating the *entire* word but only the individual characters locally. As we're ultimately interested in a syllable count we need to ensure that the output numbers depend on each other. After testing a few different ones, I ended up choosing the average of the binary cross entropy and the root mean squared error:
 
-```python3
+```python
 def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1, epsilon = 1e-12):
     ''' A combination of binary crossentropy and root mean squared error.
 
