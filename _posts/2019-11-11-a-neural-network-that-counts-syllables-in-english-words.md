@@ -4,7 +4,7 @@ mathjax: true
 title: A neural network that counts syllables in English words
 ---
 
-As part of another project, I came across the problem of correctly counting the number of syllables in English words. After searching around and seeing mostly rule- and dictionary-based methods, I ended up building such a syllable counter from scratch, which ultimately led to the construction of a neural network model that achieved a 96.54% validation accuracy on this task. Here I'll go through the journey that ended up with that final product.
+As part of another project, I came across the problem of correctly counting the number of syllables in English words. After searching around and seeing mostly rule- and dictionary-based methods, I ended up building such a syllable counter from scratch, which ultimately led to the construction of a neural network model that achieved a 96.89% validation accuracy on this task. Here I'll go through the journey that ended up with that final product.
 
 All code can be found in [the github repo](https://github.com/saattrupdan/autopoet) and all the data, including the model itself, can be found in [the pcloud repo](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/).
 
@@ -156,16 +156,14 @@ This model has 810,369 trainable parameters, which doesn't seem completely out o
 
 As for regularisation I went with the following:
 
-- Dropout between every hidden layer, with a dropout rate of 10% between the recurrent layers and 50% between the dense layers
-- Label smoothing, which punishes the model for being over-confident by forcing the model to aim for 90% confidence rather than 100%
+- Dropout between every hidden layer, with a dropout rate of 20% between the recurrent layers and 50% before the dense layer
 - Weighted labels, where I gave a higher weight to the positive instances, since the number of 0's and 1's are not equally distributed
-- A very small batch size, which enforces more randomness into the weights and thereby increasing the variance. I went with a batch size of size 8
+- A very small batch size, which enforces more randomness into the weights and thereby increasing the variance. I went with batches of size 8
 
 In terms of loss functions I *could* just use binary cross entropy, but the problem with that is that then I won't really be evaluating the *entire* word but only the individual characters locally. As we're ultimately interested in a syllable count we need to ensure that the output numbers depend on each other. After testing a few different ones, I ended up choosing the average of the binary cross entropy and the root mean squared error:
 
 ```python
-def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1, 
-    epsilon = 1e-12):
+def bce_rmse(pred, target, pos_weight = 1.3, epsilon = 1e-12):
     ''' A combination of binary crossentropy and root mean squared error.
 
     INPUT
@@ -173,10 +171,8 @@ def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1,
             A 1-dimensional tensor containing predicted values
         target
             A 1-dimensional tensor containing true values
-        pos_weight = 1.2
+        pos_weight = 1.3
             The weight that should be given to positive examples
-        smoothing = 0.1
-            Smoothing parameter for the presence detection
         epsilon = 1e-12
             A small constant to avoid dividing by zero
 
@@ -184,9 +180,6 @@ def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1,
         The average of the character-wise binary crossentropy and the
         word-wise root mean squared error
     '''
-
-    # Label smoothing
-    target = target * (1 - smoothing)
 
     # Weighted binary cross entropy
     loss_pos = target * torch.log(pred + epsilon)
@@ -205,13 +198,13 @@ def bce_rmse(pred, target, pos_weight = 1.2, smoothing = 0.1,
 
 Given an output sequence $\langle x_1, \dots, x_n \rangle\in (0,1)^n$ of the model, how do we convert this into a syllable count?
 
-We *could* firstly round the probabities to either 0 or 1 and then simply sum them up. This turned out to not be ideal however, because in the above loss function we're taking the root mean squared error of the *probabilities* and not the rounded values (this wouldn't be differentiable), which means that the model will be doing its best to ensure that the sum of the *probabilities* will equal the syllable count. Instead, we will follow the loss function and sum the probabilities.
+We *could* firstly round the probabities to either 0 or 1 and then simply sum them up. This turned out to not be ideal however, because in the above loss function we're taking the root mean squared error of the *probabilities* and not the rounded values (this wouldn't be differentiable), which means that the model will be doing its best to ensure that the sum of the *probabilities* will equal the syllable count. So, we will therefore follow the loss function and sum the probabilities.
 
 
 <a name = 'results'></a>
 ## Results
 
-After tuning the hyperparameters, the best model achieved a ~96.54% validation accuracy and a ~97.11% training accuracy.
+After tuning the hyperparameters, the best model achieved a 96.89% validation accuracy and a 97.53% training accuracy.
 
 <div style="text-align:center">
   <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="370">
