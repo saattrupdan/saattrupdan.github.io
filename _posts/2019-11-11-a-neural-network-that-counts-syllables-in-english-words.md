@@ -206,11 +206,6 @@ We *could* firstly round the probabities to either 0 or 1 and then simply sum th
 
 After tuning the hyperparameters, the best model achieved a 96.89% validation accuracy and a 97.53% training accuracy.
 
-<div style="text-align:center">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/losses.png" alt="Plot of loss history" width="370">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/autopoet_data/accs.png" alt="Plot of accuracy history" width="370">
-</div>
-
 Here are some of the words that the model counted wrongly:
 
 | Word            | Syllables | Model prediction  |
