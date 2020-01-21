@@ -1,7 +1,7 @@
 ---
 layout: post
 mathjax: true
-title: Categorising Scientific Papers
+title: Categorising scientific papers
 ---
 
 I recently finished `Scholarly`, a long-standing side project of mine, which consists of predicting the category of a given title and abstract of a scientific paper. More precisely, I am predicting the ~150 subject classification categories from the [arXiv](https://arxiv.org/) preprint server, and have trained the model on _all_ papers on the arXiv up to and including year 2019. Test out the model here:
