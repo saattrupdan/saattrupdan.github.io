@@ -16,12 +16,14 @@ All the source code can be found in the [Github repo](https://github.com/saattru
 
 Now, with all the practicalities out of the way, in this blog post I'd like to talk about the process of the project, the data I've been using and the model I ended up using. Let's start from the beginning.
 
-<figure>
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/arxiv_example.jpg" alt="Example of an arXiv entry">
-  <figcaption>
-    An example of arXiv categories in action
-  </figcaption>
-</figure>
+<center>
+  <figure>
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/arxiv_example.jpg" alt="Example of an arXiv entry">
+    <figcaption>
+      An example of arXiv categories in action
+    </figcaption>
+  </figure>
+</center>
 
 ## Scraping all of arXiv
 Turns out that ArXiv has an [API](https://arxiv.org/help/api/index). There are a couple of quirks and limitations, however. Firstly, it requires you to query something, you cannot just put in a blank query. To get around that it turns out that it's completely fine if you put in a blank query _for a particular category_. So by looping through all the categories I would be able to get all the papers. Great!
@@ -30,12 +32,14 @@ Next up is that the API can only return 10,000 papers at a time, and if you quer
 
 As my laptop is low on memory I had to come up with a way to store all this data in an efficient manner. I tried `tsv` files and `json` files, but both of them had the annoying feature of needing to at some point store the entire file in memory (unless I'm missing some neat trick here). So instead, I dived into SQL.
 
-<figure>
-  <img src="https://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="XKCD comic about SQL">
-  <figcaption>
-    There's nothing like a dry SQL joke
-  </figcaption>
-</figure>
+<center>
+  <figure>
+    <img src="https://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="XKCD comic about SQL">
+    <figcaption>
+      There's nothing like a dry SQL joke
+    </figcaption>
+  </figure>
+</center>
 
  I ended up going with a local SQLite database, which is a standalone SQL database in a single file. The `sqlalchemy` package provides a nice Python interface to work with SQL databases, which can both work with the databases in a [purely object-oriented manner](https://en.wikipedia.org/wiki/Object-relational_mapping) or by simply providing a way to query SQL statements; I chose the latter, as that turned out to be a lot faster. This process also taught me a lot about how to work with SQL databases in an efficient manner. For instance, I found that it's _way_ more efficient to have _really_ long and few queries: inserting 1,000 entries into my database in 1,000 queries took hours, but doing it all in a single query took seconds!
 
@@ -49,12 +53,14 @@ The amount of preprocessing was quite minimal: I replaced LaTeX equations like $
 ## So, why not train our own word vectors?
 Since I'm dealing with a massive dataset I decided to train my own word vectors from scratch, which would both allow the model to work with "scientific language" as well as having neat vector encodings of the special `-EQN-`, `-TITLE_START-`, `-TITLE_END-`, `-ABSTRACT-START-` and `-ABSTRACT_END-` tokens. I trained bigram [FastText](https://fasttext.cc/) 100d vectors on the corpus in an unsupervised manner. The vectors live up to their name: it only took a couple of hours to train the vectors on the entire dataset! The resulting model and vectors can be found in the above-mentioned [pCloud repo](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data).
 
-<figure>
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/vector_comparison.png" alt="Comparison of model performance when trained on the homemade FastText vectors and the pre-trained GloVe vectors. FastText wins massively.">
-  <figcaption>
-    A comparison of my homemade FastText vectors and the pre-trained GloVe vectors.
-  </figcaption>
-</figure>
+<center>
+  <figure>
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/vector_comparison.png" alt="Comparison of model performance when trained on the homemade FastText vectors and the pre-trained GloVe vectors. FastText wins massively.">
+    <figcaption>
+      A comparison of my homemade FastText vectors and the pre-trained GloVe vectors.
+    </figcaption>
+  </figure>
+</center>
 
 The above plot is a comparison of the homemade FastText vectors and pre-trained [6B GloVe vectors](https://nlp.stanford.edu/projects/glove/), trained on Wikipedia (both are 100-dimensional). As the plot shows, it *can* be worth it to train your own word vectors from scratch on your own corpus. Note that this is despite the fact that the pre-trained ones have been trained on a much larger corpus!
 
@@ -91,13 +97,15 @@ Lastly there's a question of ratio in step 5: how much priority should the model
 ## Results
 The score that I was using was the *sample-average F1 score*, which means that for every sample I'm computing the F1 score of the predictions of the sample (note that we are in a [multilabel](https://en.wikipedia.org/wiki/Multi-label_classification) setup), and averaging that over all the samples. If this was a [multiclass](https://en.wikipedia.org/wiki/Multiclass_classification) setup (in particular binary classification) then this would simply correspond to accuracy. The difference is that in a multilabel setup the model can be *partially* correct, if it correctly predicts some of the categories.
 
-<figure>
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/master_cats.png" alt="A plot of the sample-average F1 score of the master categories on the training- and validation set. The training score converges to ~95% and the validation score to ~93%." style="width:50%;">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/all_cats.png" alt="A plot of the sample-average F1 score of all the categories on the training- and validation set. The training score converges to ~68% and the validation score to ~64%." style="width:50%;">
-  <figcaption>
-    The final scores.
-  </figcaption>
-</figure>
+<center>
+  <figure>
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/master_cats.png" alt="A plot of the sample-average F1 score of the master categories on the training- and validation set. The training score converges to ~95% and the validation score to ~93%." style="width:50%;">
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/all_cats.png" alt="A plot of the sample-average F1 score of all the categories on the training- and validation set. The training score converges to ~68% and the validation score to ~64%." style="width:50%;">
+    <figcaption>
+      The final scores.
+    </figcaption>
+  </figure>
+</center>
 
 The model ended up achieving a ~93% and ~65% validation sample-average F1 score on the master categories and all the categories, respectively. Training the model requires ~17GB memory and it takes roughly a day to train on an Nvidia P100 GPU. This was trained on the [BlueCrystal Phase 4 compute cluster](https://www.acrc.bris.ac.uk/acrc/phase4.htm) at University of Bristol, UK.
 
