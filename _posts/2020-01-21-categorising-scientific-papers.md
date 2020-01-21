@@ -50,20 +50,6 @@ From my database I created a `tsv` file for my particular classification applica
 
 The amount of preprocessing was quite minimal: I replaced LaTeX equations like $\sqrt{1}{5}$ with `-EQN-` and used the tokens `-TITLE_START-`, `-TITLE_END-`, `-ABSTRACT_START-` and `-ABSTRACT_END-` to separate the titles and abstracts, allowing the model to distinguish between the two. To tokenise the titles and abstracts I used the [spaCy](https://spacy.io/) `en-core-web-sm` NLP model, which is nice and fast (the [pipe](https://spacy.io/api/tokenizer#pipe) method came in handy here).
 
-## So, why not train our own word vectors?
-Since I'm dealing with a massive dataset I decided to train my own word vectors from scratch, which would both allow the model to work with "scientific language" as well as having neat vector encodings of the special `-EQN-`, `-TITLE_START-`, `-TITLE_END-`, `-ABSTRACT-START-` and `-ABSTRACT_END-` tokens. I trained bigram [FastText](https://fasttext.cc/) 100d vectors on the corpus in an unsupervised manner. The vectors live up to their name: it only took a couple of hours to train the vectors on the entire dataset! The resulting model and vectors can be found in the above-mentioned [pCloud repo](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data).
-
-<center>
-  <figure>
-    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/vector_comparison.png" alt="Comparison of model performance when trained on the homemade FastText vectors and the pre-trained GloVe vectors. FastText wins massively." style="width:80%;">
-    <figcaption>
-      A comparison of my homemade FastText vectors and the pre-trained GloVe vectors.
-    </figcaption>
-  </figure>
-</center>
-
-The above plot is a comparison of the homemade FastText vectors and pre-trained [6B GloVe vectors](https://nlp.stanford.edu/projects/glove/), trained on Wikipedia (both are 100-dimensional). As the plot shows, it *can* be worth it to train your own word vectors from scratch on your own corpus. Note that this is despite the fact that the pre-trained ones have been trained on a much larger corpus!
-
 ## Self-attention and all that jazz
 The model that I ended up using after much trial and error was a simpler version of the recent [SHA-RNN architecture](https://arxiv.org/abs/1911.11423). More precisely, here's what's going on:
 
@@ -95,6 +81,20 @@ $$ \text{mix}(x, y) := x + y + \log(1 + e^{-x} + e^{-y}). $$
 So, to recap, in step 3 we are taking the top2 logits from each master category, mixing them in the above sense, and then using those values to compute the master category (weighted) binary cross-entropy loss. This means that if, for instance, the top2 probabilities within a master category are both 30% then the mixed probabilities will be ~51%, thus yielding a positive prediction for the master category even though the category predictions are all false.
 
 Lastly there's a question of ratio in step 5: how much priority should the model give to the master category loss over the category loss? I performed a handful of experiments and found that giving a 0.1 weight to the master category loss and a 0.9 weight to the category loss performed the best. A ratio of 0 meant that the master category score suffered drastically, and likewise for a ratio near 1 for the category score. I also tried starting with a large ratio and reducing it exponentially, but that turned out to not make any notable difference.
+
+## So, why not train our own word vectors?
+Since I'm dealing with a massive dataset I decided to train my own word vectors from scratch, which would both allow the model to work with "scientific language" as well as having neat vector encodings of the special `-EQN-`, `-TITLE_START-`, `-TITLE_END-`, `-ABSTRACT-START-` and `-ABSTRACT_END-` tokens. I trained bigram [FastText](https://fasttext.cc/) 100d vectors on the corpus in an unsupervised manner. The vectors live up to their name: it only took a couple of hours to train the vectors on the entire dataset! The resulting model and vectors can be found in the above-mentioned [pCloud repo](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data).
+
+<center>
+  <figure>
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/vector_comparison_mcat.png" alt="Comparison of model performance when trained on the homemade FastText vectors and the pre-trained GloVe vectors. FastText wins massively." style="width:50%;"><img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/vector_comparison_cat.png" alt="Comparison of model performance when trained on the homemade FastText vectors and the pre-trained GloVe vectors. FastText wins massively." style="width:50%;">
+    <figcaption>
+      A comparison of my homemade FastText vectors and the pre-trained GloVe vectors.
+    </figcaption>
+  </figure>
+</center>
+
+The above plot is a comparison of the homemade FastText vectors and pre-trained [6B GloVe vectors](https://nlp.stanford.edu/projects/glove/), trained on Wikipedia (both are 100-dimensional). As the plot shows, it *can* be worth it to train your own word vectors from scratch on your own corpus. Note that this is despite the fact that the pre-trained ones have been trained on a much larger corpus!
 
 ## Results
 The score that I was using was the *sample-average F1 score*, which means that for every sample I'm computing the F1 score of the predictions of the sample (note that we are in a [multilabel](https://en.wikipedia.org/wiki/Multi-label_classification) setup), and averaging that over all the samples. If this was a [multiclass](https://en.wikipedia.org/wiki/Multiclass_classification) setup (in particular binary classification) then this would simply correspond to accuracy. The difference is that in a multilabel setup the model can be *partially* correct, if it correctly predicts some of the categories.
