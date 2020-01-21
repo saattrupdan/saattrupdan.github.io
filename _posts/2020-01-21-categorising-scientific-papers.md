@@ -71,7 +71,7 @@ The model that I ended up using after much trial and error was a simpler version
   2. We apply a [scaled dot product self-attention](https://arxiv.org/abs/1706.03762) on the 3d outputs from the GRU, to allow the model to attend to the important tokens in the text. After taking the corresponding weighted sum we end up with a 2d tensor.
   3. Next, we project down to dimension 148, the number of categories we're trying to predict
   4. We then apply yet another self-attention on the 2d outputs, with the idea being to spot similarities between the logits for every category
-  5. Lastly, we apply a <font color=red>**Boom**</font> layer: two fully connected layers, blowing the (32, 148)-shaped input up to (32, 512) and then projecting it back down to dimension (32, 148).
+  5. Lastly, we apply a **Boom** layer: two fully connected layers, blowing the (32, 148)-shaped input up to (32, 512) and then projecting it back down to dimension (32, 148).
 
 There are layer normalisations happening at nearly every layer, and the [GELU activation](https://arxiv.org/abs/1606.08415) is used everywhere. All of this ends up having ~800,000 trainable parameters (the embedding weights are frozen), which is not too shabby at all with a ~1.3M dataset. I used no regularisation for the same reason. I tried adding 10% and 20% dropout, but both just resulted in poorer performance.
 
