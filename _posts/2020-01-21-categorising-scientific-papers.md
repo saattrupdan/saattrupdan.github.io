@@ -6,11 +6,11 @@ title: Categorising Scientific Papers
 
 I recently finished `Scholarly`, a long-standing side project of mine, which consists of predicting the category of a given title and abstract of a scientific paper. More precisely, I am predicting the ~150 subject classification categories from the [arXiv](https://arxiv.org/) preprint server, and have trained the model on _all_ papers on the arXiv up to and including year 2019. Test out the model here:
 
-<p align=center>
+<center>
   <a href="https://saattrupdan.pythonanywhere.com/scholarly">
     saattrupdan.pythonanywhere.com/scholarly
   </a>
-</p>
+</center>
 
 All the source code can be found in the [Github repo](https://github.com/saattrupdan/scholarly) and the model and all the data can be found in the [pCloud repo](https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data).
 
@@ -104,9 +104,9 @@ The model ended up achieving a ~93% and ~65% validation sample-average F1 score 
 ## Monitoring progress
 A shout out also goes out to the people at [Weights & Biases](https://www.wandb.com/), which made it incredibly easy for me to compare my models' performance, even though some of them were trained on the compute cluster, some of them in [Colab notebooks](https://colab.research.google.com/), some on my laptop and some on my office computer. Highly recommended, and it's even free. You can check out my training runs at my WandB project here:
 
-<p align=center>
+<center>
   <a href="https://app.wandb.ai/saattrupdan/scholarly/runs/3kv495v2/overview">
     https://app.wandb.ai/saattrupdan/scholarly/runs/3kv495v2/overview 
   </a>
-</p>
+</center>
 
