@@ -18,7 +18,7 @@ Now, with all the practicalities out of the way, in this blog post I'd like to t
 
 <center>
   <figure>
-    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/arxiv_example.jpg" alt="Example of an arXiv entry" style="width:50%;">
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/arxiv_example.jpg" alt="Example of an arXiv entry" style="width:80%;">
     <figcaption>
       An example of arXiv categories in action
     </figcaption>
@@ -34,7 +34,7 @@ As my laptop is low on memory I had to come up with a way to store all this data
 
 <center>
   <figure>
-    <img src="https://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="XKCD comic about SQL" style="width:50%;">
+    <img src="https://imgs.xkcd.com/comics/exploits_of_a_mom.png" alt="XKCD comic about SQL" style="width:80%;">
     <figcaption>
       There's nothing like a dry SQL joke
     </figcaption>
@@ -55,7 +55,7 @@ Since I'm dealing with a massive dataset I decided to train my own word vectors 
 
 <center>
   <figure>
-    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/vector_comparison.png" alt="Comparison of model performance when trained on the homemade FastText vectors and the pre-trained GloVe vectors. FastText wins massively." style="width:50%;">
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/vector_comparison.png" alt="Comparison of model performance when trained on the homemade FastText vectors and the pre-trained GloVe vectors. FastText wins massively." style="width:80%;">
     <figcaption>
       A comparison of my homemade FastText vectors and the pre-trained GloVe vectors.
     </figcaption>
