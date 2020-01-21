@@ -76,7 +76,7 @@ The model that I ended up using after much trial and error was a simpler version
 There are layer normalisations happening at nearly every layer, and the [GELU activation](https://arxiv.org/abs/1606.08415) is used everywhere. All of this ends up having ~800,000 trainable parameters (the embedding weights are frozen), which is not too shabby at all with a ~1.3M dataset. I used no regularisation for the same reason. I tried adding 10% and 20% dropout, but both just resulted in poorer performance.
 
 ## Nested Binary Cross Entropy Loss
-Since it's basically impossible to have perfect predictions on these ~150 categories, I wanted to ensure that the model would at least get close when it's wrong. I decided to do this by grouping the categories together in the six official "master categories" of arXiv: Mathematics, Physics, Computer Science, Statistics, Quantitative Biology and Quantitative Finance.
+Since it's basically impossible to have perfect predictions on these ~150 [categories](http://arxitics.com/help/categories), I wanted to ensure that the model would at least get close when it's wrong. I decided to do this by grouping the categories together in the six official "master categories" of arXiv: Mathematics, Physics, Computer Science, Statistics, Quantitative Biology and Quantitative Finance.
 
 I didn't want to train a separate model on these master categories; I didn't even want the master categories to be labelled in my datasets. So what I did instead was to simply describe which categories go in what master categories, and from that I could define a custom loss functions which also penalised the model for getting the master categories wrong. Here's what the loss function is doing:
 
