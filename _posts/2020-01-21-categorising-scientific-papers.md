@@ -92,8 +92,8 @@ Lastly there's a question of ratio in step 5: how much priority should the model
 The score that I was using was the *sample-average F1 score*, which means that for every sample I'm computing the F1 score of the predictions of the sample (note that we are in a [multilabel](https://en.wikipedia.org/wiki/Multi-label_classification) setup), and averaging that over all the samples. If this was a [multiclass](https://en.wikipedia.org/wiki/Multiclass_classification) setup (in particular binary classification) then this would simply correspond to accuracy. The difference is that in a multilabel setup the model can be *partially* correct, if it correctly predicts some of the categories.
 
 <figure>
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/master_cats.png" alt="A plot of the sample-average F1 score of the master categories on the training- and validation set. The training score converges to ~95% and the validation score to ~93%.">
-  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/all_cats.png" alt="A plot of the sample-average F1 score of all the categories on the training- and validation set. The training score converges to ~68% and the validation score to ~64%.">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/master_cats.png" alt="A plot of the sample-average F1 score of the master categories on the training- and validation set. The training score converges to ~95% and the validation score to ~93%." style="width:50%;">
+  <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/all_cats.png" alt="A plot of the sample-average F1 score of all the categories on the training- and validation set. The training score converges to ~68% and the validation score to ~64%." style="width:50%;">
   <figcaption>
     The final scores.
   </figcaption>
