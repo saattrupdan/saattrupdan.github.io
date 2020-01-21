@@ -71,7 +71,7 @@ The model that I ended up using after much trial and error was a simpler version
   2. We apply a [scaled dot product self-attention](https://arxiv.org/abs/1706.03762) on the 3d outputs from the GRU, to allow the model to attend to the important tokens in the text. After taking the corresponding weighted sum we end up with a 2d tensor.
   3. Next, we project down to dimension 148, the number of categories we're trying to predict
   4. We then apply yet another self-attention on the 2d outputs, with the idea being to spot similarities between the logits for every category
-  5. Lastly, we apply a **Boom** layer: two fully connected layers, blowing the (32, 148)-shaped input up to (32, 512) and then projecting it back down to dimension (32, 148).
+  5. Lastly, we apply a <font color=red>**Boom**</font> layer: two fully connected layers, blowing the (32, 148)-shaped input up to (32, 512) and then projecting it back down to dimension (32, 148).
 
 There are layer normalisations happening at nearly every layer, and the [GELU activation](https://arxiv.org/abs/1606.08415) is used everywhere. All of this ends up having ~800,000 trainable parameters (the embedding weights are frozen), which is not too shabby at all with a ~1.3M dataset. I used no regularisation for the same reason. I tried adding 10% and 20% dropout, but both just resulted in poorer performance.
 
@@ -86,7 +86,9 @@ I didn't want to train a separate model on these master categories; I didn't eve
   4. Apply weighted binary cross entropy on both the category logits and the master category logits
   5. Take a weighted sum of the two losses
 
-The projection in step 3 works by "mixing the top2 logits within each master category". To understand what I mean by that, let's do an example. Say you roll two dice: what's the probability of there being at least one of them hitting 6? This would be $1 - \left(\tfrac{5}{6}\right)^2 \sim 31%$, as there's a $\tfrac{5}{6}$ chance of it not being 6. This would be an instance of "mixing" the two probabilities $\tfrac{1}{6}\sim 17%$ into $31%$. The problem with this is that it's using the probabilities instead of the logits, but I need the logits to allow utilising class weights. One naive solution to this would be to translate the logits to probabilities, perform the mixing and then translate back, but this causes rounding issues: some probabilities would be rounded to 100%, which are translated back to infinite logits, yielding NaN loss. Woohoo. Instead, some simple algebra gives us that we can perform the mixing directly on the logits by the following formula:
+The projection in step 3 works by "mixing the top2 logits within each master category". To understand what I mean by that, let's do an example. Say you roll two dice: what's the probability of there being at least one of them hitting 6? This would be $1 - \left(\tfrac{5}{6}\right)^2 \sim 31%$, as there's a $\tfrac{5}{6}$ chance of it not being 6. This would be an instance of "mixing" the two probabilities $\tfrac{1}{6}\sim 17%$ into $31%$. The problem with this is that it's using the probabilities instead of the logits, but I need the logits to allow utilising class weights. 
+
+One naive solution to this would be to translate the logits to probabilities, perform the mixing and then translate back, but this causes rounding issues: some probabilities would be rounded to 100%, which are translated back to infinite logits, yielding NaN loss. Woohoo. Instead, some simple algebra gives us that we can perform the mixing directly on the logits by the following formula:
 
 $$ \text{mix}(x, y) := x + y + \log(1 + e^{-x} + e^{-y}). $$
 
