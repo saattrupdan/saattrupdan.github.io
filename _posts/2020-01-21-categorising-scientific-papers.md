@@ -110,6 +110,17 @@ The score that I was using was the *sample-average F1 score*, which means that f
 
 The model ended up achieving a ~93% and ~65% validation sample-average F1 score on the master categories and all the categories, respectively. Training the model requires ~17GB memory and it takes roughly a day to train on an Nvidia P100 GPU. This was trained on the [BlueCrystal Phase 4 compute cluster](https://www.acrc.bris.ac.uk/acrc/phase4.htm) at University of Bristol, UK.
 
+To have a sense of these scores, I did trained a few models that aren't neural networks (indeed, aren't even sequence models). I trained them both using frequency vectors (with scikit-learn's `CountVectorizer`) as well as my above-mentioned homemade FastText vectors. I used the same train-test split (same proportion and random state), and evaluated them on their validation sample-average F1 score, as described above.
+
+| Model                  | FastText vectors | Frequency vectors |
+| :--------------------- | :--------------: | :---------------: |
+| Naive Bayes            | xx.xx%           | xx.xx%            |
+| Logistic regression    | xx.xx%           | xx.xx%            |
+| Support vector machine | xx.xx%           | xx.xx%            |
+| SHA-RNN                | **64.96%**       | *N/A*             |
+
+We see that there's a considerable jump from the best performing 'classical' model, the Naive Bayes model on the frequency vectors, and the SHA-RNN. The script used to run these tests is called `simple_models.py` and can be found in the [Github repo](https://github.com/saattrupdan/scholarly).
+
 ## Monitoring progress
 A shout out also goes out to the people at [Weights & Biases](https://www.wandb.com/), which made it incredibly easy for me to compare my models' performance, even though some of them were trained on the compute cluster, some of them in [Colab notebooks](https://colab.research.google.com/), some on my laptop and some on my office computer. Highly recommended, and it's even free. You can check out my training runs at my WandB project here:
 
