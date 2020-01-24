@@ -112,14 +112,12 @@ The model ended up achieving a ~93% and ~65% validation sample-average F1 score 
 
 To get a sense of how good these scores are, I trained a few models that aren't neural networks (indeed, aren't even sequence models). I used the same train-test split (same test size and random state), and evaluated them on their validation sample-average F1 score, as described above.
 
-<center>
-  | Model                  | Score            |
-  | :--------------------- | :--------------: |
-  | Naive Bayes            | 40.32%           |
-  | Logistic regression    | 41.20%           |
-  | Random forest          |  8.62%           |
-  | SHA-RNN                | **64.96%**       |
-</center>
+| Model                  | Score            |
+| :--------------------- | :--------------: |
+| Naive Bayes            | 40.32%           |
+| Logistic regression    | 41.20%           |
+| Random forest          |  8.62%           |
+| SHA-RNN                | **64.96%**       |
 
 Here the Naive Bayes model and the random forest were trained on frequency vectors (I tried the FastText vectors as well for the naive Bayes model, but that resulted in a score of ~13%), and the logistic regression was trained on the FastText vectors.
 
