@@ -110,7 +110,7 @@ The score that I was using was the *sample-average F1 score*, which means that f
 
 The model ended up achieving a ~93% and ~65% validation sample-average F1 score on the master categories and all the categories, respectively. Training the model requires ~17GB memory and it takes roughly a day to train on an Nvidia P100 GPU. This was trained on the [BlueCrystal Phase 4 compute cluster](https://www.acrc.bris.ac.uk/acrc/phase4.htm) at University of Bristol, UK.
 
-To get a sense of how good these scores are, I trained a few models that aren't neural networks (indeed, aren't even sequence models). I used the same train-test split (same test size and random state), and evaluated them on their validation sample-average F1 score, as described above.
+To get a sense of how good these scores are, I trained a few 'classical' models as well. I used the same train-test split (same test size and random state), and evaluated them on their validation sample-average F1 score, as described above.
 
 | Model                  | Score            |
 | :--------------------- | :--------------: |
