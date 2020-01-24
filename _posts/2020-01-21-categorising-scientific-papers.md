@@ -110,16 +110,27 @@ The score that I was using was the *sample-average F1 score*, which means that f
 
 The model ended up achieving a ~93% and ~65% validation sample-average F1 score on the master categories and all the categories, respectively. Training the model requires ~17GB memory and it takes roughly a day to train on an Nvidia P100 GPU. This was trained on the [BlueCrystal Phase 4 compute cluster](https://www.acrc.bris.ac.uk/acrc/phase4.htm) at University of Bristol, UK.
 
-To have a sense of these scores, I did trained a few models that aren't neural networks (indeed, aren't even sequence models). I trained them both using frequency vectors (with scikit-learn's `CountVectorizer`) as well as my above-mentioned homemade FastText vectors. I used the same train-test split (same proportion and random state), and evaluated them on their validation sample-average F1 score, as described above.
+To get a sense of how good these scores are, I trained a few models that aren't neural networks (indeed, aren't even sequence models). I used the same train-test split (same test size and random state), and evaluated them on their validation sample-average F1 score, as described above.
 
-| Model                  | FastText vectors | Frequency vectors |
-| :--------------------- | :--------------: | :---------------: |
-| Naive Bayes            | xx.xx%           | xx.xx%            |
-| Logistic regression    | xx.xx%           | xx.xx%            |
-| Support vector machine | xx.xx%           | xx.xx%            |
-| SHA-RNN                | **64.96%**       | *N/A*             |
+| Model                  | Score            |
+| :--------------------- | :--------------: |
+| Naive Bayes            | 40.32%           |
+| Logistic regression    | 41.20%           |
+| Random forest          |  8.62%           |
+| SHA-RNN                | **64.96%**       |
 
-We see that there's a considerable jump from the best performing 'classical' model, the Naive Bayes model on the frequency vectors, and the SHA-RNN. The script used to run these tests is called `simple_models.py` and can be found in the [Github repo](https://github.com/saattrupdan/scholarly).
+Here the Naive Bayes model and the random forest were trained on frequency vectors (I tried the FastText vectors as well for the naive Bayes model, but that resulted in a score of ~13%), and the logistic regression was trained on the FastText vectors.
+
+<center>
+  <figure>
+    <img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/logreg_master_cats.png" alt="Comparison of the logistic regression with the SHA-RNN on the master categories" style="width:50%;"><img src="https://filedn.com/lRBwPhPxgV74tO0rDoe8SpH/scholarly_data/logreg_all_cats.png" alt="Comparison of the logistic regression with the SHA-RNN on all the categories" style="width:50%;">
+    <figcaption>
+      Comparison between the logistic regression model and the SHA-RNN
+    </figcaption>
+  </figure>
+</center>
+
+Looking at the results, we see that there's a considerable jump from the best performing 'classical' model, the logistic regression model, and the SHA-RNN. The script used to run these tests is called `simple_models.py` and can be found in the [Github repo](https://github.com/saattrupdan/scholarly).
 
 ## Monitoring progress
 A shout out also goes out to the people at [Weights & Biases](https://www.wandb.com/), which made it incredibly easy for me to compare my models' performance, even though some of them were trained on the compute cluster, some of them in [Colab notebooks](https://colab.research.google.com/), some on my laptop and some on my office computer. Highly recommended, and it's even free. You can check out my training runs at my WandB project here:
