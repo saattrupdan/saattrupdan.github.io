@@ -115,7 +115,7 @@ To get a sense of how good these scores are, I trained a few 'classical' models 
 | Model                  | Score            |
 | :--------------------- | :--------------: |
 | Naive Bayes            | 40.32%           |
-| Logistic regression    | 41.20%           |
+| Logistic regression    | 45.02%           |
 | Random forest          |  8.62%           |
 | SHA-RNN                | **64.96%**       |
 
