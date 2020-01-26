@@ -9,7 +9,7 @@ I'm Dan, Mathematician and Data Scientist.
 
 <img src="{{ site.baseurl }}/img/icon-home.png" style="margin:5px; width:3%">Copenhagen, DK<br>
 <img src="{{ site.baseurl }}/img/icon-student.png" style="margin:5px; width:3%"> 2020: PhD in Mathematics, University of Bristol, UK<br>
-<img src="{{ site.baseurl }}/img/icon-briefcase.png" style="margin:5px; width:3%">AI Researcher at Barbal Ltd, UK<br>
+<img src="{{ site.baseurl }}/img/icon-briefcase.png" style="margin:5px; width:3%">2019: AI Researcher at Barbal Limited, UK<br>
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2019: Data Study Group Lead, Alan Turing Institute, UK<br>
 <img src="{{ site.baseurl }}/img/icon-physics.png" style="margin:5px; width:3%"> 2019: Visiting researcher at Rutgers University, USA<br>
 <img src="{{ site.baseurl }}/img/icon-degree.png" style="margin:5px; width:3%"> 2016: MSc in Mathematics, University of Copenhagen, DK<br>
