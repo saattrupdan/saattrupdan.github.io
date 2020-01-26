@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:29%; margin-right:20px">
+<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:29%; margin-right:10px">
 
 I'm Dan and am interested in the interaction between machines and human language, among other things.
 
