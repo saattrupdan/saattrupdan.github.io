@@ -5,7 +5,7 @@ title: About me
 
 <img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:27%; margin-right:30px">
 
-I'm Dan, Mathematician and Data Scientist.
+I'm Dan and am interested in the interaction between machines and human language, among other things.
 
 <img src="{{ site.baseurl }}/img/icon-home.png" style="margin:5px; width:3%"> Copenhagen, DK<br>
 <img src="{{ site.baseurl }}/img/icon-student.png" style="margin:5px; width:3%"> 2020: PhD in Mathematics, University of Bristol, UK<br>
