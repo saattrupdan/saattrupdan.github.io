@@ -3,7 +3,7 @@ layout: page
 title: About me
 ---
 
-<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:27%; margin-right:30px">
+<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:26%; margin-right:30px">
 
 I'm Dan, Mathematician and Data Scientist.
 
