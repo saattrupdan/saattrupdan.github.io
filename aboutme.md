@@ -7,7 +7,8 @@ title: About me
 
 I'm Dan, Mathematician and Data Scientist.
 
-![alt](img/icon-home.png) Copenhagen, DK<br>
+![alt](img/icon-home.png) Copenhagen, DK
+
 <!--![alt](img/icon-briefcase.png) TBA<br>-->
 ![alt](img/icon-student.png) 2020: PhD in Mathematics, University of Bristol, UK<br>
 ![alt](img/icon-data.png) 2019: Data Study Group Lead, Alan Turing Institute, UK<br>
