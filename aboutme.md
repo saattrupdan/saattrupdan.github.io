@@ -8,7 +8,7 @@ title: About me
 I'm Dan, a Mathematician and Data Scientist.
 
 
-<img src="{{ site.baseurl }}/img/icon-university.svg"> test
+<img src="{{ site.baseurl }}/img/icon-university.svg" style="width:5%;"> test
 
 I grew up in Denmark and did a Master's degree in Mathematics at the University of Copenhagen (6 months of which was on an Erasmus exchange at the University of Leeds, UK). I returned to the UK after my MSc, this time around to do a PhD in Mathematical Logic at the University of Bristol.
 
