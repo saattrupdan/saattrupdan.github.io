@@ -3,11 +3,12 @@ layout: page
 title: About me
 ---
 
-<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:30%; margin-right:30px">
+<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:25%; margin-right:30px">
 
 I'm Dan, Mathematician and Data Scientist.
 
 ![alt](img/icon-home.png) Copenhagen, DK<br>
+<!--![alt](img/icon-briefcase.png) TBA<br>-->
 ![alt](img/icon-student.png) 2020: PhD in Mathematics, University of Bristol, UK<br>
 ![alt](img/icon-data.png) 2019: Data Study Group Lead at the Alan Turing Institute, UK<br>
 ![alt](img/icon-physics.png) 2019: Visiting researcher at Rutgers University, USA<br>
