@@ -70,7 +70,7 @@ The above section assumed that we knew the distribution of our statistic. That i
 
 The remarkable thing about bootstrapping is that **the distribution of the bootstrapped statistics approximates the distribution of the sample statistics**. To get a rough intuition of why this should be the case, consider the variance $\text{Var}(\hat\rho)$ of our sample statistic. If we now compute a bunch of bootstrapped versions of the statistic, $\rho_b$ for each bootstrap sample $b$, and let $s^2$ be the sample variance of these, then
 
-$$ s^2 = \frac{1}{B}\sum_{b=1}^B\rho_b^2 - \left(\frac{1}{B}\sum_{b=1}^B\rho_b\right)^2 \to_{b\to\infty} \mathbb E[\hat\rho_b^2] - \mathbb E[\hat\rho_b]^2 = \text{Var}(\hat\rho) $$
+$$ s^2 = \frac{1}{B}\sum_{b=1}^B\rho_b^2 - \left(\frac{1}{B}\sum_{b=1}^B\rho_b\right)^2 \to_{B\to\infty} \mathbb E[\hat\rho_b^2] - \mathbb E[\hat\rho_b]^2 = \text{Var}(\hat\rho) $$
 
 by the [law of large numbers](https://saattrupdan.github.io/2019-06-05-normal/). And as we are sampling with replacement, we can simply pick some very large $B$ to get a good estimate.
 
