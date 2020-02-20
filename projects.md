@@ -4,7 +4,7 @@ title: Projects
 ---
 
 ## [Scholarly](https://github.com/saattrupdan/scholarly)
-#### Classification of scientific papers --- [blog post](https://saattrupdan.github.io/2020-01-21-categorising-scientific-papers/)
+#### Classification of scientific papers --- [blog post](https://saattrupdan.github.io/2020-01-21-scholarly/)
 
 This project aims to classify the category of scientific papers, based on the subject classification on [arxiv.org](https://arxiv.org). Try the live demo here:
 
@@ -24,13 +24,13 @@ The best model achieved a ~93% and ~65% validation sample-average F1 score on th
 
 
 ## [AutoPoet](https://github.com/saattrupdan/autopoet)
-#### Build poems from text sources --- [blog post](https://saattrupdan.github.io/2019-11-11-a-neural-network-that-counts-syllables-in-english-words/)
+#### Build poems from text sources --- [blog post](https://saattrupdan.github.io/2019-11-11-syllables/)
 
 Automatically build Haiku poems from a given text source. To ensure that the syllables are counted correctly a recurrent neural network has been trained to syllabise English words with a 97% accuracy. This model was trained on The [Gutenberg Moby Hyphenator II dataset](http://onlinebooks.library.upenn.edu/webbin/gutbook/lookup?num=3204), consisting of ~170k hyphenated English words.
 
 
 ## [NaturalSelection](https://github.com/saattrupdan/naturalselection)
-#### An all-purpose pythonic genetic algorithm --- [blog post](https://saattrupdan.github.io/2019-09-07-naturalselection-easily-evolve-neural-networks/)
+#### An all-purpose pythonic genetic algorithm --- [blog post](https://saattrupdan.github.io/2019-09-07-naturalselection/)
 
 A python package which uses genetic algorithms to maximise a given function. A prime example of this is to hyperparameter optimise neural networks. See [the readme](https://github.com/saattrupdan/naturalselection/blob/master/README.md) for several examples and a more in-depth explanation of the algorithm.
 
