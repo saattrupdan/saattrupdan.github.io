@@ -33,7 +33,7 @@ Let us continue with our coffee example. Our desired statistic in this case is t
 
 $$ \frac{1}{n}\sum_{i=1}^n (x_i - \bar x)^2, \tag{1}$$
 
-which equals roughly $245,083$ in our example. The problem with this is that it is a *biased estimator*, meaning if we sampled infinitely many times then the average value of this estimate would *not* equal the true variance. This can be seen if we compute the expectation of $(1)$:
+which equals roughly $245,083$ in our example. The problem with this is that it is a *biased estimator*, meaning if we sampled infinitely many times then the average value of this estimate would *not* equal the true variance. This can be seen if we compute the [expectation](https://en.wikipedia.org/wiki/Expected_value) of $(1)$:
 
 $$
   \begin{align}
