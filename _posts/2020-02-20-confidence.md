@@ -14,7 +14,7 @@ Confidence intervals are about measuring how confident you are in a given *popul
 
 Now, for a given population statistic $\rho$ and some $\alpha\in(0,1)$, an **$\alpha$-confidence interval for $\rho$** is an interval $(a,b)\subset\mathbb R$ such that, if we were to draw infinitely many samples and compute new confidence intervals for those in the same way, then the *true value* for $\rho$ would be contained in $(100 * \alpha)$% of the intervals.
 
-As a running example, say we would like to find the mean amount of money spent on coffee in Denmark, measured in the local currency DKK. There is a true answer to this, call it $\mu$, but it would be quite time-consuming to compute $\mu$ as we would have to ask every single Dane. Instead, we randomly ask 10 people and get a sample of size $n = 10$:
+As a running example, say we would like to find the mean amount of money spent on coffee in Denmark per year, measured in the local currency DKK. There is a true answer to this, call it $\mu$, but it would be quite time-consuming to compute $\mu$ as we would have to ask every single Dane. Instead, we randomly ask 10 people and get a sample of size $n = 10$:
 
 | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 | #10 |
 |:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
