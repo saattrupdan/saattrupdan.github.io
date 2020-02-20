@@ -2,6 +2,7 @@
 layout: post
 mathjax: true
 title: Evaluating confidence
+keywords: confidence interval uncertainty machine learning bootstrap normal theory t-distribution coffee
 ---
 
 One aspect of predictive modelling that does not seem to attract much attention is quantifying the *uncertainty* of our models' predictions. In classification tasks we can *partially* remedy this by outputting conditional probabilities rather than boolean values, but what if the model is outputting 52%? Is that a clear-cut positive outcome? When it comes to regression tasks it is even worse, as we simply output a number with no uncertainty attached to it. This post will be the first post where I'm delving into quantifying uncertainty. We start with the confidence interval.

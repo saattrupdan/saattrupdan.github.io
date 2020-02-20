@@ -2,6 +2,7 @@
 layout: post
 mathjax: true
 title: Singular Value Decomposition 
+keywords: singular value decomposition eigenvalue decomposition principal component analysis picture image rotation scaling
 ---
 
 Whenever we are dealing with a complicated problem, it usually helps to break it into smaller pieces that are easier to handle. This is as true in mathematics and machine learning as it is when we're cooking a meal or cleaning our home. This idea is what's the guiding principle to the _singular value decomposition_.

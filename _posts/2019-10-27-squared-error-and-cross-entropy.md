@@ -2,6 +2,7 @@
 layout: post
 mathjax: true
 title: Squared Error and Cross Entropy
+keywords: squared error cross entropy mse maximum likelihood estimation
 ---
 
 When introduced to machine learning, practically oriented textbooks and online courses focus on two major loss functions, the *squared error* for regression tasks and *cross entropy* for classification tasks, usually with no justification for *why* these two are important. I'll here show that they're both instances of the same concept: maximum likelihood estimation.
