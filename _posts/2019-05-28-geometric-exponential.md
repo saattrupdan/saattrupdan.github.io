@@ -1,7 +1,7 @@
 ---
 layout: post
 mathjax: true
-title: Geometric and Exponential Distributions
+title: Geometric and Exponential
 subtitle: Forgetful distributions
 ---
 
