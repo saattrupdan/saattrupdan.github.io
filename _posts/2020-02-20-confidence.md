@@ -89,6 +89,7 @@ coffee_sample = np.array([1000, 0, 545, 2100, 400, 1200, 500, 1200,
     1500, 900])
 bstats = get_bootstrap_statistics(coffee_sample, np.mean)
 plt.hist(bstats, color = 'green', bins = 'auto')
+plt.title('Distribution of bootstrapped means')
 plt.show()
 ```
 
