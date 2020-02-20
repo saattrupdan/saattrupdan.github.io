@@ -95,7 +95,7 @@ plt.show()
 
 ![A roughly normally distributed collection of bootstrapped means.](/img/bootstrapped-means.png)
 
-By pulling out the $95%$-confidence interval with `np.percentile(bstats, q = [2.5, 97.5])` we get the interval $(585, 1280)$, which is $50$ units narrower than the one we achieved through normal theory above. This makes sense as our data is *not* normally distributed as assumed in the normal theory approach.
+By pulling out the 95%-confidence interval with `np.percentile(bstats, q = [2.5, 97.5])` we get the interval $(585, 1280)$, which is $50$ units narrower than the one we achieved through normal theory above. This makes sense as our data is *not* normally distributed as assumed in the normal theory approach.
 
 ![The distribution of the coffee data, which is quite right-skewed.](/img/coffee-data.png)
 
