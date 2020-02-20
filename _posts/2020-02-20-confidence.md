@@ -28,21 +28,23 @@ A confidence interval depends on the *true* distribution of our statistic, so if
 
 Let us continue with our coffee example. Our desired statistic in this case is the (arithmetic) mean $\mu$, and it turns out that our sample means $\bar x$ asymptotically follow the normal distribution $\mathcal N(\mu, \tfrac{\sigma^2}{\sqrt{n}})$ with $\sigma^2$ being the true population variance, as I described in an [earlier post](https://saattrupdan.github.io/2019-06-05-normal/). Unfortunately, we do *not* know the true population variance, so we would need to approximate that. A natural guess for this could be
 
-$$ \frac{1}{n}\sum_{i=1}^n (x_i - \bar x)^2, \tag{(1)}$$
+$$ \frac{1}{n}\sum_{i=1}^n (x_i - \bar x)^2, \tag{1}$$
 
 which equals roughly $245,083$ in our example. The problem with this is that it is a *biased estimator*, meaning if we sampled infinitely many times then the average value of this estimate would *not* equal the true variance. This can be seen if we compute the expectation of $(1)$:
 
-$$ \mathbb E\left[\frac{1}{n}\sum_{i=1}^n(x_i-\bar x)^2\right] &= \frac{1}{n}\sum_{i=1}^n(\mathbb E[x_i^2] + \mathbb E[\bar x^2] - 2\mathbb E[x_i\bar x]) \\
-&= \frac{1}{n}\sum_{i=1}^n\left((\mu^2+\sigma^2) + \mathbb E\left[\frac{1}{n^2}\sum_{j=1}^nx_j\sum_{k=1}^nx_k\right] - \frac{2}{n}\sum_{j=1}^n\mathbb E[x_ix_j]\right) \\
-&= \frac{1}{n}\sum_{i=1}^n\left(\mu^2+\sigma^2 + \frac{n-1}{n}\mu^2 + \frac{\mu^2+\sigma^2}{n} - 2\mu^2 - \frac{2}{n}\sigma^2\right) \\
-&= \frac{1}{n}\sum_{i=1}^n\frac{n+1-2}{n}\sigma^2 \\
-&= \frac{n-1}{n}\sigma^2. $$
+$$
+  \mathbb E\left[\frac{1}{n}\sum_{i=1}^n(x_i-\bar x)^2\right] &= \frac{1}{n}\sum_{i=1}^n(\mathbb E[x_i^2] + \mathbb E[\bar x^2] - 2\mathbb E[x_i\bar x]) \\\\
+  &= \frac{1}{n}\sum_{i=1}^n\left((\mu^2+\sigma^2) + \mathbb E\left[\frac{1}{n^2}\sum_{j=1}^nx_j\sum_{k=1}^nx_k\right] - \frac{2}{n}\sum_{j=1}^n\mathbb E[x_ix_j]\right) \\\\
+  &= \frac{1}{n}\sum_{i=1}^n\left(\mu^2+\sigma^2 + \frac{n-1}{n}\mu^2 + \frac{\mu^2+\sigma^2}{n} - 2\mu^2 - \frac{2}{n}\sigma^2\right) \\\\
+  &= \frac{1}{n}\sum_{i=1}^n\frac{n+1-2}{n}\sigma^2 \\\\
+  &= \frac{n-1}{n}\sigma^2.
+$$
 
 This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
 
 $$ s^2 := \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar x)^2. $$
 
-In our example this is about $272,315$, which is quite a lot different from the biased sample estimate above. Now, with the sample variance at hand we would then hope that $\bar x\sim\mathcal N(\mu, \tfrac{s^2}{n})$, so that $(F^{-1}(0.025), F^{-1}(0.975))$ would constitute a 95% confidence interval with $F$ being the CDF for $\mathcal N(\mu, \tfrac{s^2}{n})$. But this is unfortunately *not* the case, but instead it turns out that $\frac{bar x - \mu}{\tfrac{s}{\sqrt{n}}}$ follows a [$t$-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $n-1$ degrees of freedom, which is an approximation to the normal distribution:
+In our example this is about $272,315$, which is quite a lot different from the biased sample estimate above. Now, with the sample variance at hand we would then hope that $\bar x\sim\mathcal N(\mu, \tfrac{s^2}{n})$, so that $(F^{-1}(0.025), F^{-1}(0.975))$ would constitute a 95% confidence interval with $F$ being the [CDF](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for $\mathcal N(\mu, \tfrac{s^2}{n})$. But this is unfortunately *not* the case, but instead it turns out that $\frac{\bar x - \mu}{\tfrac{s}{\sqrt{n}}}$ follows a [$t$-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $n-1$ degrees of freedom, which is an approximation to the normal distribution:
 
 ![Comparison between the normal- and t-distribution, showing that as the degrees of freedom gets large, the t-distribution converges to the normal distribution. Both are bell curves.](/img/t-vs-norm.png)
 
@@ -67,7 +69,7 @@ $$ s^2 = \frac{1}{B}\sum_{b=1}^B(\rho_b^*)^2 - \left(\frac{1}{B}\sum_{b=1}^B\rho
 
 by the [law of large numbers](https://saattrupdan.github.io/2019-06-05-normal/). And as we are sampling with replacement, we can simply pick some very large $B$ to get a good estimate.
 
-To compute the confidence intervals, we we first compute the bootstrap residuals $\delta^*_b := \rho^*_b - \hat\rho$ for every bootstrap sample $b$, and let $\delta^*_\alpha$ be the $\alpha$-percentile of the $\delta^*_b$'s. The **bootstrapped $\alpha$-confidence interval** is then $(\hat\rho - \delta^*_{1-\alpha}, \hat\rho + \delta^*_\alpha)$.
+To compute the confidence intervals, we first compute the bootstrap residuals $\delta^*_b := \rho^*_b - \hat{\rho}$ for every bootstrap sample $b$, and let $\delta^*_\alpha$ be the $\alpha$-percentile of the $\delta^*_b$'s. The **bootstrapped $\alpha$-confidence interval** is then $(\hat\rho - \delta^*_{1-\alpha}, \hat\rho + \delta^*_\alpha)$.
 
 Let's compute a bootstrapped confidence interval for our coffee example. The **first step** is to resample our data $B$ many times and compute our desired statistic, which in our case is the mean. Let's set $B = 5,000$ and compute:
 
@@ -75,11 +77,13 @@ Let's compute a bootstrapped confidence interval for our coffee example. The **f
 def get_bootstrap_statistics(sample, statistic, nbootstraps: int = 5000):
     bootstrap_statistics = np.empty(nbootstraps)
     for b in range(nbootstraps):
-        resample = np.random.choice(sample, size = sample.size, replace = True)
+        resample = np.random.choice(sample, size = sample.size, 
+            replace = True)
         bootstrap_statistics[b] = statistic(resample)
     return bootstrap_statistics
 
-coffee_sample = np.array([1000, 0, 545, 2100, 400, 1200, 500, 1200, 1500, 900])
+coffee_sample = np.array([1000, 0, 545, 2100, 400, 1200, 500, 1200, 
+    1500, 900])
 bstats = get_bootstrap_statistics(coffee_sample, np.mean)
 plt.hist(bstats, color = 'green', bins = 'auto')
 plt.show()
@@ -87,6 +91,7 @@ plt.show()
 
 ![A roughly normally distributed collection of bootstrapped means.](/img/bootstrapped-means.png)
 
-By pulling out the confidence interval with `np.percentile(bstats, q = [2.5, 97.5])` we get the interval $(585, 1280)$, which is $50$ units narrower than the one we achieved through normal theory above. This makes sense as our data is not normally distributed as assumed in the normal theory approach.
+By pulling out the confidence interval with ```python np.percentile(bstats, q = [2.5, 97.5])``` we get the interval $(585, 1280)$, which is $50$ units narrower than the one we achieved through normal theory above. This makes sense as our data is *not* normally distributed as assumed in the normal theory approach.
 
 ![The distribution of the coffee data, which is quite right-skewed.](/img/coffee-data.png)
+
