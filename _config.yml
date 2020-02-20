@@ -11,7 +11,7 @@ baseurl: ""
 title: Dan Saattrup Nielsen
 
 # Short description of your site
-description: Mathematician and budding data scientist
+description: Mathematician and Data Scientist
 
 # --- Navigation bar options --- #
 
@@ -231,6 +231,7 @@ prose:
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
+  - jekyll-seo-tag
 
 # Beautiful Jekyll / Dean Attali
 # 2fc73a3a967e97599c9763d05e564189
