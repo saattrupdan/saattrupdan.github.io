@@ -38,11 +38,11 @@ $$
     &= \frac{1}{n}\sum_{i=1}^n\left((\mu^2+\sigma^2) + \mathbb E\left[\frac{1}{n^2}\sum_{j=1}^nx_j\sum_{k=1}^nx_k\right] - \frac{2}{n}\sum_{j=1}^n\mathbb E[x_ix_j]\right)\\
     &= \frac{1}{n}\sum_{i=1}^n\left(\mu^2+\sigma^2 + \frac{n-1}{n}\mu^2 + \frac{\mu^2+\sigma^2}{n} - 2\mu^2 - \frac{2}{n}\sigma^2\right)\\
     &= \frac{1}{n}\sum_{i=1}^n\frac{n+1-2}{n}\sigma^2\\
-    &= \frac{n-1}{n}\sigma^2.
+    &= \frac{n-1}{n}\sigma^2,
   \end{align}
 $$
 
-This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
+using that $\Var(x_i^2) = \mathbb E[x_i^2] - \mathbb E[x_i]^2$. This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
 
 $$ s^2 := \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar x)^2. $$
 
@@ -67,7 +67,7 @@ The above section assumed that we knew the distribution of our statistic. That i
 
 The remarkable thing about bootstrapping is that **the distribution of the bootstrapped statistics approximates the distribution of the sample statistics**. To get a rough intuition of why this should be the case, consider the variance $\text{Var}(\hat\rho)$ of our sample statistic. If we now compute a bunch of bootstrapped versions of the statistic, $\rho_b$ for each bootstrap sample $b$, and let $s^2$ be the sample variance of these, then
 
-$$ s^2 = \frac{1}{B}\sum_{b=1}^B(\rho_b)^2 - \left(\frac{1}{B}\sum_{b=1}^B\rho_b\right)^2 \to_{b\to\infty} \mathbb E[(\hat\rho_b)^2] - \mathbb E[\hat\rho_b]^2 = \text{Var}(\hat\rho) $$
+$$ s^2 = \frac{1}{B}\sum_{b=1}^B\rho_b^2 - \left(\frac{1}{B}\sum_{b=1}^B\rho_b\right)^2 \to_{b\to\infty} \mathbb E[\hat\rho_b^2] - \mathbb E[\hat\rho_b]^2 = \text{Var}(\hat\rho) $$
 
 by the [law of large numbers](https://saattrupdan.github.io/2019-06-05-normal/). And as we are sampling with replacement, we can simply pick some very large $B$ to get a good estimate.
 
