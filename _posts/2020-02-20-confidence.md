@@ -43,7 +43,7 @@ $$
   \end{align}
 $$
 
-using that $\text{Var}(x_i^2) = \mathbb E[x_i^2] - \mathbb E[x_i]^2$. This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
+using that $\text{Var}(x_i) = \mathbb E[x_i^2] - \mathbb E[x_i]^2$. This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
 
 $$ s^2 := \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar x)^2. $$
 
