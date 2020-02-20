@@ -5,13 +5,13 @@ title: Geometric and Exponential
 subtitle: Forgetful distributions
 ---
 
+This week we'll deal with memory. More specifically, we'll tackle the question of when a distribution do *not* have any memory whatsoever, meaning that it doesn't depend on past experience in any way. It turns out that there is a *unique* continuous distribution with this property, the *exponential distribution*, and a unique discrete distribution with this property, the *geometric distribution*. Let's dig in.
+
 This post is part of my series on distributions:
   1. [Poisson](https://saattrupdan.github.io/2019-05-15-poisson/)
   2. [Uniform](https://saattrupdan.github.io/2019-05-22-uniform/)
   3. Geometric and Exponential
   4. [Normal](https://saattrupdan.github.io/2019-06-05-normal/)
-
-This week we'll deal with memory. More specifically, we'll tackle the question of when a distribution do *not* have any memory whatsoever, meaning that it doesn't depend on past experience in any way. It turns out that there is a *unique* continuous distribution with this property, the *exponential distribution*, and a unique discrete distribution with this property, the *geometric distribution*. Let's dig in.
 
 > **Definition** (Geometric distribution). A random variable $X$ has the **geometric distribution** with parameter $p\in(0,1)$ if it's counting the number of failed [iid](https://en.wikipedia.org/wiki/Independent_and_identically_distributed_random_variables) [Bernoulli trials](https://en.wikipedia.org/wiki/Bernoulli_trial) with parameter $p$ until it reaches a successful trial. We write $X\sim\text{Geom}(p)$, which has density $f\colon\\\{0,1,2,\dots\\\}\to\mathbb R$ given as $f(k):=(1-p)^kp$.
 
