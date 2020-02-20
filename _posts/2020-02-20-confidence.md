@@ -43,7 +43,7 @@ $$
   \end{align}
 $$
 
-using that $\Var(x_i^2) = \mathbb E[x_i^2] - \mathbb E[x_i]^2$. This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
+using that $\text{Var}(x_i^2) = \mathbb E[x_i^2] - \mathbb E[x_i]^2$. This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
 
 $$ s^2 := \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar x)^2. $$
 
@@ -53,11 +53,11 @@ In our example this is about $272,315$, which is quite a lot different from the 
 
 If we thus let $G$ be the CDF of the t-distribution then our desired interval would be
 
-$$ (\bar x - G^{-1}(0.025)\cdot\tfrac{s}{\sqrt{n}}, \bar x + G^{-1}(0.975)\cdot\tfrac{s}{\sqrt{n}}) \approx \bar x\pm 2.26\cdot\frac{s}{\sqrt{n}}, $$
+$$ (\bar x - G^{-1}(0.025)\cdot\tfrac{s}{\sqrt{n}}, \bar x + G^{-1}(0.975)\cdot\tfrac{s}{\sqrt{n}}) \approx \bar x\pm 2.26\cdot\tfrac{s}{\sqrt{n}}, $$
 
 which in our example would be $934.50 \pm 2.26\cdot \tfrac{\sqrt{272,315}}{\sqrt{10}} \approx 373$, i.e. $(562, 1307)$. We see that the true mean $\mu = 1,105$ *does* appear within the interval.
 
-One thing to note about confidence intervals is that **the larger the sample size, the narrower the confidence interval**. This can be seen directly from the above-mentioned fact that $\bar x\sim\mathcal N(\mu, \tfrac{\sigma^2}{\sqrt{n}})$: the bell curve will become more and more sharp as $n\to\infty$.
+One thing to note about confidence intervals is that **the larger the sample size, the narrower the confidence interval**. This can be seen directly from the above-mentioned fact that $\bar x\sim\mathcal N(\mu, \tfrac{\sigma^2}{n})$: the bell curve will become more and more sharp as $n\to\infty$.
 
 
 ## Computing a confidence interval: non-parametric case
