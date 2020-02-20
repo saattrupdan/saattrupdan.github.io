@@ -33,18 +33,18 @@ $$ \frac{1}{n}\sum_{i=1}^n (x_i - \bar x)^2, \tag{1}$$
 which equals roughly $245,083$ in our example. The problem with this is that it is a *biased estimator*, meaning if we sampled infinitely many times then the average value of this estimate would *not* equal the true variance. This can be seen if we compute the expectation of $(1)$:
 
 $$
-  \mathbb E\left[\frac{1}{n}\sum_{i=1}^n(x_i-\bar x)^2\right] = \frac{1}{n}\sum_{i=1}^n(\mathbb E[x_i^2] + \mathbb E[\bar x^2] - 2\mathbb E[x_i\bar x])\\
-  = \frac{1}{n}\sum_{i=1}^n\left((\mu^2+\sigma^2) + \mathbb E\left[\frac{1}{n^2}\sum_{j=1}^nx_j\sum_{k=1}^nx_k\right] - \frac{2}{n}\sum_{j=1}^n\mathbb E[x_ix_j]\right)\\
-  = \frac{1}{n}\sum_{i=1}^n\left(\mu^2+\sigma^2 + \frac{n-1}{n}\mu^2 + \frac{\mu^2+\sigma^2}{n} - 2\mu^2 - \frac{2}{n}\sigma^2\right)\\
-  = \frac{1}{n}\sum_{i=1}^n\frac{n+1-2}{n}\sigma^2\\
-  = \frac{n-1}{n}\sigma^2.
+  \mathbb E\left[\frac{1}{n}\sum_{i=1}^n(x_i-\bar x)^2\right] \&= \frac{1}{n}\sum_{i=1}^n(\mathbb E[x_i^2] + \mathbb E[\bar x^2] - 2\mathbb E[x_i\bar x])\\
+  \&= \frac{1}{n}\sum_{i=1}^n\left((\mu^2+\sigma^2) + \mathbb E\left[\frac{1}{n^2}\sum_{j=1}^nx_j\sum_{k=1}^nx_k\right] - \frac{2}{n}\sum_{j=1}^n\mathbb E[x_ix_j]\right)\\
+  \&= \frac{1}{n}\sum_{i=1}^n\left(\mu^2+\sigma^2 + \frac{n-1}{n}\mu^2 + \frac{\mu^2+\sigma^2}{n} - 2\mu^2 - \frac{2}{n}\sigma^2\right)\\
+  \&= \frac{1}{n}\sum_{i=1}^n\frac{n+1-2}{n}\sigma^2\\
+  \&= \frac{n-1}{n}\sigma^2.
 $$
 
 This shows us that an unbiased estimate of $\sigma^2$ can be achieved by defining our sample variance as
 
 $$ s^2 := \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar x)^2. $$
 
-In our example this is about $272,315$, which is quite a lot different from the biased sample estimate above. Now, with the sample variance at hand we would then hope that $\bar x\sim\mathcal N(\mu, \tfrac{s^2}{n})$, so that $(F^{-1}(0.025), F^{-1}(0.975))$ would constitute a 95% confidence interval with $F$ being the [CDF](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for $\mathcal N(\mu, \tfrac{s^2}{n})$. But this is unfortunately *not* the case, but instead it turns out that $\frac{\bar x - \mu}{\tfrac{s}{\sqrt{n}}}$ follows a [$t$-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $n-1$ degrees of freedom, which is an approximation to the normal distribution:
+In our example this is about $272,315$, which is quite a lot different from the biased sample estimate above. Now, with the sample variance at hand we would then hope that $\bar x\sim\mathcal N(\mu, \tfrac{s^2}{n})$, so that $(F^{-1}(0.025), F^{-1}(0.975))$ would constitute a 95% confidence interval with $F$ being the [CDF](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for $\mathcal N(\mu, \tfrac{s^2}{n})$. But this is unfortunately *not* the case, but instead it turns out that $(\bar x - \mu)(\tfrac{s}{\sqrt{n}})^{-1}$ follows a [$t$-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $n-1$ degrees of freedom, which is an approximation to the normal distribution:
 
 ![Comparison between the normal- and t-distribution, showing that as the degrees of freedom gets large, the t-distribution converges to the normal distribution. Both are bell curves.](/img/t-vs-norm.png)
 
