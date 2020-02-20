@@ -22,7 +22,7 @@ As a running example, say we would like to find the mean amount of money spent o
 
 ![The distribution of the coffee data, which is quite right-skewed.](/img/coffee-data.png)
 
-We can now compute the mean of these to get the sample mean $\bar x = 934.50$. Say that we are given a 75% confidence interval $(850, 950)$, computed for this particular sample. This would mean that, were we to repeat the process of asking 10 random people and computing their mean coffee expenditure, the true mean $\mu$ would belong to 75% of the intervals. In other words, there's a 75% chance that the true mean $\mu$ belongs to our interval $(850, 950)$. It says nothing about *where* $\mu$ would be located within the interval. It turns out that $\mu\approx 1,105$, so our interval turned out to be a fluke.
+We can now compute the mean of these to get the sample mean $\bar x = 934.50$. Say that we are given a 75% confidence interval $(850, 950)$, computed for this particular sample. This would mean that, were we to repeat the process of asking 10 random people and computing their mean coffee expenditure, the true mean $\mu$ would belong to 75% of the intervals. In other words, if we put on a [Bayesian hat](https://en.wikipedia.org/wiki/Credible_interval) for a few seconds, there's a 75% chance that the true mean $\mu$ belongs to our interval $(850, 950)$. It says nothing about *where* $\mu$ would be located within the interval. It turns out that $\mu\approx 1,105$, so our interval turned out to be a fluke.
 
 
 ## Computing a confidence interval: parametric case
