@@ -5,7 +5,7 @@ title: About me
 
 I am about to finish my PhD in Mathematics at the University of Bristol, and am looking forward to return to Denmark and seek new challenges within machine learning and data science. I am incredibly ambitious and love what I am doing, and I tend to take a lot of initiative to new projects and to look at things from new angles.
 
-<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:30%; margin-right:10px">
+<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:29%; margin-right:10px"><br>
 
 <img src="{{ site.baseurl }}/img/icon-home.png" style="margin:5px; width:3%"> Copenhagen, DK<br>
 <img src="{{ site.baseurl }}/img/icon-student.png" style="margin:5px; width:3%"> 2020: PhD in Mathematics, University of Bristol, UK<br>
