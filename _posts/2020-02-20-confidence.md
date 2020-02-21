@@ -49,13 +49,13 @@ using that $\text{Var}(x_i) = \mathbb E[x_i^2] - \mathbb E[x_i]^2$. This shows u
 
 $$ s^2 := \frac{1}{n-1}\sum_{i=1}^n (x_i - \bar x)^2. $$
 
-In our example this is about $272,315$, which is quite a lot different from the biased sample estimate above. Now, with the sample variance at hand we would then hope that $\bar x\sim\mathcal N(\mu, \tfrac{s^2}{n})$, so that $(F^{-1}(0.025), F^{-1}(0.975))$ would constitute a 95% confidence interval with $F$ being the [CDF](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for $\mathcal N(\mu, \tfrac{s^2}{n})$. But this is unfortunately *not* the case, but instead it turns out that $(\bar x - \mu)(\tfrac{s}{\sqrt{n}})^{-1}$ follows a [$t$-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $n-1$ degrees of freedom, which is an approximation to the normal distribution:
+In our example this is about $272,315$, which is quite a lot different from the biased sample estimate above. Now, with the sample variance at hand we would then hope that $\bar x\sim\mathcal N(\mu, \tfrac{s^2}{n})$, so that $(\Phi^{-1}(0.025), \Phi^{-1}(0.975))$ would constitute a 95% confidence interval with $\Phi$ being the [CDF](https://en.wikipedia.org/wiki/Cumulative_distribution_function) for $\mathcal N(\mu, \tfrac{s^2}{n})$. But this is unfortunately *not* the case, but instead it turns out that $(\bar x - \mu)(\tfrac{s}{\sqrt{n}})^{-1}$ asymptotically follows a [$t$-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $n-1$ degrees of freedom, which is an approximation to the normal distribution:
 
 ![Comparison between the normal- and t-distribution, showing that as the degrees of freedom gets large, the t-distribution converges to the normal distribution. Both are bell curves.](/img/t-vs-norm.png)
 
-If we thus let $G$ be the CDF of the t-distribution then our desired interval would be
+If we thus let $F$ be the CDF of the t-distribution then our desired interval would be
 
-$$ (\bar x - G^{-1}(0.025)\cdot\tfrac{s}{\sqrt{n}}, \bar x + G^{-1}(0.975)\cdot\tfrac{s}{\sqrt{n}}) \approx \bar x\pm 2.26\cdot\tfrac{s}{\sqrt{n}}, $$
+$$ (\bar x - F^{-1}(0.025)\cdot\tfrac{s}{\sqrt{n}}, \bar x + F^{-1}(0.975)\cdot\tfrac{s}{\sqrt{n}}) \approx \bar x\pm 2.26\cdot\tfrac{s}{\sqrt{n}}, $$
 
 which in our example would be $934.50 \pm 2.26\cdot \tfrac{\sqrt{272,315}}{\sqrt{10}} \approx 373$, i.e. $(562, 1307)$. We see that the true mean $\mu = 1,105$ *does* appear within the interval.
 
@@ -96,4 +96,4 @@ plt.show()
 
 ![A roughly normally distributed collection of bootstrapped means.](/img/bootstrapped-means.png)
 
-By pulling out the 95%-confidence interval with the `np.percentile` function we get the interval $(585, 1280)$, which happens to be $50$ units narrower than the one we achieved through normal theory above.
+By pulling out the 95%-confidence interval with the `np.percentile` function we get the interval $(585, 1280)$, which happens to be $50$ units narrower than the one we achieved through normal theory above. This won't always be the case, but in our situation we shouldn't think that the law of large numbers could "calibrate" the distribution of $\bar x$ to be approximately normal when $n$ is so small, especially since we saw our data isn't quite normally distributed. This is relevant because for $(\bar x - \mu)(\tfrac{s}{\sqrt{n}})^{-1}$ to be $t$-distributed with $n-1$ degrees of freedom we are assuming that $\bar x$ is approximately normal.
