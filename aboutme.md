@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About me
+keywords: data scientist mathematics phd machine learning dan saattrup nielsen
 ---
 
 I am about to finish my PhD in Mathematics at the University of Bristol, and am looking forward to return to Denmark and seek new challenges within machine learning and data science. I am incredibly ambitious and love what I am doing, and I tend to take a lot of initiative to new projects and to look at things from new angles.
