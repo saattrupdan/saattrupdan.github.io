@@ -13,7 +13,8 @@ I am about to finish my PhD in Mathematics at the University of Bristol, and am 
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2019: Data Study Group Lead, Alan Turing Institute, UK<br>
 <img src="{{ site.baseurl }}/img/icon-physics.png" style="margin:5px; width:3%"> 2019: Visiting researcher at Rutgers University, USA<br>
 <img src="{{ site.baseurl }}/img/icon-degree.png" style="margin:5px; width:3%"> 2016: MSc in Mathematics, University of Copenhagen, DK<br>
-<img src="{{ site.baseurl }}/img/icon-teaching.png" style="margin:5px; width:3%"> 2014-2020: Lecturer and teaching assistant<br>
+<img src="{{ site.baseurl }}/img/icon-degree.png" style="margin:5px; width:3%"> 2014: BSc in Mathematics, University of Copenhagen, DK<br>
+<img src="{{ site.baseurl }}/img/icon-teaching.png" style="margin:5px; width:3%"> 2013-2020: Lecturer and teaching assistant<br>
 <img src="{{ site.baseurl }}/img/icon-airplane.png" style="margin:5px; width:3%"> 2013: Erasmus exchange, University of Leeds, UK<br>
 
 For more detailed information please see my [CV](/img/cv.pdf).
