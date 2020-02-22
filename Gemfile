@@ -8,3 +8,6 @@ gem 'jekyll-paginate'
 
 # Enable Search Engine Optimisation
 gem 'jekyll-seo-tag'
+
+# Enable automatic site map generation
+gem 'jekyll-sitemap'
