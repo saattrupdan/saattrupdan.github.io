@@ -5,7 +5,7 @@ title: Evaluating confidence
 meta-description: Producing confidence intervals for sample statistics, both using normal theory with t-distributions and also using modern bootstrap methods. This is the first post in a series about quantifying uncertainty in machine learning models. Includes a dummy example of Danish coffee consumption.
 ---
 
-This post will be the first post where I'm delving into quantifying uncertaintyof statistical models. We start with the classical *confidence interval*, used to estimate uncertainty of statistics about the data that we are working with. Computing confidence intervals can be done using *normal theory*, which is the classical approach, and *bootstrapping*, which is more flexible but also more computationally demanding.
+This post will be the first post where I'm delving into quantifying uncertainty of statistical models. We start with the classical *confidence interval*, used to estimate uncertainty of statistics about the data that we are working with. Computing confidence intervals can be done using *normal theory*, which is the classical approach, and *bootstrapping*, which is more flexible but also more computationally demanding.
 
 
 ## What is a confidence interval?
