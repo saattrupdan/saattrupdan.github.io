@@ -3,7 +3,7 @@ layout: post
 mathjax: true
 title: Scholarly
 subtitle: Categorising scientific papers
-meta-description: Scholarly: predict the arXiv category of a scientific paper, using only the title and abstract. The neural network is based on the SHARNN architecture and is trained on all of arXiv, scraped through their API and stored in a SQLite database which is also freely available.
+meta-description: Scholarly - Predict the arXiv category of a scientific paper, using only the title and abstract. The neural network is based on the SHARNN architecture and is trained on all of arXiv, scraped through their API and stored in a SQLite database which is also freely available.
 ---
 
 I recently finished `Scholarly`, a long-standing side project of mine, which consists of predicting the category of a given title and abstract of a scientific paper. More precisely, I am predicting the ~150 subject classification categories from the [arXiv](https://arxiv.org/) preprint server, and have trained the model on _all_ papers on the arXiv up to and including year 2019. Test out the model here:
