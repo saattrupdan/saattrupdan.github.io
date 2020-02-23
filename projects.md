@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Projects
+meta-description: Personal data science projects by Dan Saattrup Nielsen, involving classification of scientific papers, counting syllables in English words, implementing genetic algorithms to evolve neural networks, and performing a cluster analysis of constituencies in England and Wales.
 ---
 
 ## [Scholarly](https://github.com/saattrupdan/scholarly)
