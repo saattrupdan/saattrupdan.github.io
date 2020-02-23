@@ -3,7 +3,7 @@ layout: post
 mathjax: true
 title: Geometric and Exponential
 subtitle: Forgetful distributions
-keywords: geometric distribution exponential distribution memoryless
+meta-description: The geometric distribution and the exponential distribution are the unique memoryless distributions.
 ---
 
 This week we'll deal with memory. More specifically, we'll tackle the question of when a distribution do *not* have any memory whatsoever, meaning that it doesn't depend on past experience in any way. It turns out that there is a *unique* continuous distribution with this property, the *exponential distribution*, and a unique discrete distribution with this property, the *geometric distribution*. Let's dig in.

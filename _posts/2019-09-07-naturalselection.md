@@ -3,7 +3,7 @@ layout: post
 mathjax: true
 title: NaturalSelection
 subtitle: A Python package to easily evolve neural networks
-keywords: python package natural selection genetic algorithm evolution neural network
+meta-description: NaturalSelection: A Python package that implements a genetic optimization algorithm, which can be used to evolve neural network architectures.
 ---
 
 In a deep learning project I am currently working on, I faced the inevitable problem of having to tune my hyperparameters. After trying a few dozen combinations it felt way more like guesswork than anything and I decided to be more systematic, which eventually led to the development of my python package `NaturalSelection`, which approaches this problem in an intelligent manner with a simple interface. [Here's the github repo](https://github.com/saattrupdan/naturalselection).
