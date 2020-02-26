@@ -7,6 +7,10 @@ meta-description: Producing confidence intervals for sample statistics, both usi
 
 This post will be the first post where I'm delving into quantifying uncertainty of statistical models. We start with the classical *confidence interval*, used to estimate uncertainty of statistics about the data that we are working with. Computing confidence intervals can be done using *normal theory*, which is the classical approach, and *bootstrapping*, which is more flexible but also more computationally demanding.
 
+This post is part of my series on quantifying uncertainty:
+  1. Confidence intervals
+  2. [Parametric prediction intervals](https://saattrupdan.github.io/2020-02-26-parametric-prediction/)
+  3. Bootstrap prediction intervals (TBA)
 
 ## What is a confidence interval?
 

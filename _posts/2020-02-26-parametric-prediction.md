@@ -2,7 +2,7 @@
 layout: post
 mathjax: true
 title: Evaluating predictions
-meta-description: Parametric prediction intervals
+meta-description: Parametric prediction intervals are produced using normal theory, which are different to the confidence intervals. As examples we consider the classical linear regression model with additive noise and show that the intervals work as intended in that case. However, as soon as we start to overfit the intervals get too narrow.
 ---
 
 One aspect of predictive modelling that does not seem to attract much attention is quantifying the *uncertainty* of our models' predictions. In classification tasks we can *partially* remedy this by outputting conditional probabilities rather than boolean values, but what if the model is outputting 52%? Is that a clear-cut positive outcome? When it comes to regression tasks it is even worse, as we simply output a number with no uncertainty attached to it. As we saw with [confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/), we can compute these intervals both parametrically using normal theory and unparametrically using bootstrapping methods.
@@ -11,7 +11,6 @@ This post is part of my series on quantifying uncertainty:
   1. [Confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/)
   2. Parametric prediction intervals
   3. Bootstrap prediction intervals (TBA)
-  4. Quantile regression (TBA)
 
 Assuming we have a [univariate](https://en.wikipedia.org/wiki/Univariate) predictive model $\mu\colon\mathbb R^n\to\mathbb R$ trained on training data $\{(x_i,y_i)\in\mathbb R^{n+1}\mid i < n\}$, an **$\alpha$-prediction interval** for $\alpha\in(0,1)$ associated to a new sample $x_0$ is an interval $(a,b)\mathbb R$ such that, if we were to continue sampling new training data, fit our model to the samples and produce new predictions for $x_0$, then the true value $y_0$ will land within $(a,b)$ in $(100 * \alpha)$% of the intervals.
 
@@ -41,14 +40,21 @@ As [we saw with confidence intervals](https://saattrupdan.github.io/2020-02-20-c
 The coverage in this case is very close to 90%. I repeated the experiment 10 times and got the following coverage values:
 
 | Experiment | #0 | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 |
-| Coverage   | x | x | x | x | x | x | x | x | x | x |
+| Coverage   | 90.5% | 86.5% | 86.5% | 87.0% | 90.5% | 91.5% | 87.0% | 92.5% | 90.0% | 85.5% |
 
-
-## A real-world example
-
-asd
+The values average to 88.75%, which quite close. After 10,000 repetitions they average to 89.2%.
 
 
 ## Where the parametric approach doesn't work
 
-asd
+A standing assumption throughout the above method is that the *model assumption* is correct; i.e., that the true values are actually iid normally distributed around the predictions. In particular, the intervals would be identical for the training data and testing data. This is fine with the above linear regression example, but in practice we will often *overfit* the training set to some degree. This means that our intervals will be constructed with respect to the *training* error and not the *validation* error.
+
+If we for instance simply switch out the linear regression model in the above example with a model that is often used in practice, a random forest, we get the following.
+
+![Plot of the prediction interval around the random forest predictions, which is way too narrow](/img/prediction-random-forest)
+
+Here the coverage is only 50%, quite far from the intended 90%. To go to an even more extreme case, this is what happens if we fit a single decision tree to the data.
+
+![Plot of the prediction interval around the decision tree predictions, which has length zero](/img/prediction-decision-tree)
+
+Here we see that the intervals have shrunk to nothing, giving a coverage of **0%**! We therefore see that we are heavily dependant on our model assumption in this parametric setting, but thankfully there are non-parametric methods as well which take care of this issue, which we will see in the next post in this series.
