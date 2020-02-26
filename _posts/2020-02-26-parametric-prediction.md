@@ -48,7 +48,7 @@ The coverage in this case is very close to 90%. I repeated the experiment 10 tim
 | Experiment | #0 | #1 | #2 | #3 | #4 | #5 | #6 | #7 | #8 | #9 |
 | Coverage   | .91 | .87 | .87 | .87 | .91 | .92 | .87 | .93 | .90 | .86 |
 
-The values average to 88.75%, which quite close. After 10,000 repetitions they average to 89.2%.
+The values average to 88.75%, which is quite close to our desired 90%. After 10,000 repetitions they average to 89.2%.
 
 
 ## Where the parametric approach doesn't work
