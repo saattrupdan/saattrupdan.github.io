@@ -1,11 +1,11 @@
 ---
 layout: post
 mathjax: true
-title: Prediction uncertainty: parametric method
-meta-description: Parametric prediction intervals are produced using normal theory, which are different to the confidence intervals. As examples we consider the classical linear regression model with additive noise and show that the intervals work as intended in that case. However, as soon as we start to overfit the intervals get too narrow.
+title: Parametric prediction intervals
+meta-description: Parametric prediction intervals are produced for machine learning models using normal theory, which are different to the confidence intervals. As examples we consider the classical linear regression model with additive noise and show that the intervals work as intended in that case. However, as soon as we start to overfit the intervals get too narrow.
 ---
 
-One aspect of predictive modelling that does not seem to attract much attention is quantifying the *uncertainty* of our models' predictions. In classification tasks we can *partially* remedy this by outputting conditional probabilities rather than boolean values, but what if the model is outputting 52%? Is that a clear-cut positive outcome? When it comes to regression tasks it is even worse, as we simply output a number with no uncertainty attached to it. As we saw with [confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/), we can compute these intervals both parametrically using normal theory and unparametrically using bootstrapping methods.
+One aspect of machine learning that does not seem to attract much attention is quantifying the *uncertainty* of our models' predictions. In classification tasks we can *partially* remedy this by outputting conditional probabilities rather than boolean values, but what if the model is outputting 52%? Is that a clear-cut positive outcome? When it comes to regression tasks it is even worse, as we simply output a number with no uncertainty attached to it. As we saw with [confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/), we can compute these intervals both parametrically using normal theory and unparametrically using bootstrapping methods.
 
 This post is part of my series on quantifying uncertainty:
   1. [Confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/)
