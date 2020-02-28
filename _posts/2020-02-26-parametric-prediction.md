@@ -1,7 +1,7 @@
 ---
 layout: post
 mathjax: true
-title: Evaluating predictions
+title: Prediction uncertainty: parametric method
 meta-description: Parametric prediction intervals are produced using normal theory, which are different to the confidence intervals. As examples we consider the classical linear regression model with additive noise and show that the intervals work as intended in that case. However, as soon as we start to overfit the intervals get too narrow.
 ---
 
