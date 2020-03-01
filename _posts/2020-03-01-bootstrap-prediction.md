@@ -19,21 +19,17 @@ To enable the authors of the paper to prove that the prediction intervals are va
 $$ y(x) = \psi(x) + \varepsilon(x), $$
 
 where $\psi\colon\mathbb R^d\to\mathbb R$ is the "main model function" and $\varepsilon\colon\mathbb R^d\to\mathbb R$ is a noise function. These will satisfy that
-\begin{enumerate}
-  \item $\psi$ should be **deterministic**, meaning that is has no random elements;
-  \item $\psi$ is "sufficiently smooth";
-  \item $\varepsilon(x)$ are iid for all $x\in\mathbb R^d$, with mean $0$ and finite variance.
-\end{enumerate}
+  1. \item $\psi$ should be **deterministic**, meaning that is has no random elements;
+  2. \item $\psi$ is "sufficiently smooth";
+  3. $\varepsilon(x)$ are iid for all $x\in\mathbb R^d$, with mean $0$ and finite variance.
 
 For a precise definition of "sufficiently smooth" check out the paper, but we note that a sufficient condition for satisfying this is to be [continuously differentiable](https://en.wikipedia.org/wiki/Differentiable_function#Differentiability_classes).
 
 On top of the true model we of course also have our model estimate $\hat y_n\colon\mathbb R^d\to\mathbb R$, which has been trained on a sample of size $n$. We also assume a couple of things about this model:
-\begin{enumerate}
-  \item $\hat y_n$ is deterministic;
-  \item $\hat y_n$ is continuous;
-  \item $\hat y_n$ converges pointwise to some $\hat y\colon\mathbb R^d\to\mathbb R$ as $n\to\infty$;
-  \item $\mathbb E[\hat y_n(x)-\psi(x)]^2\to 0$ as $n\to\infty$ for every $x\in\mathbb R^d$.
-\end{enumerate}
+  1. $\hat y_n$ is deterministic;
+  2. $\hat y_n$ is continuous;
+  3. $\hat y_n$ converges pointwise to some $\hat y\colon\mathbb R^d\to\mathbb R$ as $n\to\infty$;
+  4. $\mathbb E[\hat y_n(x)-\psi(x)]^2\to 0$ as $n\to\infty$ for every $x\in\mathbb R^d$.
 
 Most notable is assumption $(4)$, stating that our model estimate $\hat y_n$ will estimate the true model $\psi$ *perfectly* as we gather more data. In other words, we're essentially assuming that we can get *zero training error*. This is fine for most unregularised models (not all though, with linear regression being an example), but as soon as we start regularising then this won't hold anymore.
 
