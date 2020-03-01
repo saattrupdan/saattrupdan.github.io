@@ -35,7 +35,7 @@ Most notable is assumption $(4)$, stating that our model estimate $\hat y_n$ wil
 
 We don't even have to assume $(4)$, if we instead merely assume that
 
-$$ \eta(x):=\lim_{n\to\infty}\mathbb E[(\hat y_n(x)-\psi(x))^2] \tag*($\dagger$) $$
+$$ \eta(x):=\lim_{n\to\infty}\mathbb E[(\hat y_n(x)-\psi(x))^2] \tag*{$\dagger$} $$
 
 exists for every $x\in\mathbb R^d$. This would then corresponds to the **bias** of the model, and $(4)$ would postulate that the model has no bias at all.
 
