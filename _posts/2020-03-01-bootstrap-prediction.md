@@ -14,26 +14,22 @@ This post is part of my series on quantifying uncertainty:
 
 
 ## The setup
-To enable the authors of the paper to prove that the prediction intervals are valid, they need to make some assumptions on both the true data distribution and our predictive model. Let's say that we're working with a $d$-dimensional feature space and that we only have a single response variable. We will then assume that the true model $y\colon\mathbb R^d\to\mathbb R$ is of the form
+To prove that the prediction intervals are valid the authors made some assumptions on both the true data distribution and our predictive model. Let's say that we're working with a $d$-dimensional feature space and that we only have a single response variable. We will then assume that the true model $y\colon\mathbb R^d\to\mathbb R$ is of the form
 
 $$ y(x) = \psi(x) + \varepsilon(x), $$
 
 where $\psi\colon\mathbb R^d\to\mathbb R$ is the "main model function" and $\varepsilon\colon\mathbb R^d\to\mathbb R$ is a noise function. These will satisfy that
   1. $\psi$ should be **deterministic**, meaning that is has no random elements;
   2. $\psi$ is "sufficiently smooth";
-  3. $\varepsilon(x)$ are iid for all $x\in\mathbb R^d$, with mean $0$ and finite variance.
+  3. $\varepsilon(x)$ are iid for all $x\in\mathbb R^d$.
 
-For a precise definition of "sufficiently smooth" check out the paper, but we note that a sufficient condition for satisfying this is to be [continuously differentiable](https://en.wikipedia.org/wiki/Differentiable_function#Differentiability_classes).
-
-On top of the true model we of course also have our model estimate $\hat y_n\colon\mathbb R^d\to\mathbb R$, which has been trained on a sample of size $n$. We also assume a couple of things about this model:
+For a precise definition of "sufficiently smooth" check out the paper, but we note that a sufficient condition for satisfying this is to be [continuously differentiable](https://en.wikipedia.org/wiki/Differentiable_function#Differentiability_classes). On top of the true model we of course also have our model estimate $\hat y_n\colon\mathbb R^d\to\mathbb R$, which has been trained on a training sample of size $n$. We assume a couple of things about this model:
   1. $\hat y_n$ is deterministic;
   2. $\hat y_n$ is continuous;
   3. $\hat y_n$ converges pointwise to some $\hat y\colon\mathbb R^d\to\mathbb R$ as $n\to\infty$;
   4. $\mathbb E[\hat y_n(x)-\psi(x)]^2\to 0$ as $n\to\infty$ for every $x\in\mathbb R^d$.
 
-Most notable is assumption $(4)$, stating that our model estimate $\hat y_n$ will estimate the true model $\psi$ *perfectly* as we gather more data. In other words, we're essentially assuming that we can get *zero training error*. This is fine for most unregularised models (not all though, with linear regression being an example), but as soon as we start regularising then this won't hold anymore.
-
-We don't even have to assume $(4)$, if we instead merely assume that
+Most notable is assumption $(4)$, stating that our model estimate $\hat y_n$ will estimate the true model $\psi$ *perfectly* as we gather more data. In other words, we're essentially assuming that we can get *zero training error*. This is fine for most unregularised models (not all though, with linear regression being an example), but as soon as we start regularising then this won't hold anymore. We can avoid assuming $(4)$ if we instead merely assume that
 
 $$ \eta(x):=\lim_{n\to\infty}\mathbb E[(\hat y_n(x)-\psi(x))^2] \tag*{$(\dagger)$} $$
 
