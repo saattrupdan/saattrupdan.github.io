@@ -76,7 +76,7 @@ which is equal to $0$ if no overfitting is taking place and $1$ if the overfitti
 
 $$ o_i := (1 - \hat w)\times \text{train_error} + \hat w\times\text{val_error}. $$
 
-In practice, computing $\hat\gamma$ can be quite computationally expensive if $n$ is large, so instead we will estimate this by only considering a random permutation of the $y(x_i)$'s and the $\hat y(x_j)$'s.
+In practice, computing $\hat\gamma$ can be quite computationally expensive if $n$ is large, so instead I chose to estimate this by only considering a random permutation of the $y(x_i)$'s and the $\hat y(x_j)$'s.
 
 
 ## Prediction interval implementation
