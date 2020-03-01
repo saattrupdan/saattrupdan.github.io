@@ -66,7 +66,7 @@ $$ \mathbb E_b[\text{val_error}_{b,i}] \approx \eta(x_i) + \eta_n(x_i) + \vareps
 
 giving us an estimate of the sum of the sample noise and the bias. This would work equally well asymptotically if we replaced the validation errors with the training errors, so we have to decide which one to choose. It turns out that the training errors will usually be too small as we tend to overfit, so we have to rely on the validation errors as well. The validation errors will be slightly too large, as a bootstrap sample only contains roughly 2/3 of the training data on average, meaning that the predictions will be artificially worsened.
 
-This iisue is also pointed out in Section 7.11 in the "machine learning bible", [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and as a comprimise betweeen the training- and validation errors they propose the following "$.632+$ bootstrap estimate". We start by defining the **no-information error rate** as
+This issue is also pointed out in Section 7.11 in the "machine learning bible", [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and as a comprimise betweeen the training- and validation errors they propose the following "$.632+$ bootstrap estimate". We start by defining the **no-information error rate** as
 
 $$ \hat\gamma := \frac{1}{n^2}\sum_{i = 1}^n\sum_{j = 1}^n (y(x_i) - \hat y(x_j))^2, $$
 
