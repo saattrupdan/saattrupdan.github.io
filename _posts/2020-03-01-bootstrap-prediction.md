@@ -120,8 +120,9 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
     train_idxs = np.random.choice(range(n), size = n, replace = True)
     val_idxs = np.array([idx for idx in range(n) if idx not in train_idxs])
     model.fit(X_train[train_idxs, :], y_train[train_idxs])
+    preds = model.predict(x_train[val_idxs])
+    val_residuals.append(y_train[val_idxs] - preds)
     bootstrap_preds[b] = model.predict(x0)
-    val_residuals.append(y_train[val_idxs] - model.predict(x_train[val_idxs]))
   bootstrap_preds -= np.mean(bootstrap_preds)
   val_residuals = np.concatenate(val_residuals)
 
