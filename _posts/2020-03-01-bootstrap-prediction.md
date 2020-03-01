@@ -46,7 +46,7 @@ $$ y_0 := y(x_0) = \psi(x_0) + \varepsilon(x_0) = \hat y_n(x_0) + \eta(x_0) + \e
 
 where we define $\eta_n\colon\mathbb R^d\to\mathbb R$ as $\eta_n(x) := \psi(x) - \hat y_n(x) - \eta(x_0)$. This neatly splits the noise around our prediction $\hat y_n(x_0)$ into the **model bias** $\eta(x_0)$, **model variance noise** $\eta_n(x_0)$ and the **sample noise** $\varepsilon(x_0)$. We therefore need to estimate the uncertainty of both types of noise when we're computing our prediction intervals.
 
-### Model variance noise
+### Noise #1: Model variance
 Let's start by seeing how the authors estimate the model error. Here we're bootstrapping our sample $B\gg 0$ many times, fitting our model on each of them and then generating bootstrapped predictions $\bar y_{b,n}(x_0)$ for every $b < B$. We will estimate the mean $\mu(x_0)$ of the distribution of $\hat y(x_0)$ by the bootstrap estimate
 
 $$ \hat\mu_n(x_0) := \frac{1}{B}\sum_{b=1}^B\bar y_{b,n}(x_0). $$
@@ -57,7 +57,7 @@ $$ \mathbb E[m_b] = \mathbb E[\hat\mu_n(x_0)] - \mathbb E[\bar y_{b,n}(x_0)] \to
 
 giving us our estimate of the model variance noise.
 
-### Sample noise and bias
+### Noise #2: Sampling and bias
 Next up, we want to estimate the bias $\eta(x_0)$ and the sample noise $\varepsilon(x_0)$. As I mentioned above, in the paper they're assuming that the sample noise terms are identically distributed, which means that they can estimate them using the training residuals $y_i(x_i) - \hat y(x_i)$. In practice however, the sample noise for the training set and the test set would follow very different distributions if we're overfitting, so we'll instead want to use *bootstrapped validation* residuals. With $\bar y_{b,n}$ being the bootstrapped models as above, we define the bootstrap validation residuals 
 
 $$ \text{val_error}_{b, i} := y(x_i) - \bar y_{b, n}(x_i) $$
