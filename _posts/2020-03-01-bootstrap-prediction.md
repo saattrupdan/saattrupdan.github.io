@@ -2,7 +2,7 @@
 layout: post
 mathjax: true
 title: Bootstrapping prediction intervals
-meta-description: 
+meta-description: Produce prediction intervals for nearly any machine learning model, using bootstrapping. This is based on prediction intervals introduced in Kuma and Srivastava (2012), and takes into account both sample noise, model variance noise and model bias. We provide several simulations where we compare it to the parametric prediction intervals computed via normal theory.
 ---
 
 Continuing from [where we left off](https://saattrupdan.github.io/2020-02-26-parametric-prediction/), in this post I will discuss a general way of producing accurate prediction intervals for all machine learning models that are in use today. The algorithm for producing these intervals uses [bootstrapping](https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29) and was introduced in [Kumar and Srivastava (2012)](https://ntrs.nasa.gov/search.jsp?R=20130014367).
