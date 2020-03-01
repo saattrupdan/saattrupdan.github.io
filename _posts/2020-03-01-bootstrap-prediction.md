@@ -58,9 +58,11 @@ $$ \mathbb E[m_b] = \mathbb E[\hat\mu_n(x_0)] - \mathbb E[\bar y_{b,n}(x_0)] \to
 giving us our estimate of the model variance noise.
 
 ### Sample noise and bias
-Next up, we want to estimate the bias $\eta(x_0)$ and the sample noise $\varepsilon(x_0)$. As I mentioned above, in the paper they're assuming that the sample noise terms are identically distributed, which means that they can estimate them using the training residuals $y_i(x_i) - \hat y(x_i)$. In practice however, the sample noise for the training set and the test set would follow very different distributions if we're overfitting, so we'll instead want to use *bootstrapped validation* residuals. 
+Next up, we want to estimate the bias $\eta(x_0)$ and the sample noise $\varepsilon(x_0)$. As I mentioned above, in the paper they're assuming that the sample noise terms are identically distributed, which means that they can estimate them using the training residuals $y_i(x_i) - \hat y(x_i)$. In practice however, the sample noise for the training set and the test set would follow very different distributions if we're overfitting, so we'll instead want to use *bootstrapped validation* residuals. With $\bar y_{b,n}$ being the bootstrapped models as above, we define the bootstrap validation residuals 
 
-With $\bar y_{b,n}$ being the bootstrapped models as above, we define the bootstrap validation residuals $\text{val_error}_{b, i} := y(x_i) - \bar y_{b, n}(x_i)$ for every $b < B$ and every $i < n$ which is **not** in the $b$'th bootstrap sample. This will then estimate the validation residual $y(x_0) - \hat y(x_0)$. We also calculate the training residuals $\text{train_error}_i := y(x_i) - \hat y(x_i)$ for $i < n$. Note that
+$$ \text{val_error}_{b, i} := y(x_i) - \bar y_{b, n}(x_i) $$
+
+for every $b < B$ and every $i < n$ which is **not** in the $b$'th bootstrap sample. This will then estimate the validation residual $y(x_0) - \hat y(x_0)$. We also calculate the training residuals $\text{train_error}_i := y(x_i) - \hat y(x_i)$ for $i < n$. Note that
 
 $$ \mathbb E_b[\text{val_error}_{b,i}] \approx \eta(x_i) + \eta_n(x_i) + \varepsilon(x_i) \to_{n\to\infty} \eta(x_i) + \varepsilon(x_i), $$
 
