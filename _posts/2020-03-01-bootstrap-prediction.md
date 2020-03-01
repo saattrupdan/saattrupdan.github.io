@@ -158,7 +158,7 @@ Let's see how well the above implementation works in practice. Let's start easy 
 
 ![Plot of linear regression fit with the two prediction intervals, which are basically identical.](/img/prediction-bootstrap-linear.png)
 
-In this case the bootstrap interval has a coverage of 95% and the normal theory one having 94%. If we repeat the experiment we see that they are both fluctuating around 95%, sometimes where the bootstrap interval is more accurate and sometimes the normal theory interval being more accurate. Note that in the bootstrapping case we're *not* assuming normal distributed noise, so if we now let $\varepsilon\sim e^Z$ with $Z\sim\mathcal N(0, 1)$, i.e. we're assuming that it now follows a [log-normal distribution(https://en.wikipedia.org/wiki/Log-normal_distribution) with $\mu=0$ and $\sigma=1$, then the bootstrap intervals take the asymmetry into account.
+In this case the bootstrap interval has a coverage of 95% and the normal theory one having 94%. If we repeat the experiment we see that they are both fluctuating around 95%, sometimes where the bootstrap interval is more accurate and sometimes the normal theory interval being more accurate. Note that in the bootstrapping case we're *not* assuming normal distributed noise, so if we now let $\varepsilon\sim e^Z$ with $Z\sim\mathcal N(0, 1)$, i.e. we're assuming that it now follows a [log-normal distribution](https://en.wikipedia.org/wiki/Log-normal_distribution) with $\mu=0$ and $\sigma=1$, then the bootstrap intervals take the asymmetry into account.
 
 ![Plot of linear regression fit as above, but with log-normal noise. The normal intervals are still symmetrical even though almost all the noise are concentrated on one side of the regression line, resulting in wide intervals. The bootstrap interval follows the asymmetry.](/img/prediction-bootstrap-linear-tree.png)
 
@@ -166,9 +166,7 @@ Here we thus get much smaller intervals, and the coverages in this case are 98% 
 
 ![Plot of decision tree fit on same data as above. The bootstrap interval is fairly wide and the normal theory interval is basically non-existent.](/img/prediction-bootstrap-linear-tree.png)
 
-Here the bootstrap interval has a coverage of 92% and the parametric one having a coverage of 1%. Overall, we see that we've really gained something here!
-
-We can also test it for non-linear data. Here we've set $d=5$, i.e. chosen 5 features, and set
+Here the bootstrap interval has a coverage of 92% and the parametric one having a coverage of 1%. Overall, we see that we've really gained something here! We can also test it for non-linear data. Here we've set $d=5$, i.e. chosen 5 features, and set
 
 $$ y(\vec x) := e^{x_0} + x_1x_2^2 + \log(|x_3+x_4|)) + \varepsilon, $$
 
