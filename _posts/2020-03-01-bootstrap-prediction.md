@@ -104,14 +104,14 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
 
   OUTPUT
     A triple (`lower`, `pred`, `upper`) with `pred` being the prediction of 
-    the model and `lower` and `upper` constituting the lower- and upper bounds
-    for the prediction interval around `pred`, respectively. '''
+    the model and `lower` and `upper` constituting the lower- and upper 
+    bounds for the prediction interval around `pred`, respectively. '''
 
   # Number of training samples
   n = X_train.shape[0]
 
-  # The authors choose the number of bootstrap samples as the square root of 
-  # the number of samples
+  # The authors choose the number of bootstrap samples as the square root 
+  # of the number of samples
   nbootstraps = np.sqrt(n).astype(int)
 
   # Compute the m_i's and the validation residuals
