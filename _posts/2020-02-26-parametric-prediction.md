@@ -10,7 +10,7 @@ One aspect of machine learning that does not seem to attract much attention is q
 This post is part of my series on quantifying uncertainty:
   1. [Confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/)
   2. Parametric prediction intervals
-  3. *Bootstrap prediction intervals (TBA)*
+  3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
 
 Assuming we have a [univariate](https://en.wikipedia.org/wiki/Univariate) predictive model $\mu\colon\mathbb R^n\to\mathbb R$ trained on training data $\\\{(x_i,y_i)\in\mathbb R^{n+1}\mid i < n\\\}$, an **$\alpha$-prediction interval** for $\alpha\in(0,1)$ associated to a new sample $x_0$ is an interval $(a,b)\subset\mathbb R$ such that, if we were to continue sampling new training data, fit our model to the samples and produce new predictions for $x_0$, then the true value $y_0$ will land within $(100 * \alpha)$% of the intervals.
 

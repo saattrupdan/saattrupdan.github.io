@@ -10,7 +10,7 @@ This post will be the first post where I'm delving into quantifying uncertainty 
 This post is part of my series on quantifying uncertainty:
   1. Confidence intervals
   2. [Parametric prediction intervals](https://saattrupdan.github.io/2020-02-26-parametric-prediction/)
-  3. *Bootstrap prediction intervals (TBA)*
+  3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
 
 ## What is a confidence interval?
 
