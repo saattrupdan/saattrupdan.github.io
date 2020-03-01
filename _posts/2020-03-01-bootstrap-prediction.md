@@ -35,7 +35,7 @@ Most notable is assumption $(4)$, stating that our model estimate $\hat y_n$ wil
 
 We don't even have to assume $(4)$, if we instead merely assume that
 
-$$ \eta(x):=\lim_{n\to\infty}\mathbb E[(\hat y_n(x)-\psi(x))^2] \tag*{$\dagger$} $$
+$$ \eta(x):=\lim_{n\to\infty}\mathbb E[(\hat y_n(x)-\psi(x))^2] \tag*{$(\dagger)$} $$
 
 exists for every $x\in\mathbb R^d$. This would then corresponds to the **bias** of the model, and $(4)$ would postulate that the model has no bias at all.
 
@@ -53,16 +53,16 @@ $$ \hat\mu_n(x_0) := \frac{1}{B}\sum_{b=1}^B\bar y_{b,n}(x_0). $$
 
 We can thus center the bootstrapped predictions as $m_b := \hat\mu_n(x_0) - \bar y_{b,n}(x_0)$. Now note that since we're assuming $(\dagger)$ we get that
 
-$$ \mathbb E[m_b] = \mathbb E[\hat\mu_n(x_0)] - \mathbb E[\bar y_{b,n}(x_0)] \longrightarrow_{b\to\infty} \mathbb E[\psi(x_0) - \eta(x_0)] - \mathbb E[\hat y_n(x_0)] = \mathbb E[\eta_n(x_0)], $$
+$$ \mathbb E[m_b] = \mathbb E[\hat\mu_n(x_0)] - \mathbb E[\bar y_{b,n}(x_0)] \to_{b\to\infty} \mathbb E[\psi(x_0) - \eta(x_0)] - \mathbb E[\hat y_n(x_0)] = \mathbb E[\eta_n(x_0)], $$
 
 giving us our estimate of the model variance noise.
 
 ### Sample noise and bias
 Next up, we want to estimate the bias $\eta(x_0)$ and the sample noise $\varepsilon(x_0)$. As I mentioned above, in the paper they're assuming that the sample noise terms are identically distributed, which means that they can estimate them using the training residuals $y_i(x_i) - \hat y(x_i)$. In practice however, the sample noise for the training set and the test set would follow very different distributions if we're overfitting, so we'll instead want to use *bootstrapped validation* residuals. 
 
-With $\bar y_{b,n}$ being the bootstrapped models as above, we define the bootstrap validation residuals $\text{val_error}_{b, i} := y(x_i) - \bar y_{b_n}(x_i)$ for every $b < B$ and every $i < n$ which is **not** in the $b$'th bootstrap sample. This will then estimate the validation residual $y(x_0) - \hat y(x_0)$. We also calculate the training residuals $\text{train_error}_i := y(x_i) - \hat y(x_i)$ for $i < n$. Note that
+With $\bar y_{b,n}$ being the bootstrapped models as above, we define the bootstrap validation residuals $\text{val_error}_{b, i} := y(x_i) - \bar y_{b,n}(x_i)$ for every $b < B$ and every $i < n$ which is **not** in the $b$'th bootstrap sample. This will then estimate the validation residual $y(x_0) - \hat y(x_0)$. We also calculate the training residuals $\text{train_error}_i := y(x_i) - \hat y(x_i)$ for $i < n$. Note that
 
-$$ \mathbb E_b[\text{val_error}_{b,i}] \approx \eta(x_i) + \eta_n(x_i) + \varepsilon(x_i) \longrightarrow_{n\to\infty} \eta(x_i) + \varepsilon(x_i), $$
+$$ \mathbb E_b[\text{val_error}_{b,i}] \approx \eta(x_i) + \eta_n(x_i) + \varepsilon(x_i) \to_{n\to\infty} \eta(x_i) + \varepsilon(x_i), $$
 
 giving us an estimate of the sum of the sample noise and the bias. This would work equally well asymptotically if we replaced the validation errors with the training errors, so we have to decide which one to choose. It turns out that the training errors will usually be too small as we tend to overfit, so we have to rely on the validation errors as well. The validation errors will be slightly too large, as a bootstrap sample only contains roughly 2/3 of the training data on average, meaning that the predictions will be artificially worsened.
 
