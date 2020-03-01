@@ -105,8 +105,8 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
       A new data point, of shape (n_features,)
 
   OUTPUT
-    A triple (`lower`, `pred`, `upper`) with `pred` being the prediction of 
-    the model and `lower` and `upper` constituting the lower- and upper 
+    A triple (`lower`, `pred`, `upper`) with `pred` being the prediction 
+    of the model and `lower` and `upper` constituting the lower- and upper 
     bounds for the prediction interval around `pred`, respectively. '''
 
   # Number of training samples
@@ -142,8 +142,8 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
   no_information_error = np.mean(np.abs(np.random.permutation(y_train) - \
     np.random.permutation(preds)))
   generalisation = np.abs(val_residuals - train_residuals)
-  no_information_value = np.abs(no_information_error - train_residuals)
-  relative_overfitting_rate = np.mean(generalisation / no_information_value)
+  no_information_val = np.abs(no_information_error - train_residuals)
+  relative_overfitting_rate = np.mean(generalisation / no_information_val)
   weight = .632 / (1 - .368 * relative_overfitting_rate)
   residuals = (1 - weight) * train_residuals + weight * val_residuals
 
