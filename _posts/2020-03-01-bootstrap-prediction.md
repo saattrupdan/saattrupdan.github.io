@@ -99,6 +99,8 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
       A numpy array containing the training target data
     x0
       A new data point, of shape (n_features,)
+    alpha: float = 0.05
+      The prediction uncertainty
 
   OUTPUT
     A triple (`lower`, `pred`, `upper`) with `pred` being the prediction 
