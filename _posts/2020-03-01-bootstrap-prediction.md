@@ -19,8 +19,8 @@ To enable the authors of the paper to prove that the prediction intervals are va
 $$ y(x) = \psi(x) + \varepsilon(x), $$
 
 where $\psi\colon\mathbb R^d\to\mathbb R$ is the "main model function" and $\varepsilon\colon\mathbb R^d\to\mathbb R$ is a noise function. These will satisfy that
-  1. \item $\psi$ should be **deterministic**, meaning that is has no random elements;
-  2. \item $\psi$ is "sufficiently smooth";
+  1. $\psi$ should be **deterministic**, meaning that is has no random elements;
+  2. $\psi$ is "sufficiently smooth";
   3. $\varepsilon(x)$ are iid for all $x\in\mathbb R^d$, with mean $0$ and finite variance.
 
 For a precise definition of "sufficiently smooth" check out the paper, but we note that a sufficient condition for satisfying this is to be [continuously differentiable](https://en.wikipedia.org/wiki/Differentiable_function#Differentiability_classes).
@@ -66,7 +66,7 @@ $$ \mathbb E_b[\text{val_error}_{b,i}] \approx \eta(x_i) + \eta_n(x_i) + \vareps
 
 giving us an estimate of the sum of the sample noise and the bias. This would work equally well asymptotically if we replaced the validation errors with the training errors, so we have to decide which one to choose. It turns out that the training errors will usually be too small as we tend to overfit, so we have to rely on the validation errors as well. The validation errors will be slightly too large, as a bootstrap sample only contains roughly 2/3 of the training data on average, meaning that the predictions will be artificially worsened.
 
-This iisue is also pointed out in Section 7.11 in the "machine learning bible", [the Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and as a comprimise betweeen the training- and validation errors they propose the following "$.632+$ bootstrap estimate". We start by defining the **no-information error rate** as
+This iisue is also pointed out in Section 7.11 in the "machine learning bible", [Elements of Statistical Learning](https://web.stanford.edu/~hastie/ElemStatLearn/), and as a comprimise betweeen the training- and validation errors they propose the following "$.632+$ bootstrap estimate". We start by defining the **no-information error rate** as
 
 $$ \hat\gamma := \frac{1}{n^2}\sum_{i = 1}^n\sum_{j = 1}^n (y(x_i) - \hat y(x_j))^2, $$
 
@@ -76,7 +76,7 @@ $$ \hat R := \frac{\text{val_error} - \text{train_error}}{\hat\gamma - \text{tra
 
 which is equal to $0$ if no overfitting is taking place and $1$ if the overfitting equals the no-information value $\hat\gamma - \text{train_error}$. We then define the weight $\hat w := \tfrac{.632}{1 - .368 \hat R}$, varying from $.632$ in case of no overfitting (in which case this estimate is equal to the standard $.632$ estimate) to $1$ if there is severe overfitting. Our $.632+$ bootstrap estimate of the distribution of $\varepsilon(x_0) + \eta(x_0)$ is then
 
-$$ o_i := (1 - \hat w)\text{train_error} + \hat w\text{val_error}. $$
+$$ o_i := (1 - \hat w)\times \text{train_error} + \hat w\times\text{val_error}. $$
 
 In practice, computing $\hat\gamma$ can be quite computationally expensive if $n$ is large, so instead we will estimate this by only considering a random permutation of the $y(x_i)$'s and the $\hat y(x_j)$'s.
 
@@ -84,7 +84,7 @@ In practice, computing $\hat\gamma$ can be quite computationally expensive if $n
 ## Prediction interval implementation
 The algorithm producing the intervals are now quite simple given the above reasoning: we simply have to compute the set
 
-$$ C := \\\{m_b + o_i \mid b < B, i < n\\\}, $$
+$$ C := \{m_b + o_i \mid b < B, i < n\}, $$
 
 which we showed above were estimating the distribution of $\eta(x_0)+\eta_n(x_0)+\varepsilon(x_0)$, which constitutes all the noise around $\hat y_n(x_0)$. From $C$ we can then let our interval be given as the predicted value $\hat y_n(x_0)$ offset by the $(100 * \alpha)$% and $(100 * (1 - \alpha))$% percentiles. Here is how we can implement all of this in Python:
 
@@ -95,23 +95,23 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
   INPUT
     model
       A predictive model with `fit` and `predict` methods
-    X_train
-      A numpy array containing the training input data, of shape (n_samples, n_features)
-    y_train
-      A numpy array containing the training target data, of shape (n_samples,)
+    X_train: numpy array of shape (n_samples, n_features)
+      A numpy array containing the training input data
+    y_train: numpy array of shape (n_samples,)
+      A numpy array containing the training target data
     x0
       A new data point, of shape (n_features,)
 
   OUTPUT
-    A triple (`lower`, `pred`, `upper`) with `pred` being the prediction of the model and
-    `lower` and `upper` constituting the lower- and upper bounds for the prediction
-    interval around `pred`, respectively. '''
+    A triple (`lower`, `pred`, `upper`) with `pred` being the prediction of 
+    the model and `lower` and `upper` constituting the lower- and upper bounds
+    for the prediction interval around `pred`, respectively. '''
 
   # Number of training samples
   n = X_train.shape[0]
 
-  # The authors choose the number of bootstrap samples as the square root of the
-  # number of samples
+  # The authors choose the number of bootstrap samples as the square root of 
+  # the number of samples
   nbootstraps = np.sqrt(n).astype(int)
 
   # Compute the m_i's and the validation residuals
@@ -136,7 +136,8 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
   train_residuals = np.percentile(train_residuals, q = np.arange(100))
 
   # Compute the .632+ bootstrap estimate for the sample noise and bias
-  no_information_error = np.mean(np.abs(np.random.permutation(y_train) - np.random.permutation(preds)))
+  no_information_error = np.mean(np.abs(np.random.permutation(y_train) - \
+    np.random.permutation(preds)))
   generalisation = np.abs(val_residuals - train_residuals)
   no_information_value = np.abs(no_information_error - train_residuals)
   relative_overfitting_rate = np.mean(generalisation / no_information_value)
@@ -145,7 +146,8 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
 
   # Construct the C set and get the percentiles
   C = np.array([m + o for m in bootstrap_preds for o in residuals])
-  percentiles = np.percentile(C, q = [100 * alpha / 2, 100 * (1 - alpha / 2)])
+  qs = [100 * alpha / 2, 100 * (1 - alpha / 2)]
+  percentiles = np.percentile(C, q = qs)
   
   return percentiles[0], model.predict(x0), percentiles[1]
 ```
