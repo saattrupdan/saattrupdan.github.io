@@ -62,4 +62,15 @@ In short, I'd personally use quantile regression when I'm dealing with heterosce
 
 
 ## Simulations
-asd
+Comparison between quantile regression prediction intervals and bootstrap intervals.
+  1. Linear regression on.. 
+    1. Linear data with normal noise
+    2. Linear data with heteroscedastic normal noise
+    3. Linear data with asymmetric noise
+    4. Non-linear data?
+  2. Overfitting case: decision tree
+  3. Neural network
+
+
+## Variations
+Smooth quantile regression, more?
