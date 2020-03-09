@@ -116,8 +116,6 @@ The loss function then computes the mean of the three quantile losses: the two q
 class QuantileLoss(nn.Module):
     def __init__(self, alpha: float):
         super().__init__()
-        if not (alpha < 1 and alpha > 0): 
-          raise RuntimeError('Alpha has to be within the interval (0, 1).')
         self.lower, self.upper = ((1 - alpha) / 2, (1 + alpha) / 2)
         
     def forward(self, preds, target):
