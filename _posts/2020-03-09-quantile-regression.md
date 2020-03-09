@@ -62,7 +62,7 @@ In short, I'd personally use quantile regression when I'm dealing with heterosce
 
 
 ## Implementations and simulations
-Let's start with a simple linear example, where we sample $n=1000$ training data points $X\sim\textsf{Unif}(0,5)$ and define our response variable as $Y = 5X - 5 + \varepsilon$ with $\varepsilon\sim\mathcal N(0,1)$. For the testing data I've chosen $100$ equidistributed points in the interval $[0,5]$. Implementing linear quantile regression is very simple using the powerful [statsmodels](https://www.statsmodels.org/stable/index.html) module:
+Let's start with a simple linear example, where we sample $n=1000$ training data points $X\sim\textsf{Unif}(0,5)$ and define our response variable as $Y = 5X - 5 + \varepsilon$ with $\varepsilon\sim\mathcal N(0,1)$. For the testing data I've chosen $100$ equidistributed points in the interval $[0,5]$. Implementing linear quantile regression is simple using the [statsmodels](https://www.statsmodels.org/stable/index.html) module:
 
 ```python
 from statsmodels.regression.quantile_regression import QuantReg
