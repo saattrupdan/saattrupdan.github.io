@@ -37,7 +37,7 @@ $$
 \begin{align}
   \mathbb E[\rho_q(Y-\hat y)] &= (q-1)\int_{-\infty}^{\hat y}f(t)(t-\hat y)dt + q\int_{\hat y}^\infty f(t)(t-\hat y)dt \\
   &= q\int f(t)(t-\hat y)dt - \int_{-\infty}^{\hat y}f(t)(t-\hat y)dt \\
-  &= q\int f(t)tdt - \hat yq\int_{\mathbb R}f(t)dt - \int_{-\infty}^{\hat y}f(t)tdt + \hat y\int_{-\infty}^{\hat y}f(t)dt \\
+  &= q\int f(t)tdt - \hat yq\int f(t)dt - \int_{-\infty}^{\hat y}f(t)tdt + \hat y\int_{-\infty}^{\hat y}f(t)dt \\
   &= q\int f(t)tdt - \hat yq - \int_{-\infty}^{\hat y}f(t)tdt + \hat yF(\hat y)
 \end{align}
 $$
@@ -54,9 +54,9 @@ A clear strength of quantile regression, compared to the [bootstrap approaches t
 
 A very neat side effect of quantile regression is that it can take of [heteroscedasticity](https://en.wikipedia.org/wiki/Heteroscedasticity) out of the box, a feature that the bootstrap approaches failed to achieve (see the simulations below). Attempts have been made to make the bootstrap approach account for this, e.g. using the [wild bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29#Wild_bootstrap), but this is unsuitable for new predictions as it requires knowledge of the residuals.
 
-One notable weakness of the quantile prediction intervals is that **the model is quantifying its own uncertainty**. This means that we are reliant on the model being able to correctly fit the data, so in a case where the conditional means of the data follow a linear trend but the quantiles don't, we would then have to choose a non-linear model to get correct prediction intervals. 
+One notable weakness of the quantile prediction intervals is that **the model is quantifying its own uncertainty**. This means that we are reliant on the model being able to correctly fit the data, so in a case where the conditional means of the data follow a linear trend but the quantiles don't, we would then have to choose a non-linear model to get correct prediction intervals. Further, if we're overfitting the training data then the prediction intervals will also become overfitted. 
 
-Further, if we're overfitting the training data then the prediction intervals will also become overfitted. We can remedy this by creating [confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/) around the quantile predictions, but then we're back at either the homoscedasticity scenario if we choose to create parametric confidence intervals, or otherwise we have to bootstrap again, losing what I think is the primary benefit of the quantile approach for prediction intervals.
+We can remedy the latter by creating [confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/) around the quantile predictions, but then we're back at either the homoscedasticity scenario if we choose to create parametric confidence intervals, or otherwise we have to bootstrap again, losing what I think is the primary benefit of the quantile approach for prediction intervals.
 
 In short, I'd personally use quantile regression when I'm dealing with heteroscedastic data (with confidence intervals included if bootstrapping is feasible), or when I'm dealing with an accurate predictive model that takes a long time to train, such as neural nets.
 
