@@ -84,7 +84,7 @@ for q in [0.05, 0.5, 0.95]:
 prediction_intervals = np.stack(preds, axis = 1)
 ```
 
-If we plot the residuals and the intervals we get the following, with 87% covering! This is all predicted in one shot, taking ~0.08 seconds, compared to a bootstrap approach with 100 resamples which takes ~0.31 seconds.
+If we plot the residuals and the intervals we get the following, with 87% covering! This is all predicted in one shot, taking only ~0.08 seconds, compared to a bootstrap approach with only 100 resamples taking roughly four times as long.
 
 ![Plot of quantile linear regression prediction interval, where the interval encloses most of the residuals](/img/quantile-linear-regression.png)
 
