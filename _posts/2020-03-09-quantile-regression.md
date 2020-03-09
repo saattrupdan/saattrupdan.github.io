@@ -58,7 +58,7 @@ One notable weakness of the quantile prediction intervals is that **the model is
 
 We can remedy the latter by creating [confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/) around the quantile predictions, but then we're back at either the homoscedasticity scenario if we choose to create parametric confidence intervals, or otherwise we have to bootstrap again, losing what I think is the primary benefit of the quantile approach for prediction intervals.
 
-In short, I'd personally use quantile regression when I'm dealing with heteroscedastic data (with confidence intervals included if bootstrapping is feasible), or when I'm dealing with an accurate predictive model that takes a long time to train, such as neural nets.
+In short, I'd personally use quantile regression when dealing with heteroscedastic data (with confidence intervals included if bootstrapping is feasible), or when dealing with an accurate predictive model that takes a long time to train, such as neural nets.
 
 
 ## Implementations and simulations
