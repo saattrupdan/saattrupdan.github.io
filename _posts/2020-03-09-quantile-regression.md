@@ -140,7 +140,7 @@ Here the quantile intervals have a coverage of 88% and 87%, and the bootstrapped
 
 To see what happens in the non-linear case, we now take as explanatory variables $\vec X=(X_1, X_2, X_3, X_4, X_5)$ following a multivariate normal distribution with means $\mu_i\sim\textsf{Unif}(-1, 1)$ and variances $\sigma_i^2\sim\textsf{Unif}(-2, 2)$, and define our response variable as
 
-$$ Y := \exp(X_1) + X_2X_3 ** 2 + \log(|X_4 + X_5|) + \varepsilon $$
+$$ Y := \exp(X_1) + X_2X_3^2 + \log(|X_4 + X_5|) + \varepsilon $$
 
 with $\varepsilon\sim\mathcal N(0,1)$. We again sample $n=1000$ data points for the training set and for our test set we sample 100 points uniformly from $[-4, 4]^5$. We then get the following, where the $x$-axis is the indices of the 100 test samples.
 
