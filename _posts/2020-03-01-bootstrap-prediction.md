@@ -84,7 +84,7 @@ The algorithm producing the intervals are now quite simple given the above reaso
 
 $$ C := \{m_b + o_i \mid b < B, i < n\}, $$
 
-which we showed above is estimating the distribution of $\eta(x_0)+\eta_n(x_0)+\varepsilon(x_0)$, which constitutes all the noise around $\hat y_n(x_0)$. From $C$ we can then let our interval be given as the predicted value $\hat y_n(x_0)$ offset by the $(100\cdot\tfrac{alpha}{2})$% and $(100\cdot(1 - \tfrac{\alpha}{2}))$% percentiles. Here is how we can implement all of this in Python:
+which we showed above is estimating the distribution of $\eta(x_0)+\eta_n(x_0)+\varepsilon(x_0)$, which constitutes all the noise around $\hat y_n(x_0)$. From $C$ we can then let our interval be given as the predicted value $\hat y_n(x_0)$ offset by the $(100\cdot\tfrac{\alpha}{2})$% and $(100\cdot(1 - \tfrac{\alpha}{2}))$% percentiles. Here is how we can implement all of this in Python:
 
 ```python
 def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
