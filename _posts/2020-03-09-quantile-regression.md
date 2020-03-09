@@ -67,11 +67,11 @@ Let's start with a simple linear example, where we sample $n=1000$ training data
 ```python
 from statsmodels.regression.quantile_regression import QuantReg
 
-# Set up the model - note here that we have to manually add the constant to 
-# the data to fit an intercept, and that `statsmodels` models needs the 
-# training data at initialisation
-constant = np.ones((X_train.shape[0], 1))
-qreg_model = QuantReg(Y_train, np.concatenate([constant, X_train], axis = 1))
+# Set up the model - note here that we have to manually add the constant
+# to the data to fit an intercept, and that `statsmodels` models needs 
+# the training data at initialisation
+cnst = np.ones((X_train.shape[0], 1))
+qreg_model = QuantReg(Y_train, np.concatenate([cnst, X_train], axis = 1))
 
 # Fit the linear quantile regression three times, for the interval 
 # boundaries and the median
