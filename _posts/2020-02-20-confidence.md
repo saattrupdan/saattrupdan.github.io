@@ -11,6 +11,7 @@ This post is part of my series on quantifying uncertainty:
   1. Confidence intervals
   2. [Parametric prediction intervals](https://saattrupdan.github.io/2020-02-26-parametric-prediction/)
   3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
+  4. [Quantile regression](https://saattrupdan.github.io/2020-03-09-quantile-regression/)
 
 ## What is a confidence interval?
 
