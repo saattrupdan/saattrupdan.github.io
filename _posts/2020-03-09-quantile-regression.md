@@ -128,7 +128,7 @@ class QuantileLoss(nn.Module):
         return (lower_loss + median_loss + upper_loss) / 3
 ```
 
-Now, with these tools at hand, I've trained an [MLP](https://en.wikipedia.org/wiki/Multilayer_perceptron) with hidden layers $[256, 256, 256]$ and GELU activations to achieve the following, which is basically the same thing as in the linear case, here with 86% covering.
+Now, with these tools at hand, I've trained an [MLP](https://en.wikipedia.org/wiki/Multilayer_perceptron) with hidden layers $[256, 256, 256]$ and [GELU](https://arxiv.org/abs/1606.08415) activations to achieve the following, which is basically the same thing as in the linear case, here with 86% covering.
 
 ![Plot of quantile MLP prediction interval, where the interval encloses most of the residuals](/img/quantile-linear-mlp.png)
 
