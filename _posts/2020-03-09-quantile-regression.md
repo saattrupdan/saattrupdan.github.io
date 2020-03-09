@@ -31,7 +31,7 @@ We then define the associated **mean quantile loss** as
 
 $$ \textsf{MQL}(y, \hat y) := \frac{1}{n}\sum_{i=1}^n \rho_q(y_i-\hat y_i). $$
 
-To find out what the optimal estimate for this loss function is, we're trying to find $\hat y$ such that
+To find out what the optimal estimate for this loss function is, we're trying to find $\hat y$ that minimises
 
 $$ 
 \begin{align}
