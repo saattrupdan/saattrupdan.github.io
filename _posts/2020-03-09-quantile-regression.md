@@ -138,7 +138,7 @@ To see an example of how the quantile approach deals with heteroscedasticity, le
 
 Here the quantile intervals have a coverage of 88% and 87%, and the bootstrapped intervals cover 88% and 89%. So they both perform roughly as they should, but here the average interval length in the quantile case is ~8.1, which is ~9.9 for the bootstrap intervals. From the plots we see that the quantile intervals capture the actual variance a lot better.
 
-To see what happens in the non-linear case, we now take as explanatory variables $\vec X=(X_1, X_2, X_3, X_4, X_5)$ following a multivariate normal distribution with means $\mu_i\sim\textsf{Unif}(-1, 1)$ and variances $\sigma_i^2\sim\textsf{Unif}(-2, 2)$, and define our response variable as
+To see what happens in the non-linear case, we now take as explanatory variables $\vec X=(X_1, X_2, X_3, X_4, X_5)$ following a multivariate normal distribution with means $\mu_i\sim\textsf{Unif}(-1, 1)$ and covariances $\Sigma_{ij}\sim\textsf{Unif}(-2, 2)$, and define our response variable as
 
 $$ Y := \exp(X_1) + X_2X_3^2 + \log(|X_4 + X_5|) + \varepsilon $$
 
