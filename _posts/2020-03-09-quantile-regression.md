@@ -14,6 +14,7 @@ This post is part of my series on quantifying uncertainty:
   2. [Parametric prediction intervals](https://saattrupdan.github.io/2020-02-26-parametric-prediction/)
   3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
   4. Quantile regression
+  5. [Quantile regression forests](https://saattrupdan.github.io/2020-04-05-quantile-regression-forests/)
 
 
 ## Going beyond the mean
