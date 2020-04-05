@@ -54,17 +54,17 @@ Note one crucial difference between these QRFs and the quantile regression model
 
 Meinshausen shows that the CDF estimate described in the previous section *is* asympotically a consistent estimate, given the following conditions, where $n$ is the size of the training set:
 
-    1. The proportion of values in a leaf, relative to all values, is vanishing as $n\to\infty$. Intuitively, this means that the leaves are roughly evenly populated
-    2. The minimal number of values in a tree node is growing as $n\to\infty$. This means that our tree depth grows slowly ($O(\log(n)$)
-    3. When looking for features at a split, the probability of a feature being chosen is uniformly bounded from below. I.e., we don't "forget" about features
-    4. There's a constant $\gamma\in(0, 0.5]$ such that the number of values in a child node is always at least $\gamma$ times the number of values in the parent node. This roughly means that our branches are always "thick"
-    5. The true CDF of the predictive distribution is [Lipschitz continuous](https://en.wikipedia.org/wiki/Lipschitz_continuity)
+  1. The proportion of values in a leaf, relative to all values, is vanishing as $n\to\infty$. Intuitively, this means that the leaves are roughly evenly populated
+  2. The minimal number of values in a tree node is growing as $n\to\infty$. This means that our tree depth grows slowly ($O(\log(n)$)
+  3. When looking for features at a split, the probability of a feature being chosen is uniformly bounded from below. I.e., we don't "forget" about features
+  4. There's a constant $\gamma\in(0, 0.5]$ such that the number of values in a child node is always at least $\gamma$ times the number of values in the parent node. This roughly means that our branches are always "thick"
+  5. The true CDF of the predictive distribution is [Lipschitz continuous](https://en.wikipedia.org/wiki/Lipschitz_continuity)
 
 Hopefully you will agree that these are not wild assumptions. 
 From these assumptions Meinshausen proved the following, where $F$ is the CDF of the true predictive distribution and $\hat F$ is our estimate as described in the previous section:
 
 > **Theorem (Meinhausen).** Assume the above five conditions hold. Then, for every $x$,
-> $$ \sup_{y\in\mathbb R}|\hat F(y\mid X=x) - F(y\mid X=x)|_ $$
+> $$ \sup_{y\in\mathbb R}|\hat F(y\mid X=x) - F(y\mid X=x)| $$
 > converges in probability to $0$ as $n\longrightarrow\infty$.
 
 This is thus saying that our CDF estimate $\hat F$ *is* an asymptotically consistent estimate. The curious thing is that this even holds for a single tree, as his proof doesn't use the number of trees for anything.
