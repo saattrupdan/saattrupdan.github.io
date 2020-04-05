@@ -105,7 +105,7 @@ We see that it *is* mostly when the intervals are tiny that the samples tend to 
 
 ![Same sorted prediction interval plot but without the bootstrap and with the samples marked if they're outside the intervals. Most of those are in the beginning, when the intervals are really narrow](/img/qrf-1leaf-in-out.png)
 
-A simple solution to this, if we *really* care that much about the "hard" coverage (in most cases in practice we wouldn't) then we could simply uniformly pad the quantile interval by 20 units (rental bike users):
+A simple solution to this, if we *really* care that much about the "hard" coverage (in most cases in practice we wouldn't) then we could simply uniformly pad the quantile interval by 20 units (rental bike users) to achieve a better coverage than the bootstrap intervals:
 
 ![Same plot as the original sorted prediction intervals, but with padding on the quantile intervals. The quantile intervals are still only half as wide as the bootstrap intervals to start out with, and they achieve 94.4% coverage, which is more than the 93.5% coverage of the bootstrap.](/img/qrf-padded.png)
 
