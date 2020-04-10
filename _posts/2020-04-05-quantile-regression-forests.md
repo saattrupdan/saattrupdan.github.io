@@ -5,13 +5,13 @@ title: Quantile regression forests
 meta-description: Quantile regression forests is a way to make a random forest output quantiles and thereby quantify its own uncertainty. This method only requires training the forest once. We compare the QRFs to bootstrap methods on the hourly bike rental data set.
 ---
 
-A random forest is an incredibly useful and versatile tool in a data scientists' toolkit, and is one of the more popular non-deep models that are being used in industry today. 
-If we now want our random forests to also output its uncertainty, it would seem that we are forced to go down the [bootstrapping](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/) route,
-as the [quantile approach](https://saattrupdan.github.io/2020-03-09-quantile-regression/) we saw last time relied on the model learning through gradient descent, which random forests aren't.
+A random forest is an incredibly useful and versatile tool in a data scientist's toolkit, and is one of the more popular non-deep models that are being used in industry today. 
+If we now want our random forests to also output their uncertainty, it would seem that we are forced to go down the [bootstrapping](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/) route,
+as the [quantile approach](https://saattrupdan.github.io/2020-03-09-quantile-regression/) we saw last time relied on the models learning through gradient descent, which random forests aren't.
 
 The bootstrapping would definitely work, but we would be paying a price at inference time. 
 Say I have a random forest consisting of 1,000 trees and I'd like to make 1,000 bootstrapped predictions to form a reasonable prediction interval.
-Naively, to be able to do that we'd have to make a million decision tree predictions _for every_ prediction we'd like from our model, which can cause a delay that the users of the model wouldn't be too happy about.
+Naively, to be able to do that we'd have to make a million decision tree predictions _for every_ prediction we'd like from our model, which can cause a delay that the users of the model might not be too happy about.
 
 In this post I'll describe a surprisingly simple way of tweaking a random forest to enable to it make quantile predictions, which eliminates the need for bootstrapping. This is all from Meinshausen's 2006 paper ["Quantile Regression Forests"](http://www.jmlr.org/papers/volume7/meinshausen06a/meinshausen06a.pdf).
 
@@ -27,11 +27,11 @@ This post is part of my series on quantifying uncertainty:
 
 Let's take a step back and remind ourselves how vanilla random forests work. 
 Random forests are simply a collection of so-called decision trees, where we train each decision tree on a bootstrapped resample of the training data set. 
-A decision tree is basically just a flow chat diagram. Here's an example of one:
+A decision tree is basically just a flow chart diagram. Here's an example of one:
 
 ![A small flow chart diagram, aka a decision tree, to model how cold it will be tomorrow. The leaves each contain a single value.](/img/qrf-decision-tree.jpg)
 
-I won't go into the construction algorithm of decision trees here, as that algorithm is exactly the same in the quantile case; see e.g. Section 9.2 in [Elements of Statistical Learning](https://web.stanford.edu/~hastie/Papers/ESLII.pdf). The rough idea is that we choose the feature and threshold that best separates the target values of the data.
+I won't go into the construction algorithm of decision trees here, as there's nothing new in the quantile case here; see e.g. Section 9.2 in [Elements of Statistical Learning](https://web.stanford.edu/~hastie/Papers/ESLII.pdf) for more information. The rough idea is that we choose the feature and threshold that best separates the target values of the data.
 From such a tree, we can now easily figure out which leaf a given input belongs to, by simply answering the yes/no questions all the way down. Super simple.
 
 A _quantile_ decision tree is different when we focus on what happens after having found the correct leaf.
