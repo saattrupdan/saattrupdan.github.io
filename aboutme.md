@@ -4,7 +4,7 @@ title: About me
 meta-description: Dan Saattrup Nielsen, Mathematician and Data Scientist, based in Copenhagen. Mathematics PhD from the University of Bristol, United Kingdom, have previously worked as an AI Researcher at Barbal Limited, Bristol, as a Data Study Group lead at the Alan Turing Institute, London, and as a software developer at GE Revision, Hvidovre. Was a visiting researcher at Rutgers University in New Jersey.
 ---
 
-I am a data scientist with specialised knowledge of machine learning methods. I enjoy out-of-the-box thinking and coming up with creative solutions to complicated problems. I am incredibly ambitious and love what I am doing, and I tend to take a lot of initiative to new projects and to look at things from new angles.
+I am a data scientist with specialised knowledge of machine learning methods.  I am incredibly ambitious and love what I am doing, and I tend to take a lot of initiative to new projects and to look at things from new angles.
 
 <img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:29%; margin-right:10px">
 
