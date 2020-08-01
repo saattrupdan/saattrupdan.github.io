@@ -16,17 +16,38 @@ Before we dive into the Mathematics of the algorithm, I'd like to start with an 
 
 We then ask ourselves: how much of the web surfer's time will be spent at each individual website? The algorithm in its essence is quite simple: we simply let the person surf around and record how often they visit each node. The fact that this procedure will eventually terminate is then the crucial result that makes the algorithm useful.
 
+[gfx]
+
 
 ## Markov Chains
 
-asd
+The Mathematics around the PageRank algorithm mostly concerns Markov chains, so let's start with a definition.
+
+> **Definition**. A **Markov chain** is a sequence $(X_n)_{n\in 0}^\infty$ of random variables $X_n$ for some *state space* $S\subseteq\mathbb N_0$, such that 
+>   1. (Markov property) $P(X_{n+1} | X_0,\dots,X_n) = P(X_{n+1} | X_n)$; and
+>   2. (Time homogeneity) $P(X_{n+1} = s | X_n = t)$ is independent of $n$, for every $s, t\in S$.
+
+[intuition]
+
+[example]
+
+[homogeneity enables a transition matrix]
+
+> **Definition**. A *stationary distribution* of a Markov chain $(X_n)$ is a discrete distribution $\pi:S\to\mathbb R$ such that $\pi T = \pi$, where $T$ is the transition matrix.
+
+[example]
+
+[theorem of existence of stationary distribution]
 
 
 ## The Algorithm
 
-asd
+[definition of pagerank]
+
+[example]
 
 
 ## Python Implementation
 
-asd
+[implementation using networkx]
+[implementation using neo4j]
