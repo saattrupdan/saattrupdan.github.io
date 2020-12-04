@@ -1,7 +1,7 @@
 ---
 layout: page
 title: About me
-meta-description: Dan Saattrup Nielsen, Mathematician and Data Scientist, based in Copenhagen. Mathematics PhD from the University of Bristol, United Kingdom, have previously worked as an AI Researcher at Barbal Limited, Bristol, as a Data Study Group lead at the Alan Turing Institute, London, and as a software developer at GE Revision, Hvidovre. Was a visiting researcher at Rutgers University in New Jersey.
+meta-description: Dan Saattrup Nielsen, Mathematician and Data Scientist, based in Copenhagen. Mathematics PhD from the University of Bristol, United Kingdom, have previously worked as an AI Researcher at Barbal Limited, Bristol, as a Data Study Group lead at the Alan Turing Institute, London, and as a software developer at GE Revision, Hvidovre. Was a visiting researcher at Rutgers University in New Jersey. Founded the company T-til-T.
 ---
 
 I am a data scientist with specialised knowledge of machine learning methods.  I am incredibly ambitious and love what I am doing, and I tend to take a lot of initiative to new projects and to look at things from new angles.
@@ -9,6 +9,7 @@ I am a data scientist with specialised knowledge of machine learning methods.  I
 <img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:29%; margin-right:10px">
 
 <img src="{{ site.baseurl }}/img/icon-home.png" style="margin:5px; width:3%"> Copenhagen, DK<br>
+<img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2020-: CEO and Founder, T-til-T, DK<br>
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2020-: ML Consultant, Danish Business Authority, DK<br>
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2020: ML Specialist, LYS Technologies, DK<br>
 <img src="{{ site.baseurl }}/img/icon-student.png" style="margin:5px; width:3%"> 2020: PhD in Mathematics, University of Bristol, UK<br>

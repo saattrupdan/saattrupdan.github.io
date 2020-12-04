@@ -10,8 +10,8 @@ meta-description: Personal data science projects by Dan Saattrup Nielsen, involv
 This project aims to classify the category of scientific papers, based on the subject classification on [arxiv.org](https://arxiv.org). Try the live demo here:
 
 <center>
-  <a href="https://saattrupdan.pythonanywhere.com/scholarly">
-    saattrupdan.pythonanywhere.com/scholarly
+  <a href="https://www.ttilt.dk/scholarly">
+    ttilt.dk/scholarly
   </a>
 </center>
 
