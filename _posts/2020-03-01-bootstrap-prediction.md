@@ -13,6 +13,7 @@ This post is part of my series on quantifying uncertainty:
   3. Bootstrap prediction intervals
   4. [Quantile regression](https://saattrupdan.github.io/2020-03-09-quantile-regression/)
   5. [Quantile regression forests](https://saattrupdan.github.io/2020-04-05-quantile-regression-forests/)
+  6. [Doubt](https://saattrupdan.github.io/2021-04-04-doubt/)
 
 
 ## The setup
@@ -56,7 +57,7 @@ $$ \mathbb E[m_b] = \mathbb E[\hat\mu_n(x_0)] - \mathbb E[\bar y_{b,n}(x_0)] \to
 giving us our estimate of the model variance noise.
 
 ### Noise #2: Sampling and bias
-Next up, we want to estimate the bias $\eta(x_0)$ and the sample noise $\varepsilon(x_0)$. With $\bar y_{b,n}$ being the bootstrapped models as above, we define the bootstrap validation residuals 
+Next up, we want to estimate the bias $\eta(x_0)$ and the sample noise $\varepsilon(x_0)$. With $\bar y_{b,n}$ being the bootstrapped models as above, we define the bootstrap validation residuals
 
 $$ \text{val_error}_{b, i} := y(x_i) - \bar y_{b, n}(x_i) $$
 
@@ -105,14 +106,14 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
       The prediction uncertainty
 
   OUTPUT
-    A triple (`lower`, `pred`, `upper`) with `pred` being the prediction 
-    of the model and `lower` and `upper` constituting the lower- and upper 
+    A triple (`lower`, `pred`, `upper`) with `pred` being the prediction
+    of the model and `lower` and `upper` constituting the lower- and upper
     bounds for the prediction interval around `pred`, respectively. '''
 
   # Number of training samples
   n = X_train.shape[0]
 
-  # The authors choose the number of bootstrap samples as the square root 
+  # The authors choose the number of bootstrap samples as the square root
   # of the number of samples
   nbootstraps = np.sqrt(n).astype(int)
 
@@ -133,7 +134,7 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
   preds = model.predict(X_train)
   train_residuals = y_train - preds
 
-  # Take percentiles of the training- and validation residuals to enable 
+  # Take percentiles of the training- and validation residuals to enable
   # comparisons between them
   val_residuals = np.percentile(val_residuals, q = np.arange(100))
   train_residuals = np.percentile(train_residuals, q = np.arange(100))
@@ -151,7 +152,7 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
   C = np.array([m + o for m in bootstrap_preds for o in residuals])
   qs = [100 * alpha / 2, 100 * (1 - alpha / 2)]
   percentiles = np.percentile(C, q = qs)
-  
+
   return percentiles[0], model.predict(x0), percentiles[1]
 ```
 

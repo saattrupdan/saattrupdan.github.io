@@ -30,7 +30,7 @@ Now, with all the practicalities out of the way, in this blog post I'd like to t
 ## Scraping all of arXiv
 Turns out that ArXiv has an [API](https://arxiv.org/help/api/index). There are a couple of quirks and limitations, however. Firstly, it requires you to query something, you cannot just put in a blank query. To get around that it turns out that it's completely fine if you put in a blank query _for a particular category_. So by looping through all the categories I would be able to get all the papers. Great!
 
-Next up is that the API can only return 10,000 papers at a time, and if you query it repeatedly it blocks you out temporarily. The solution? Write a scraping script that queries in batches, and which takes breaks if the arXiv decides that it's break time. Scraping with breaks is also considered [good practice](https://info.scrapinghub.com/web-scraping-guide/web-scraping-best-practices#1), and note that the actual scraping is taking place on [export.arxiv.org](https://export.arxiv.org), which is copy of the arXiv meant for programmable purposes, updated daily. Now, we have a scraper that's scraping away, a new problem arises: it turns out that you can't really tell the difference between being blocked out and there being no results left in that particular category. My hacky solution to that was to set an upper bound on the amount of tries (=amount of patience) the scraping script should attempt before moving on to the next category. 
+Next up is that the API can only return 10,000 papers at a time, and if you query it repeatedly it blocks you out temporarily. The solution? Write a scraping script that queries in batches, and which takes breaks if the arXiv decides that it's break time. Scraping with breaks is also considered [good practice](https://info.scrapinghub.com/web-scraping-guide/web-scraping-best-practices#1), and note that the actual scraping is taking place on [export.arxiv.org](https://export.arxiv.org), which is copy of the arXiv meant for programmable purposes, updated daily. Now, we have a scraper that's scraping away, a new problem arises: it turns out that you can't really tell the difference between being blocked out and there being no results left in that particular category. My hacky solution to that was to set an upper bound on the amount of tries (=amount of patience) the scraping script should attempt before moving on to the next category.
 
 As my laptop is low on memory I had to come up with a way to store all this data in an efficient manner. I tried `tsv` files and `json` files, but both of them had the annoying feature of needing to at some point store the entire file in memory (unless I'm missing some neat trick here). So instead, I dived into SQL.
 
@@ -74,7 +74,7 @@ I didn't want to train a separate model on these master categories; I didn't eve
   4. Apply weighted binary cross entropy on both the category logits and the master category logits
   5. Take a weighted sum of the two losses
 
-The projection in step 3 works by "mixing the top2 logits within each master category". To understand what I mean by that, let's do an example. Say you roll two dice: what's the probability of there being at least one of them hitting 6? This would be $1 - \left(\tfrac{5}{6}\right)^2 \sim 31\%$, as there's a $\tfrac{5}{6}$ chance of it not being 6. This would be an instance of "mixing" the two probabilities $\tfrac{1}{6}\sim 17\%$ into 31%. The problem with this is that it's using the probabilities instead of the logits, but I need the logits to allow utilising class weights. 
+The projection in step 3 works by "mixing the top2 logits within each master category". To understand what I mean by that, let's do an example. Say you roll two dice: what's the probability of there being at least one of them hitting 6? This would be $1 - \left(\tfrac{5}{6}\right)^2 \sim 31\%$, as there's a $\tfrac{5}{6}$ chance of it not being 6. This would be an instance of "mixing" the two probabilities $\tfrac{1}{6}\sim 17\%$ into 31%. The problem with this is that it's using the probabilities instead of the logits, but I need the logits to allow utilising class weights.
 
 One naive solution to this would be to translate the logits to probabilities, perform the mixing and then translate back, but this causes rounding issues: some probabilities would be rounded to 100%, which are translated back to infinite logits, yielding NaN loss. Woohoo. Instead, some simple algebra gives us that we can perform the mixing directly on the logits by the following formula:
 
@@ -139,7 +139,7 @@ A shout out also goes out to the people at [Weights & Biases](https://www.wandb.
 
 <center>
   <a href="https://app.wandb.ai/saattrupdan/scholarly/runs/3kv495v2/overview">
-    https://app.wandb.ai/saattrupdan/scholarly/runs/3kv495v2/overview 
+    https://app.wandb.ai/saattrupdan/scholarly/runs/3kv495v2/overview
   </a>
 </center>
 

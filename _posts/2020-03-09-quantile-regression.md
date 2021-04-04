@@ -5,7 +5,7 @@ title: Quantile regression
 meta-description: Introduction to quantile regression for prediction intervals, a discussion of the pros and cons, and implementations for both linear quantile regression and quantile neural networks in PyTorch.
 ---
 
-When we are performing regression analysis using complicated predictive models such as neural networks, knowing how *certain* the model is is highly valuable in many cases, for instance when the applications are within the health sector. The [bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/) that we covered last time requires us to train the model on a large number of bootstrapped samples, which is unfeasible if training the model takes many hours or days, leaving us stranded. 
+When we are performing regression analysis using complicated predictive models such as neural networks, knowing how *certain* the model is is highly valuable in many cases, for instance when the applications are within the health sector. The [bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/) that we covered last time requires us to train the model on a large number of bootstrapped samples, which is unfeasible if training the model takes many hours or days, leaving us stranded.
 
 Thankfully, there are alternatives. One of those is *quantile regression*, which we'll have a closer look at in this post.
 
@@ -15,6 +15,7 @@ This post is part of my series on quantifying uncertainty:
   3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
   4. Quantile regression
   5. [Quantile regression forests](https://saattrupdan.github.io/2020-04-05-quantile-regression-forests/)
+  6. [Doubt](https://saattrupdan.github.io/2021-04-04-doubt/)
 
 
 ## Going beyond the mean
@@ -34,7 +35,7 @@ $$ \textsf{MQL}(y, \hat y) := \frac{1}{n}\sum_{i=1}^n \rho_q(y_i-\hat y_i). $$
 
 Let's check that the optimal estimate for this loss function is actually the quantiles. We're trying to find $\hat y$ that minimises
 
-$$ 
+$$
 \begin{align}
   \mathbb E[\rho_q(Y-\hat y)] &= (q-1)\int_{-\infty}^{\hat y}f(t)(t-\hat y)dt + q\int_{\hat y}^\infty f(t)(t-\hat y)dt \\
   &= q\int f(t)(t-\hat y)dt - \int_{-\infty}^{\hat y}f(t)(t-\hat y)dt \\
@@ -55,7 +56,7 @@ A clear strength of quantile regression, compared to the [bootstrap approaches t
 
 A very neat side effect of quantile regression is that it can take of [heteroscedasticity](https://en.wikipedia.org/wiki/Heteroscedasticity) out of the box (simply because our models are not simply outputting constants), a feature that the bootstrap approaches failed to achieve (see the simulations below). Attempts have been made to make the bootstrap approach account for this, e.g. using the [wild bootstrap](https://en.wikipedia.org/wiki/Bootstrapping_%28statistics%29#Wild_bootstrap), but this is unsuitable for new predictions as it requires knowledge of the residuals.
 
-One notable weakness of the quantile prediction intervals is that **the model is quantifying its own uncertainty**. This means that we are reliant on the model being able to correctly fit the data, so in a case where the conditional means of the data follow a linear trend but the quantiles don't, we would then have to choose a non-linear model to get correct prediction intervals. Further, if we're overfitting the training data then the prediction intervals will also become overfitted. 
+One notable weakness of the quantile prediction intervals is that **the model is quantifying its own uncertainty**. This means that we are reliant on the model being able to correctly fit the data, so in a case where the conditional means of the data follow a linear trend but the quantiles don't, we would then have to choose a non-linear model to get correct prediction intervals. Further, if we're overfitting the training data then the prediction intervals will also become overfitted.
 
 We can remedy the latter by creating [confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/) around the quantile predictions, but then we're back at either the homoscedasticity scenario if we choose to create parametric confidence intervals, or otherwise we have to bootstrap again, losing what I think is the primary benefit of the quantile approach for prediction intervals.
 
@@ -69,12 +70,12 @@ Let's start with a simple linear example, where we sample $n=1000$ training data
 from statsmodels.regression.quantile_regression import QuantReg
 
 # Set up the model - note here that we have to manually add the constant
-# to the data to fit an intercept, and that `statsmodels` models needs 
+# to the data to fit an intercept, and that `statsmodels` models needs
 # the training data at initialisation
 cnst = np.ones((X_train.shape[0], 1))
 qreg_model = QuantReg(Y_train, np.concatenate([cnst, X_train], axis = 1))
 
-# Fit the linear quantile regression three times, for the interval 
+# Fit the linear quantile regression three times, for the interval
 # boundaries and the median
 preds = []
 for q in [0.05, 0.5, 0.95]:
@@ -89,9 +90,9 @@ If we plot the residuals and the intervals we get the following, with 87% coveri
 
 ![Plot of quantile linear regression prediction interval, where the interval encloses most of the residuals](/img/quantile-linear-regression.png)
 
-The most interesting use case of quantile regression to me is in conjunction with neural networks, so let's see how we could implement that in `PyTorch`. We'd need to be able to modify any network to predict the two extra values corresponding to the relevant quantiles, and implement the quantile loss. 
+The most interesting use case of quantile regression to me is in conjunction with neural networks, so let's see how we could implement that in `PyTorch`. We'd need to be able to modify any network to predict the two extra values corresponding to the relevant quantiles, and implement the quantile loss.
 
-Let's start with the wrapper. The following module duplicates the model three times using Python's built-in `copy` module, and the two extra modules are then predicting the *offset* from the prediction to the quantile. I've done it this way to ensure that the lower predicted quantile is guaranteed to always be below the prediction, which is again always below the upper predicted quantile. 
+Let's start with the wrapper. The following module duplicates the model three times using Python's built-in `copy` module, and the two extra modules are then predicting the *offset* from the prediction to the quantile. I've done it this way to ensure that the lower predicted quantile is guaranteed to always be below the prediction, which is again always below the upper predicted quantile.
 
 I'm squaring the outputs of these lower and upper quantile predictions for the same reason. We could just take the absolute value here, but differentiable operations make gradient descent more stable.
 
@@ -103,7 +104,7 @@ class QuantileRegressor(nn.Module):
         self.model = model
         self.lower = copy.deepcopy(model)
         self.upper = copy.deepcopy(model)
-        
+
     def forward(self, x):
         preds = self.model(x)
         lower = preds - self.lower(x) ** 2
@@ -118,13 +119,13 @@ class QuantileLoss(nn.Module):
     def __init__(self, alpha: float):
         super().__init__()
         self.lower, self.upper = ((1 - alpha) / 2, (1 + alpha) / 2)
-        
+
     def forward(self, preds, target):
         residuals = target.unsqueeze(1) - preds
-        lower_loss = torch.mean(F.relu(residuals[:, 0]) * self.lower - 
+        lower_loss = torch.mean(F.relu(residuals[:, 0]) * self.lower -
           F.relu(-residuals[:, 0]) * (self.lower - 1))
         median_loss = torch.mean(torch.abs(residuals[:, 1]))
-        upper_loss = torch.mean(F.relu(residuals[:, 2]) * self.upper - 
+        upper_loss = torch.mean(F.relu(residuals[:, 2]) * self.upper -
           F.relu(-residuals[:, 2]) * (self.upper - 1))
         return (lower_loss + median_loss + upper_loss) / 3
 ```

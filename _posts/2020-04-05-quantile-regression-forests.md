@@ -5,11 +5,11 @@ title: Quantile regression forests
 meta-description: Quantile regression forests is a way to make a random forest output quantiles and thereby quantify its own uncertainty. This method only requires training the forest once. We compare the QRFs to bootstrap methods on the hourly bike rental data set.
 ---
 
-A random forest is an incredibly useful and versatile tool in a data scientist's toolkit, and is one of the more popular non-deep models that are being used in industry today. 
+A random forest is an incredibly useful and versatile tool in a data scientist's toolkit, and is one of the more popular non-deep models that are being used in industry today.
 If we now want our random forests to also output their uncertainty, it would seem that we are forced to go down the [bootstrapping](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/) route,
 as the [quantile approach](https://saattrupdan.github.io/2020-03-09-quantile-regression/) we saw last time relied on the models learning through gradient descent, which random forests aren't.
 
-The bootstrapping would definitely work, but we would be paying a price at inference time. 
+The bootstrapping would definitely work, but we would be paying a price at inference time.
 Say I have a random forest consisting of 1,000 trees and I'd like to make 1,000 bootstrapped predictions to form a reasonable prediction interval.
 Naively, to be able to do that we'd have to make a million decision tree predictions _for every_ prediction we'd like from our model, which can cause a delay that the users of the model might not be too happy about.
 
@@ -21,12 +21,13 @@ This post is part of my series on quantifying uncertainty:
   3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
   4. [Quantile regression](https://saattrupdan.github.io/2020-03-09-quantile-regression/)
   5. Quantile regression forests
+  6. [Doubt](https://saattrupdan.github.io/2021-04-04-doubt/)
 
 
 ## Regression trees with a twist
 
-Let's take a step back and remind ourselves how vanilla random forests work. 
-Random forests are simply a collection of so-called decision trees, where we train each decision tree on a bootstrapped resample of the training data set. 
+Let's take a step back and remind ourselves how vanilla random forests work.
+Random forests are simply a collection of so-called decision trees, where we train each decision tree on a bootstrapped resample of the training data set.
 A decision tree is basically just a flow chart diagram. Here's an example of one:
 
 ![A small flow chart diagram, aka a decision tree, to model how cold it will be tomorrow. The leaves each contain a single value.](/img/qrf-decision-tree.jpg)
@@ -60,7 +61,7 @@ Meinshausen shows that the CDF estimate described in the previous section *is* a
   4. There's a constant $\gamma\in(0, 0.5]$ such that the number of values in a child node is always at least $\gamma$ times the number of values in the parent node. This roughly means that our branches are always "thick"
   5. The true CDF of the predictive distribution is [Lipschitz continuous](https://en.wikipedia.org/wiki/Lipschitz_continuity)
 
-Hopefully you will agree that these are not wild assumptions. 
+Hopefully you will agree that these are not wild assumptions.
 From these assumptions Meinshausen proved the following, where $F$ is the CDF of the true predictive distribution and $\hat F$ is our estimate as described in the previous section:
 
 > **Theorem (Meinhausen).** Assume the above five conditions hold. Then, for every $x$,
@@ -87,10 +88,10 @@ Here's the distribution of our response:
 I trained a QRF and 100 bootstrapped regular random forests on the data set, with 100 trees in each forest.
 This gives us the following.
 
-![Plot of sorted prediction intervals of the QRF and the bootstrapped random forest. The variance of the residuals vary between approx 0 and 400, with the quantile intervals capturing this. 
+![Plot of sorted prediction intervals of the QRF and the bootstrapped random forest. The variance of the residuals vary between approx 0 and 400, with the quantile intervals capturing this.
 The bootstrap interval is of almost uniform length and thus does not capture the shape of the data, even though it has almost perfect coverage (93.5%) and the quantile intervals have a coverage of 80.9%.](/img/qrf-1leaf.png)
 
-We clearly see that the quantile method (as anticipated) can deal with the heteroscedasticity a lot better than the bootstrap. 
+We clearly see that the quantile method (as anticipated) can deal with the heteroscedasticity a lot better than the bootstrap.
 But we also see that the quantile intervals aren't on par with the bootstrapped ones, only having 81% coverage on a 95% prediction interval.
 Let's take a closer look at what is happening:
 

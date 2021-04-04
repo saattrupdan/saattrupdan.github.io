@@ -13,6 +13,7 @@ This post is part of my series on quantifying uncertainty:
   3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
   4. [Quantile regression](https://saattrupdan.github.io/2020-03-09-quantile-regression/)
   5. [Quantile regression forests](https://saattrupdan.github.io/2020-04-05-quantile-regression-forests/)
+  6. [Doubt](https://saattrupdan.github.io/2021-04-04-doubt/)
 
 ## What is a confidence interval?
 
@@ -88,7 +89,7 @@ Let's compute a bootstrapped confidence interval for our coffee example. The **f
 def get_bootstrap_statistics(sample, statistic, nbootstraps: int = 5000):
     bootstrap_statistics = np.empty(nbootstraps)
     for b in range(nbootstraps):
-        resample = np.random.choice(sample, size = sample.size, 
+        resample = np.random.choice(sample, size = sample.size,
             replace = True)
         bootstrap_statistics[b] = statistic(resample)
     return bootstrap_statistics

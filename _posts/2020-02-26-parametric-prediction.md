@@ -13,6 +13,7 @@ This post is part of my series on quantifying uncertainty:
   3. [Bootstrap prediction intervals](https://saattrupdan.github.io/2020-03-01-bootstrap-prediction/)
   4. [Quantile regression](https://saattrupdan.github.io/2020-03-09-quantile-regression/)
   5. [Quantile regression forests](https://saattrupdan.github.io/2020-04-05-quantile-regression-forests/)
+  6. [Doubt](https://saattrupdan.github.io/2021-04-04-doubt/)
 
 Assuming we have a [univariate](https://en.wikipedia.org/wiki/Univariate) predictive model $\mu\colon\mathbb R^n\to\mathbb R$ trained on training data $\\\{(x_i,y_i)\in\mathbb R^{n+1}\mid i < n\\\}$, an **$\alpha$-prediction interval** for $\alpha\in(0,1)$ associated to a new sample $x_0$ is an interval $(a,b)\subset\mathbb R$ such that, if we were to continue sampling new training data, fit our model to the samples and produce new predictions for $x_0$, then the true value $y_0$ will land within $(100 * \alpha)$% of the intervals.
 
@@ -37,7 +38,7 @@ Now, given a new test sample $x_0$, we would like to guess where the residual $\
 
 $$ \varepsilon_0 - \bar\varepsilon\sim\mathcal N(0, \sigma^2 + \tfrac{\sigma^2}{n}), $$
 
-so that $\varepsilon_0\sim\mathcal N(\bar\varepsilon, \sigma^2 + \tfrac{\sigma^2}{n})$. As [we saw with confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/), we now use $s_N^2 := \tfrac{1}{n-1}\sum_{i=1}^N(\varepsilon_i - \bar\varepsilon)^2$ as our unbiased estimate of $\sigma^2$, and that $\tfrac{\varepsilon_0}{s_N} \sim T^{N-1}$, the [t-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $(N-1)$ degrees of freedom. Summa summarum, we get a 90%-prediction interval 
+so that $\varepsilon_0\sim\mathcal N(\bar\varepsilon, \sigma^2 + \tfrac{\sigma^2}{n})$. As [we saw with confidence intervals](https://saattrupdan.github.io/2020-02-20-confidence/), we now use $s_N^2 := \tfrac{1}{n-1}\sum_{i=1}^N(\varepsilon_i - \bar\varepsilon)^2$ as our unbiased estimate of $\sigma^2$, and that $\tfrac{\varepsilon_0}{s_N} \sim T^{N-1}$, the [t-distribution](https://en.wikipedia.org/wiki/Student%27s_t-distribution) with $(N-1)$ degrees of freedom. Summa summarum, we get a 90%-prediction interval
 
 $$ \hat y_0 + \bar\varepsilon \pm F^{-1}(0.95)s_N(1 + \tfrac{1}{n}) $$
 
