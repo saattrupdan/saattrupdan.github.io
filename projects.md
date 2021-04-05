@@ -1,8 +1,18 @@
 ---
 layout: page
 title: Projects
-meta-description: Personal data science projects by Dan Saattrup Nielsen, involving classification of scientific papers, counting syllables in English words, implementing genetic algorithms to evolve neural networks, and performing a cluster analysis of constituencies in England and Wales.
+meta-description: Personal data science projects by Dan Saattrup Nielsen, involving getting uncertainty estimates of machine learning model predictions, classification of scientific papers, counting syllables in English words, implementing genetic algorithms to evolve neural networks, and performing a cluster analysis of constituencies in England and Wales.
 ---
+
+## [Doubt](https://github.com/saattrupdan/doubt)
+#### Python package that allows uncertainty estimates of machine learning models  --- [blog post](https://saattrupdan.github.io/2021-04-04-doubt/)
+
+This Python package implements various algorithms that allows machine learning
+practitioners to get uncertainty estimates from their machine learning models.
+This includes wrapping their existing models in a bootstrap wrapper, as well as
+implementing stand-alone models such as linear quantile regression and quantile
+regression trees.
+
 
 ## [Scholarly](https://github.com/saattrupdan/scholarly)
 #### Classification of scientific papers --- [blog post](https://saattrupdan.github.io/2020-01-21-scholarly/)
@@ -31,9 +41,9 @@ Automatically build Haiku poems from a given text source. To ensure that the syl
 
 
 ## [NaturalSelection](https://github.com/saattrupdan/naturalselection)
-#### An all-purpose pythonic genetic algorithm --- [blog post](https://saattrupdan.github.io/2019-09-07-naturalselection/)
+#### An all-purpose Pythonic genetic algorithm --- [blog post](https://saattrupdan.github.io/2019-09-07-naturalselection/)
 
-A python package which uses genetic algorithms to maximise a given function. A prime example of this is to hyperparameter optimise neural networks. See [the readme](https://github.com/saattrupdan/naturalselection/blob/master/README.md) for several examples and a more in-depth explanation of the algorithm.
+A Python package which uses genetic algorithms to maximise a given function. A prime example of this is to hyperparameter optimise neural networks. See [the readme](https://github.com/saattrupdan/naturalselection/blob/master/README.md) for several examples and a more in-depth explanation of the algorithm.
 
 ![Image showing an example of the evolution of a population](/img/fashion_mnist.png)
 
