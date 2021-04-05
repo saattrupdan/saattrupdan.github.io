@@ -5,9 +5,9 @@ meta-description: Personal data science projects by Dan Saattrup Nielsen, involv
 ---
 
 ## [Doubt](https://github.com/saattrupdan/doubt)
-#### Python package that allows uncertainty estimates of machine learning models  --- [blog post](https://saattrupdan.github.io/2021-04-04-doubt/)
+#### Get uncertainty estimates of machine learning models  --- [blog post](https://saattrupdan.github.io/2021-04-04-doubt/)
 
-This Python package implements various algorithms that allows machine learning
+A Python package that implements various algorithms that allows machine learning
 practitioners to get uncertainty estimates from their machine learning models.
 This includes wrapping their existing models in a bootstrap wrapper, as well as
 implementing stand-alone models such as linear quantile regression and quantile
