@@ -142,7 +142,7 @@ def prediction_interval(model, X_train, y_train, x0, alpha: float = 0.05):
   # Compute the .632+ bootstrap estimate for the sample noise and bias
   no_information_error = np.mean(np.abs(np.random.permutation(y_train) - \
     np.random.permutation(preds)))
-  generalisation = np.abs(val_residuals - train_residuals)
+  generalisation = np.abs(val_residuals.mean() - train_residuals.mean())
   no_information_val = np.abs(no_information_error - train_residuals)
   relative_overfitting_rate = np.mean(generalisation / no_information_val)
   weight = .632 / (1 - .368 * relative_overfitting_rate)
