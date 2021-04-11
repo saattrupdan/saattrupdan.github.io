@@ -20,4 +20,4 @@ I am a data scientist with specialised knowledge of machine learning methods.  I
 <img src="{{ site.baseurl }}/img/icon-student.png" style="margin:5px; width:3%"> 2014: BSc in Mathematics, University of Copenhagen, DK<br>
 <img src="{{ site.baseurl }}/img/icon-teaching.png" style="margin:5px; width:3%"> 2013-2020: Lecturer and Teaching Assistant, DK & UK<br>
 <img src="{{ site.baseurl }}/img/icon-airplane.png" style="margin:5px; width:3%"> 2013: Erasmus Exchange, University of Leeds, UK<br>
-<img src="{{ site.baseurl }}/img/icon-briefcase.png" style="margin:5px; width:3%"> 2009-2014: Software Developer, GE Revision, DK<br>
+<img src="{{ site.baseurl }}/img/icon-briefcase.png" style="margin:5px; width:3%"> 2009-2014: Junior Programmer, GE Revision, DK<br>
