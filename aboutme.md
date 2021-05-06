@@ -6,7 +6,7 @@ meta-description: Dan Saattrup Nielsen, Mathematician and Data Scientist, based 
 
 I am a data scientist with specialised knowledge of machine learning methods.  I am incredibly ambitious and love what I am doing, and I tend to take a lot of initiative to new projects and to look at things from new angles.
 
-<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:33%; margin-right:10px">
+<img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:29%; margin-right:10px">
 
 <img src="{{ site.baseurl }}/img/icon-home.png" style="margin:5px; width:3%"> Bristol, UK<br>
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2021-: Research Associate in ML, University of Bristol, UK<br>
@@ -21,4 +21,3 @@ I am a data scientist with specialised knowledge of machine learning methods.  I
 <img src="{{ site.baseurl }}/img/icon-student.png" style="margin:5px; width:3%"> 2014: BSc in Mathematics, University of Copenhagen, DK<br>
 <img src="{{ site.baseurl }}/img/icon-teaching.png" style="margin:5px; width:3%"> 2013-2020: Lecturer and Teaching Assistant, DK & UK<br>
 <img src="{{ site.baseurl }}/img/icon-airplane.png" style="margin:5px; width:3%"> 2013: Erasmus Exchange, University of Leeds, UK<br>
-<img src="{{ site.baseurl }}/img/icon-briefcase.png" style="margin:5px; width:3%"> 2009-2014: Junior Programmer, GE Revision, DK<br>
