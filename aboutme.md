@@ -9,7 +9,7 @@ I am a data scientist with specialised knowledge of machine learning methods.  I
 <img align="left" src="{{ site.baseurl }}/img/2mt.jpg" style="width:29%; margin-right:10px">
 
 <img src="{{ site.baseurl }}/img/icon-home.png" style="margin:5px; width:3%"> Bristol, UK<br>
-<img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2021-: Research Associate in ML, University of Bristol, UK<br>
+<img src="{{ site.baseurl }}/img/icon-physics.png" style="margin:5px; width:3%"> 2021-: Research Associate in ML, University of Bristol, UK<br>
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2020-: CEO and Founder, T-til-T, DK<br>
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2020-2021: ML Consultant, Danish Business Authority, DK<br>
 <img src="{{ site.baseurl }}/img/icon-data.png" style="margin:5px; width:3%"> 2020: ML Specialist, LYS Technologies, DK<br>
