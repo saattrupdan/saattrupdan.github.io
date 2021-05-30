@@ -32,7 +32,8 @@ This post is part of my series on graph algorithms:
 As the name suggests, the graph **convolutional** neural networks are related
 to convolutional neural networks (CNNs). This connection turns out to be a bit
 contrived, but we will get to that later. In any case, to make the analogue
-clear, let's briefly go over how CNNs work.
+clear, let's briefly go over how CNNs work, and also why they won't work out of
+the box on graphs.
 
 The purpose of a CNN, say for image classification, is to learn how to
 aggregate neighboring pixels. For every pixel we would like to train a function
@@ -67,7 +68,10 @@ learn to recognise vertical lines, another one white space, and so on.
 Now, why doesn't this work for graphs? The reason is that graphs don't have the
 same kind of neat grid-like structure as images, which in particular means that
 nodes in a graph can have wildly different numbers of neighbours. As a matrix
-is of a fixed size, it simply cannot adapt to arbitrary graphs.
+is of a fixed size, it simply cannot adapt to arbitrary graphs. More
+specifically, grid-like graphs enjoy the property of having a *shift operator*:
+we can shift in the x- and y-axes to get all the neighbours of a given node, a
+property general graphs do not have.
 
 
 ## Rephrasing the Problem in the Fourier Domain
@@ -86,8 +90,9 @@ $$
 $$
 
 Now, the reason why we care about this transformation, is the following
-*Convolution Theorem*, stating that the convolution operation can be
-rephrased as simple multiplication in the Fourier domain!
+[Convolution Theorem](https://en.wikipedia.org/wiki/Convolution_theorem#Functions_of_a_discrete_variable_(sequences)),
+stating that the convolution operation can be rephrased as simple
+multiplication in the Fourier domain!
 
 > **The Convolution Theorem.** For any two measurable functions
 > $f,g\colon\mathbb R^n\to\mathbb R$ it holds that
@@ -95,8 +100,12 @@ rephrased as simple multiplication in the Fourier domain!
 
 Now, how does this help us to generalise the convolution operation to general
 graphs? What we've done here is moved from *shift operations* to *Fourier
-transforms*, so the next step is generalising the regular Fourier transform to
-general graphs.
+transforms*, so if we can jump from regular Fourier transforms to *graph*
+Fourier transforms, then we can access graph convolutions through this detour.
+
+![We can present this as a diagram, going from convolutions to Fourier
+transforms, from Fourier transforms to graph Fourier transforms, and finally to
+graph convolutions](../img/convolution-fourier.jpg)
 
 
 ## From Fourier to Graph Fourier
@@ -107,8 +116,10 @@ a connected graph $\mathcal G$ with adjacency matrix $A$ we define the **graph
 Laplacian** $L := D-A$, where $D$ is the diagonal degree matrix of $\mathcal
 G$.
 
-We'd like to compute the eigenvectors of the Laplacian, so we first ensure that
-it's symmetric. This leads to the following **normalised graph Laplacian**:
+The definition of the graph Fourier transform involves the eigenvectors of the
+Laplacian, so we first ensure that this matrix is symmetric, as we're then
+[guaranteed of the existence of eigenvectors](https://saattrupdan.github.io/2019-06-12-singular-value-decomposition/).
+This leads to the following **normalised graph Laplacian**:
 
 $$
 \hat L := D^{-\tfrac{1}{2}}LD^{-\tfrac{1}{2}} = I_N - D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}},
@@ -143,21 +154,21 @@ We simply pretend that the same relationship between convolutions and "Fourier
 products" also holds in the graph domain, and define the convolution from that
 relationship.
 
-
-## Graph Convolutional Neural Networks
-
 We *could* just stop here, and simply use the spectral graph convolutions. The
 problem is that it's incredibly computationally expensive, as the graph Fourier
 transform is $O(N^2)$, so the final job is about approximating this as best as
 possible.
 
-In [Hammond et al.
-(2011)](https://www.sciencedirect.com/science/article/pii/S1063520310000552) it
-was suggested that the spectral graph convolution could be approximated using
-the so-called [Chebyshev
-polynomials](https://en.wikipedia.org/wiki/Chebyshev_polynomials), $T_n$, which
-are given as $T_0(x) = 1$, $T_1(x) := x$ and $T_{n+1}(x) :=
-2xT_n(x)-T_{n-1}(x)$. The $K$'th approximation then looks like
+
+## Graph Convolutional Neural Networks
+
+In
+[Hammond et al.  (2011)](https://www.sciencedirect.com/science/article/pii/S1063520310000552)
+it was suggested that the spectral graph convolution could be approximated
+using the so-called
+[Chebyshev polynomials](https://en.wikipedia.org/wiki/Chebyshev_polynomials),
+$T_n$, which are given as $T_0(x) = 1$, $T_1(x) := x$ and
+$T_{n+1}(x) := 2xT_n(x)-T_{n-1}(x)$. The $K$'th approximation then looks like
 
 $$
 f\star g \approx \sum_{k=0}^K f(k)T_k(\tilde L)g,
@@ -169,8 +180,8 @@ eigenvalue of $\hat L$.
 
 In [Kipf and Welling (2017)](https://arxiv.org/abs/1609.02907), the paper where
 GCNs were introduced, they make further approximations. Let's put our GCN hat
-on, so that $f$ is now the kernel and $g$ is our node feature matrix, so let's
-rename $f$ to $k$, and rename $g$ to $\textsf{nodeFeatures}$.
+on, so that $f$ is now the kernel and $g$ is our node feature matrix, and let
+us accordingly rename $f$ to $k$ and $g$ to $\textsf{nodeFeatures}$.
 
 The first approximation they make is setting the Chebyshev approximation level
 $K$ to $1$, reducing the approximation of $k\star\textsf{nodeFeatures}$ to
@@ -180,7 +191,7 @@ The second approximation is setting $\lambda_{\text{max}} = 2$, reducing it
 further to $k_0g + k_1(\hat L - I_N)\textsf{nodeFeatures}$.
 
 The third and last approximation they make is assuming that $k_0 = k_1$,
-resulting in the final approximation
+resulting in the approximation
 
 $$
 f\star g \approx k_0(I_N + D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}})\textsf{nodeFeatures}.
@@ -188,9 +199,9 @@ $$
 
 Are we done yet? Not quite, there is one last problem we need to deal with.
 $I_N + D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}}$ now has eigenvalues in the range
-$[0,2]$, so to avoid vanishing and exploding gradients, we normalise it: we set
-$\tilde A := A + I_N$, $\tilde D_{ii} := \sum_j \tilde A_{ij}$. Finally, we end
-up with the approximation:
+$[0,2]$, so to avoid vanishing and exploding gradients, we normalise it: they
+set $\tilde A := A + I_N$, $\tilde D_{ii} := \sum_j \tilde A_{ij}$. Finally, we
+end up with the approximation:
 
 $$
 f\star g \approx k_0(\tilde D^{-\tfrac{1}{2}}\tilde A\tilde D^{-\tfrac{1}{2}})\textsf{nodeFeatures}.
@@ -206,7 +217,7 @@ actually doing. We're computing a representation for every node in our graph,
 so let's assume we are currently dealing with a particular node.
 
 We see that we only have a single learnable parameter, $k_0$, and if we ignore
-the last normalisation part of the approximation then the first term, $I_N$,
+the final normalisation part of the approximation then the first term, $I_N$,
 corresponds to the contribution of the node's own features towards its
 representation, and the second term corresponds to the contribution from the
 node's neighbouring nodes' features.
