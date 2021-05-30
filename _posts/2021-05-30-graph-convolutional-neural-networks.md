@@ -7,9 +7,9 @@ meta-description: This is an introduction to graph convolutional neural networks
 
 As more and more businesses strive toward becoming data-driven, the use of
 graph methods for storing relational data has been on the rise (
-[1](https://www.forbes.com/sites/cognitiveworld/2019/07/18/graph-databases-go-mainstream/?sh=6f97faea179d),
-[2](https://www.business-of-data.com/articles/graph-databases),
-[3](https://www.eweek.com/database/why-experts-see-graph-databases-headed-to-mainstream-use/)).
+[\[1\]](https://www.forbes.com/sites/cognitiveworld/2019/07/18/graph-databases-go-mainstream/?sh=6f97faea179d),
+[\[2\]](https://www.business-of-data.com/articles/graph-databases),
+[\[3\]](https://www.eweek.com/database/why-experts-see-graph-databases-headed-to-mainstream-use/)).
 Along with these graph databases comes more opportunities for analysing the
 data, including the use of predictive machine learning models on graphs.
 
@@ -112,9 +112,11 @@ graph convolutions](../img/convolution-fourier.jpg)
 
 It turns out that there *is* an analogue of the Fourier transform to general
 graphs. We have to go through yet another couple of hoops, however. First, for
-a connected graph $\mathcal G$ with adjacency matrix $A$ we define the **graph
-Laplacian** $L := D-A$, where $D$ is the diagonal degree matrix of $\mathcal
-G$.
+a connected graph $\mathcal G$ with
+[adjacency matrix](https://en.wikipedia.org/wiki/Adjacency_matrix)
+$A$ we define the
+[graph Laplacian](https://en.wikipedia.org/wiki/Laplacian_matrix)
+$L := D-A$, where $D$ is the diagonal degree matrix of $\mathcal G$.
 
 The definition of the graph Fourier transform involves the eigenvectors of the
 Laplacian, so we first ensure that this matrix is symmetric, as we're then
@@ -122,7 +124,7 @@ Laplacian, so we first ensure that this matrix is symmetric, as we're then
 This leads to the following **normalised graph Laplacian**:
 
 $$
-\hat L := D^{-\tfrac{1}{2}}LD^{-\tfrac{1}{2}} = I_N - D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}},
+\overline L := D^{-\tfrac{1}{2}}LD^{-\tfrac{1}{2}} = I_N - D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}},
 $$
 
 which *is* symmetric, by construction, so it has a complete set of orthonormal
@@ -135,8 +137,8 @@ $$
 $$
 
 where $(-)^*$ is the complex conjugate. Note here that $f\colon\mathbb
-R^N\to\mathbb R$ and $\textsf{graphFourier}(f)\colon\{\lambda_l\mid
-l=1,\dots,N\}\to\mathbb C$.
+R^N\to\mathbb R$ and $\textsf{graphFourier}(f)\colon\\{\lambda_l\mid
+l=1,\dots,N\\}\to\mathbb C$.
 
 
 ## Spectral Graph Convolutions
@@ -174,24 +176,21 @@ $$
 f\star g \approx \sum_{k=0}^K f(k)T_k(\tilde L)g,
 $$
 
-where $\tilde L := \tfrac{2}{\lambda_{\text{max}}}\hat L-I_N$ with $I_N$ being
+where $\tilde L := \tfrac{2}{\lambda_{\text{max}}}\overline L-I_N$ with $I_N$ being
 the $N\times N$ identity matrix and $\lambda_{\text{max}}$ being the largest
-eigenvalue of $\hat L$.
+eigenvalue of $\overline L$.
 
 In [Kipf and Welling (2017)](https://arxiv.org/abs/1609.02907), the paper where
 GCNs were introduced, they make further approximations. Let's put our GCN hat
 on, so that $f$ is now the kernel and $g$ is our node feature matrix, and let
-us accordingly rename $f$ to $k$ and $g$ to $\textsf{nodeFeatures}$.
+us accordingly rename $f$ to $k$ and $g$ to $\textsf{nodeFeatures}$. They make
+the following simplifying assumptions:
 
-The first approximation they make is setting the Chebyshev approximation level
-$K$ to $1$, reducing the approximation of $k\star\textsf{nodeFeatures}$ to
-$k_0\textsf{nodeFeatures} + k_1\tilde L\textsf{nodeFeatures}$.
+1. They set the Chebyshev approximation level $K$ to $1$;
+2. They set $\lambda_{\text{max}} = 2$;
+3. They assume that $k_0 = k_1$.
 
-The second approximation is setting $\lambda_{\text{max}} = 2$, reducing it
-further to $k_0g + k_1(\hat L - I_N)\textsf{nodeFeatures}$.
-
-The third and last approximation they make is assuming that $k_0 = k_1$,
-resulting in the approximation
+These assumptions then result in the following approximation:
 
 $$
 f\star g \approx k_0(I_N + D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}})\textsf{nodeFeatures}.
@@ -199,9 +198,9 @@ $$
 
 Are we done yet? Not quite, there is one last problem we need to deal with.
 $I_N + D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}}$ now has eigenvalues in the range
-$[0,2]$, so to avoid vanishing and exploding gradients, we normalise it: they
-set $\tilde A := A + I_N$, $\tilde D_{ii} := \sum_j \tilde A_{ij}$. Finally, we
-end up with the approximation:
+$[0,2]$, so to avoid vanishing and exploding gradients, we normalise it. This
+is done by setting $\tilde A := A + I_N$ and $\tilde D_{ii} := \sum_j \tilde
+A_{ij}$, and using the following final approximation:
 
 $$
 f\star g \approx k_0(\tilde D^{-\tfrac{1}{2}}\tilde A\tilde D^{-\tfrac{1}{2}})\textsf{nodeFeatures}.
@@ -223,7 +222,7 @@ representation, and the second term corresponds to the contribution from the
 node's neighbouring nodes' features.
 
 We see that we're scaling the neighbouring nodes' features by
-$\frac{1}{\sqrt{\text{degree}(\textsf{node})}\sqrt{\text{degree}(\textsf{neighbourNode})}}$,
+$(\sqrt{\text{degree}(\textsf{node})}\sqrt{\text{degree}(\textsf{neighbourNode})})^{-1}$,
 meaning that we are not simply taking the mean of the neighbouring nodes, but
 instead we're also considering the *degrees* of the neighbours.
 
