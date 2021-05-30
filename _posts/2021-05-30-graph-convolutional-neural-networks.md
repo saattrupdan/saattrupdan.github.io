@@ -162,7 +162,7 @@ transform is $O(N^2)$, so the final job is about approximating this as best as
 possible.
 
 
-## Graph Convolutional Neural Networks
+## Graph Convolutional Neural Networks
 
 In
 [Hammond et al.  (2011)](https://www.sciencedirect.com/science/article/pii/S1063520310000552)
@@ -173,10 +173,10 @@ $T_n$, which are given as $T_0(x) = 1$, $T_1(x) := x$ and
 $T_{n+1}(x) := 2xT_n(x)-T_{n-1}(x)$. The $K$'th approximation then looks like
 
 $$
-f\star g \approx \sum_{k=0}^K f(k)T_k(\tilde L)g,
+f\star g \approx \sum_{k=0}^K f(k)T_k(\widetilde L)g,
 $$
 
-where $\tilde L := \tfrac{2}{\lambda_{\text{max}}}\overline L-I_N$ with $I_N$ being
+where $\widetilde L := \tfrac{2}{\lambda_{\text{max}}}\overline L-I_N$ with $I_N$ being
 the $N\times N$ identity matrix and $\lambda_{\text{max}}$ being the largest
 eigenvalue of $\overline L$.
 
@@ -199,11 +199,11 @@ $$
 Are we done yet? Not quite, there is one last problem we need to deal with.
 $I_N + D^{-\tfrac{1}{2}}AD^{-\tfrac{1}{2}}$ now has eigenvalues in the range
 $[0,2]$, so to avoid vanishing and exploding gradients, we normalise it. This
-is done by setting $\tilde A := A + I_N$ and $\tilde D_{ii} := \sum_j \tilde
+is done by setting $\widetilde A := A + I_N$ and $\widetilde D_{ii} := \sum_j \widetilde
 A_{ij}$, and using the following final approximation:
 
 $$
-f\star g \approx k_0(\tilde D^{-\tfrac{1}{2}}\tilde A\tilde D^{-\tfrac{1}{2}})\textsf{nodeFeatures}.
+f\star g \approx k_0(\widetilde D^{-\tfrac{1}{2}}\widetilde A\widetilde D^{-\tfrac{1}{2}})\textsf{nodeFeatures}.
 $$
 
 And success, there's our convolution!
@@ -222,7 +222,7 @@ representation, and the second term corresponds to the contribution from the
 node's neighbouring nodes' features.
 
 We see that we're scaling the neighbouring nodes' features by
-$(\sqrt{\text{degree}(\textsf{node})}\sqrt{\text{degree}(\textsf{neighbourNode})})^{-1}$,
+$\left(\sqrt{\text{degree}(\textsf{node})}\sqrt{\text{degree}(\textsf{neighbourNode})}\right)^{-1}$,
 meaning that we are not simply taking the mean of the neighbouring nodes, but
 instead we're also considering the *degrees* of the neighbours.
 
@@ -249,7 +249,8 @@ Geometric:
 ```python
 import torch
 import torch.nn as nn
-import torch geometric as tg import torch geometric.nn as tgnn
+import torch geometric as tg
+import torch geometric.nn as tgnn
 
 class GCN(nn.Module):
     def __init__(self, in_feats: int, hidden_size: int, num_classes: int):
